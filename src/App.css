@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+  --bg-main: #fcfbf7;
+  --bg-form: #ffffff;
+  --gold: #d4af37;
+  --text-dark: #333333;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.ornament {
+  width: 100px;
+  fill: var(--gold);
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  color: var(--gold);
+  margin: 0 0 10px 0;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+}
+
+p {
+  line-height: 1.6;
+}
+
+.rsvp-form, .success-message {
+  background-color: var(--bg-form);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  margin: 40px 0;
+  text-align: left;
+}
+
+.rsvp-form h3, .success-message h3 {
+  text-align: center;
+  color: var(--gold);
+  margin-top: 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  transition: border 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-group label {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+button {
+  background-color: var(--gold);
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #bfa030;
+}
+
+button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.map-section {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+.btn-map {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--gold);
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+
+.btn-map:hover {
+  background-color: var(--gold);
+  color: white;
+}
