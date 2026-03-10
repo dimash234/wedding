@@ -1,86 +1,95 @@
-/* ==== НОВЫЙ index.css ==== */
-html, body {
-  width: 100%;
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  background: #f9f7f4;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* можно center, если хочешь строго по центру экрана */
-}
-
-#root {
-  width: 100%;
-  max-width: 620px;           /* чуть шире, чтобы было место для орнаментов */
-  margin: 20px auto;
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-
-.wrapper {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;             /* главное центрирование */
-  background: #ffffff;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-  border-radius: 20px;
-  overflow: hidden;
 }
 
 :root {
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light;
-  color: #333333;
-  background-color: #f9f7f4;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --cream: #FDF8F2;
+  --ivory: #FAF5ED;
+  --white: #FFFFFF;
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-pale: #F5E6C0;
+  --gold-faint: #FBF3DC;
+  --rose: #D4897A;
+  --rose-light: #EDB9AD;
+  --rose-pale: #F9EAE6;
+  --brown: #7A5C3A;
+  --text-dark: #3D2B1F;
+  --text-mid: #6B4E35;
+  --text-light: #9B7D65;
+  --border: rgba(201, 168, 76, 0.3);
 }
 
-a {
-  font-weight: 500;
-  color: #d4c09a;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #c0ab85;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #f9f7f4;
-  cursor: pointer;
-  transition: border-color 0.25s;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-button:hover {
-  border-color: #d4c09a;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@keyframes floatPetal {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes countdown-tick {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.9s ease both;
+}
+
+.animate-fade {
+  animation: fadeIn 1.2s ease both;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
 }
