@@ -146,3 +146,28 @@ button:disabled {
   background-color: var(--gold);
   color: white;
 }
+
+.map-container {
+  margin: 20px 0;
+  border: 1px solid #f0eee8;
+  border-radius: 8px;
+  overflow: hidden;
+  line-height: 0; /* Убирает лишний отступ снизу у iframe */
+}
+
+.location-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.location-info h3 {
+  margin-bottom: 5px;
+}
+
+.location-info p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 15px;
+}

@@ -88,11 +88,28 @@ function App() {
           <div className="success-msg">Ждем вас! Көп рахмет!</div>
         )}
 
-        <div className="location-info">
-          <h3>Место проведения</h3>
-          <p>г. Алматы</p>
-          <a href="https://2gis.kz/almaty/firm/70000001054095105/77.04876%2C43.305975" target="_blank" className="btn-secondary">Открыть в 2GIS</a>
-        </div>
+<div className="location-info">
+  <h3>Место проведения</h3>
+  <p>г. Алматы, пр-т Достык 52/2 (Ziyafet Meat House)</p>
+  
+  <div className="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1d2906.770283474324!2d76.95545612666504!3d43.24420527112448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836ef0bcb9e4b5%3A0x9cab94be8fe77743!2sZIYAFET%20MEAT%20HOUSE!5e0!3m2!1sru!2skz!4v1715850000000!5m2!1sru!2skz" 
+      width="100%" 
+      height="300" 
+      style={{ border: 0 }} 
+      allowFullScreen="" 
+      loading="lazy" 
+      referrerPolicy="no-referrer-when-downgrade"
+      title="Wedding Location"
+    ></iframe>
+  </div>
+
+  <div className="location-buttons">
+    <a href="https://2gis.kz/almaty/firm/70000001054095105" target="_blank" className="btn-secondary">Открыть в 2GIS</a>
+    <a href="https://goo.gl/maps/ChIJM40dB9JvgzgRQ3f-qL_Sm5Q" target="_blank" className="btn-secondary">Google Maps</a>
+  </div>
+</div>
       </div>
     </div>
   );
