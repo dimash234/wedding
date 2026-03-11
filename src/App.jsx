@@ -8,6 +8,40 @@ import { translations } from './lang'
 
 export const LangContext = createContext()
 
+/* ─── Scroll reveal hook ─────────────────────────────────────────── */
+function useScrollReveal(options = {}) {
+  const ref = React.useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: options.threshold ?? 0.12, rootMargin: options.rootMargin ?? '0px 0px -40px 0px' }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return [ref, visible]
+}
+
+/* ─── Reveal wrapper ─────────────────────────────────────────────── */
+function Reveal({ children, delay = 0, y = 28, style: extraStyle }) {
+  const [ref, visible] = useScrollReveal()
+  return (
+    <div ref={ref} style={{
+      opacity:   visible ? 1 : 0,
+      transform: visible ? 'translateY(0)' : `translateY(${y}px)`,
+      transition: `opacity 0.85s cubic-bezier(.16,1,.3,1) ${delay}s, transform 0.85s cubic-bezier(.16,1,.3,1) ${delay}s`,
+      ...extraStyle,
+    }}>
+      {children}
+    </div>
+  )
+}
+
 /* ─── Audio ──────────────────────────────────────────────────────── */
 const audio = new Audio('./music/mahabbat.mp3')
 audio.loop = true
@@ -165,11 +199,10 @@ function Hero() {
           ].join(''),
         }} />
 
-        {/* ── Initials — top ── */}
+        {/* ── Initials — upper-center ── */}
         <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0,
+          position: 'absolute', top: '18%', left: 0, right: 0,
           display: 'flex', flexDirection: 'column', alignItems: 'center',
-          paddingTop: 'clamp(72px,12vh,110px)',
           pointerEvents: 'none',
         }}>
           <h1 className="rise-1" style={{
@@ -198,9 +231,9 @@ function Hero() {
           }}>{t.invite}</p>
         </div>
 
-        {/* ── Music button — centre ── */}
+        {/* ── Music button — lower centre ── */}
         <div style={{
-          position: 'absolute', top: '50%', left: '50%',
+          position: 'absolute', top: '65%', left: '50%',
           transform: 'translate(-50%, -50%)',
         }}>
           <MusicRing playing={playing} onClick={toggle} />
@@ -226,60 +259,70 @@ function Hero() {
       }}>
 
         {/* Names */}
-        <h2 className="rise-2" style={{
-          fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
-          fontSize: 'clamp(28px,7.5vw,58px)',
-          fontWeight: 300, fontStyle: 'italic',
-          letterSpacing: 'clamp(1px,0.5vw,4px)',
-          color: 'var(--ink)', lineHeight: 1.2,
-        }}>
-          Райымбек{' '}
-          <span style={{ color: 'var(--gold)', fontStyle: 'normal', fontSize: '0.65em' }}>{'&'}</span>
-          {' '}Жансая
-        </h2>
+        <Reveal delay={0}>
+          <h2 style={{
+            fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
+            fontSize: 'clamp(28px,7.5vw,58px)',
+            fontWeight: 300, fontStyle: 'italic',
+            letterSpacing: 'clamp(1px,0.5vw,4px)',
+            color: 'var(--ink)', lineHeight: 1.2,
+          }}>
+            Райымбек{' '}
+            <span style={{ color: 'var(--gold)', fontStyle: 'normal', fontSize: '0.65em' }}>{'&'}</span>
+            {' '}Жансая
+          </h2>
+        </Reveal>
 
         {/* Date */}
-        <p className="rise-3" style={{
-          marginTop: '16px',
-          fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
-          fontSize: 'clamp(18px,4vw,32px)',
-          fontWeight: 300, letterSpacing: 'clamp(3px,1.5vw,8px)',
-          color: 'var(--mid)',
-        }}>28 · 06 · 2026</p>
+        <Reveal delay={0.12}>
+          <p style={{
+            marginTop: '16px',
+            fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
+            fontSize: 'clamp(18px,4vw,32px)',
+            fontWeight: 300, letterSpacing: 'clamp(3px,1.5vw,8px)',
+            color: 'var(--mid)',
+          }}>28 · 06 · 2026</p>
+        </Reveal>
 
         {/* Ornament divider */}
-        <div className="rise-4" style={{
-          display: 'flex', alignItems: 'center', gap: '16px',
-          margin: 'clamp(20px,4vh,32px) 0',
-        }}>
-          <WaveLine />
-          <GoldDiamond />
-          <WaveLine />
-        </div>
+        <Reveal delay={0.22}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '16px',
+            margin: 'clamp(20px,4vh,32px) 0',
+          }}>
+            <WaveLine />
+            <GoldDiamond />
+            <WaveLine />
+          </div>
+        </Reveal>
 
         {/* Quote */}
-        <p className="rise-5" style={{
-          fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
-          fontSize: 'clamp(14px,3.5vw,20px)',
-          fontStyle: 'italic', color: 'var(--soft)',
-          lineHeight: 1.9, letterSpacing: '0.3px',
-          maxWidth: '420px',
-        }}>{t.quote}</p>
-
-        {/* Greeting */}
-        <div className="rise-6" style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
+        <Reveal delay={0.3}>
           <p style={{
             fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
-            fontSize: 'clamp(18px,4vw,28px)',
-            fontWeight: 400, color: 'var(--ink)',
-            letterSpacing: '1px', marginBottom: '12px',
-          }}>{t.greeting}</p>
-          <p style={{
-            fontSize: '12.5px', letterSpacing: '0.5px',
-            color: 'var(--soft)', lineHeight: 2,
-            fontWeight: 300,
-          }}>{t.subGreeting}</p>
-        </div>
+            fontSize: 'clamp(14px,3.5vw,20px)',
+            fontStyle: 'italic', color: 'var(--soft)',
+            lineHeight: 1.9, letterSpacing: '0.3px',
+            maxWidth: '420px',
+          }}>{t.quote}</p>
+        </Reveal>
+
+        {/* Greeting */}
+        <Reveal delay={0.42}>
+          <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
+            <p style={{
+              fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
+              fontSize: 'clamp(18px,4vw,28px)',
+              fontWeight: 400, color: 'var(--ink)',
+              letterSpacing: '1px', marginBottom: '12px',
+            }}>{t.greeting}</p>
+            <p style={{
+              fontSize: '12.5px', letterSpacing: '0.5px',
+              color: 'var(--soft)', lineHeight: 2,
+              fontWeight: 300,
+            }}>{t.subGreeting}</p>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -353,8 +396,12 @@ function CountdownSection() {
       borderBottom: '1px solid var(--border)',
     }}>
       <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-        <SectionLabel>{t.countdown.label}</SectionLabel>
-        <Countdown targetDate="2026-06-28T18:00:00" />
+        <Reveal delay={0}>
+          <SectionLabel>{t.countdown.label}</SectionLabel>
+        </Reveal>
+        <Reveal delay={0.12} y={20}>
+          <Countdown targetDate="2026-06-28T18:00:00" />
+        </Reveal>
       </div>
     </section>
   )
@@ -371,13 +418,17 @@ function ScheduleSection() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 'clamp(44px,8vh,72px)' }}>
-          <SectionLabel>{t.schedule.label}</SectionLabel>
-          <h2 style={{
-            fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
-            fontSize: 'clamp(24px,5vw,42px)',
-            fontWeight: 300, fontStyle: 'italic',
-            color: 'var(--ink)', letterSpacing: '2px',
-          }}>{t.schedule.title}</h2>
+          <Reveal delay={0}>
+            <SectionLabel>{t.schedule.label}</SectionLabel>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 style={{
+              fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
+              fontSize: 'clamp(24px,5vw,42px)',
+              fontWeight: 300, fontStyle: 'italic',
+              color: 'var(--ink)', letterSpacing: '2px',
+            }}>{t.schedule.title}</h2>
+          </Reveal>
         </div>
 
         {/* Timeline */}
@@ -392,31 +443,29 @@ function ScheduleSection() {
           {t.schedule.items.map((item, i) => {
             const flip = i % 2 === 0
             return (
-              <div key={i} style={{
-                display: 'grid', gridTemplateColumns: '1fr 48px 1fr',
-                alignItems: 'center',
-                marginBottom: i < t.schedule.items.length - 1 ? 'clamp(40px,7vh,64px)' : 0,
-                animation: `riseUp 0.75s cubic-bezier(.16,1,.3,1) ${i * 0.18 + 0.1}s both`,
-              }}>
-                {/* Left */}
-                <div style={{ paddingRight: '24px', display: 'flex', justifyContent: 'flex-end' }}>
-                  {flip ? <SchCard item={item} align="right" /> : <SchPhoto src={photos[i]} />}
+              <Reveal key={i} delay={i * 0.15} y={24} style={{ marginBottom: i < t.schedule.items.length - 1 ? 'clamp(40px,7vh,64px)' : 0 }}>
+                <div style={{
+                  display: 'grid', gridTemplateColumns: '1fr 48px 1fr',
+                  alignItems: 'center',
+                }}>
+                  {/* Left */}
+                  <div style={{ paddingRight: '24px', display: 'flex', justifyContent: 'flex-end' }}>
+                    {flip ? <SchCard item={item} align="right" /> : <SchPhoto src={photos[i]} />}
+                  </div>
+                  {/* Centre dot */}
+                  <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+                    <div style={{
+                      width: '11px', height: '11px', borderRadius: '50%',
+                      background: 'var(--gold)',
+                      boxShadow: '0 0 0 4px var(--white), 0 0 0 5.5px var(--gold2)',
+                    }} />
+                  </div>
+                  {/* Right */}
+                  <div style={{ paddingLeft: '24px', display: 'flex', justifyContent: 'flex-start' }}>
+                    {flip ? <SchPhoto src={photos[i]} /> : <SchCard item={item} align="left" />}
+                  </div>
                 </div>
-
-                {/* Centre dot */}
-                <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
-                  <div style={{
-                    width: '11px', height: '11px', borderRadius: '50%',
-                    background: 'var(--gold)',
-                    boxShadow: '0 0 0 4px var(--white), 0 0 0 5.5px var(--gold2)',
-                  }} />
-                </div>
-
-                {/* Right */}
-                <div style={{ paddingLeft: '24px', display: 'flex', justifyContent: 'flex-start' }}>
-                  {flip ? <SchPhoto src={photos[i]} /> : <SchCard item={item} align="left" />}
-                </div>
-              </div>
+              </Reveal>
             )
           })}
         </div>
@@ -478,24 +527,41 @@ function DetailsSection() {
       borderTop: '1px solid var(--border)',
       borderBottom: '1px solid var(--border)',
     }}>
-      <div style={{ maxWidth: '520px', margin: '0 auto', textAlign: 'center' }}>
-        <SectionLabel>{t.details.label}</SectionLabel>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--border)' }}>
-          {[
-            [t.details.date,  t.details.dv],
-            [t.details.time,  t.details.tv],
-            [t.details.place, t.details.pv],
-          ].map(([l, v], i) => (
-            <div key={i} style={{ padding: 'clamp(18px,4vw,28px) 12px', background: 'var(--white)', textAlign: 'center' }}>
-              <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--soft)', marginBottom: '9px' }}>{l}</p>
-              <p style={{
-                fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
-                fontSize: 'clamp(12px,2.8vw,17px)',
-                color: 'var(--ink)', letterSpacing: '1.5px', fontWeight: 300,
-              }}>{v}</p>
-            </div>
-          ))}
-        </div>
+      <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center' }}>
+        <Reveal delay={0}>
+          <SectionLabel>{t.details.label}</SectionLabel>
+        </Reveal>
+
+        {/* Top row: date + time */}
+        <Reveal delay={0.1}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)', marginBottom: '1px' }}>
+            {[
+              [t.details.date,  t.details.dv],
+              [t.details.time,  t.details.tv],
+            ].map(([l, v], i) => (
+              <div key={i} style={{ padding: 'clamp(18px,4vw,28px) 16px', background: 'var(--white)', textAlign: 'center' }}>
+                <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--soft)', marginBottom: '9px' }}>{l}</p>
+                <p style={{
+                  fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
+                  fontSize: 'clamp(13px,3vw,18px)',
+                  color: 'var(--ink)', letterSpacing: '1.5px', fontWeight: 300,
+                }}>{v}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Bottom row: address full width */}
+        <Reveal delay={0.2}>
+          <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderTop: 'none', padding: 'clamp(18px,4vw,28px) 16px', textAlign: 'center' }}>
+            <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--soft)', marginBottom: '9px' }}>{t.details.place}</p>
+            <p style={{
+              fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
+              fontSize: 'clamp(13px,3vw,18px)',
+              color: 'var(--ink)', letterSpacing: '1px', fontWeight: 300,
+            }}>{t.details.pv}</p>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -507,8 +573,12 @@ function CalendarSection() {
   return (
     <section style={{ padding: 'clamp(56px,9vh,80px) 20px', background: 'var(--white)' }}>
       <div style={{ maxWidth: '440px', margin: '0 auto', textAlign: 'center' }}>
-        <SectionLabel>{t.calendar.label}</SectionLabel>
-        <Calendar weddingDate="2026-06-28" />
+        <Reveal delay={0}>
+          <SectionLabel>{t.calendar.label}</SectionLabel>
+        </Reveal>
+        <Reveal delay={0.12} y={20}>
+          <Calendar weddingDate="2026-06-28" />
+        </Reveal>
       </div>
     </section>
   )
@@ -524,24 +594,22 @@ function FooterSection() {
       textAlign: 'center',
       borderTop: '1px solid var(--border)',
     }}>
-      <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, transparent, var(--gold2))', margin: '0 auto 32px' }} />
-
-      <p style={{
-        fontFamily: "'Bodoni Moda', 'Cormorant SC', serif",
-        fontSize: 'clamp(44px,11vw,80px)',
-        fontWeight: 300, letterSpacing: 'clamp(10px,3vw,20px)',
-        color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
-      }}>Р ✦ Ж</p>
-
-      <p style={{ fontSize: '9px', letterSpacing: '5px', color: 'var(--soft)', fontWeight: 300 }}>{t.footer}</p>
-
-      <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-        <WaveLine />
-        <GoldDiamond />
-        <WaveLine />
-      </div>
-
-      <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, var(--gold2), transparent)', margin: '24px auto 0' }} />
+      <Reveal delay={0}>
+        <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, transparent, var(--gold2))', margin: '0 auto 32px' }} />
+        <p style={{
+          fontFamily: "'Bodoni Moda', 'Cormorant SC', serif",
+          fontSize: 'clamp(44px,11vw,80px)',
+          fontWeight: 300, letterSpacing: 'clamp(10px,3vw,20px)',
+          color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
+        }}>Р ✦ Ж</p>
+        <p style={{ fontSize: '9px', letterSpacing: '5px', color: 'var(--soft)', fontWeight: 300 }}>{t.footer}</p>
+        <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
+          <WaveLine />
+          <GoldDiamond />
+          <WaveLine />
+        </div>
+        <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, var(--gold2), transparent)', margin: '24px auto 0' }} />
+      </Reveal>
     </footer>
   )
 }
