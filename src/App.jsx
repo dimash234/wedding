@@ -1,9 +1,9 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import Countdown  from './components/Countdown'
-import MapSection from './components/MapSection'
-import RSVPForm   from './components/RSVPForm'
-import Calendar   from './components/Calendar'
-import Petals     from './components/Petals'
+import Countdown  from './components/Countdown.jsx'
+import MapSection from './components/MapSection.jsx'
+import RSVPForm   from './components/RSVPForm.jsx'
+import Calendar   from './components/Calendar.jsx'
+import Petals     from './components/Petals.jsx'
 import { translations } from './lang.js'
 
 export const LangContext = createContext()
