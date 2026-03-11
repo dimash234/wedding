@@ -89,10 +89,10 @@ export default function App() {
         <Petals />
         <Navbar scrolled={scrolled} />
         <Hero />
-        <CountdownSection />
         <ScheduleSection />
-        <DetailsSection />
         <CalendarSection />
+        <DetailsSection />
+        <CountdownSection />
         <MapSection />
         <RSVPForm />
         <FooterSection />
@@ -280,7 +280,7 @@ function Hero() {
             fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
             fontSize: 'clamp(18px,4vw,32px)',
             fontWeight: 300, letterSpacing: 'clamp(3px,1.5vw,8px)',
-            color: 'var(--mid)',
+            color: 'var(--ink)',
           }}>28 · 06 · 2026</p>
         </Reveal>
 
@@ -301,7 +301,7 @@ function Hero() {
           <p style={{
             fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
             fontSize: 'clamp(14px,3.5vw,20px)',
-            fontStyle: 'italic', color: 'var(--soft)',
+            fontStyle: 'italic', color: 'var(--ink)',
             lineHeight: 1.9, letterSpacing: '0.3px',
             maxWidth: '420px',
           }}>{t.quote}</p>
@@ -318,7 +318,7 @@ function Hero() {
             }}>{t.greeting}</p>
             <p style={{
               fontSize: '12.5px', letterSpacing: '0.5px',
-              color: 'var(--soft)', lineHeight: 2,
+              color: 'var(--ink)', lineHeight: 2,
               fontWeight: 300,
             }}>{t.subGreeting}</p>
           </div>
@@ -489,7 +489,7 @@ function SchCard({ item, align }) {
         marginBottom: '5px',
       }}>{item.title}</p>
       <p style={{
-        fontSize: '11px', color: 'var(--soft)',
+        fontSize: '11px', color: 'var(--ink)',
         lineHeight: 1.75, fontWeight: 300,
       }}>{item.desc}</p>
     </div>
@@ -540,7 +540,7 @@ function DetailsSection() {
               [t.details.time,  t.details.tv],
             ].map(([l, v], i) => (
               <div key={i} style={{ padding: 'clamp(18px,4vw,28px) 16px', background: 'var(--white)', textAlign: 'center' }}>
-                <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--soft)', marginBottom: '9px' }}>{l}</p>
+                <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--ink)', marginBottom: '9px', opacity: 0.45 }}>{l}</p>
                 <p style={{
                   fontFamily: "'Bodoni Moda', 'Cormorant Garamond', serif",
                   fontSize: 'clamp(13px,3vw,18px)',
@@ -602,7 +602,7 @@ function FooterSection() {
           fontWeight: 300, letterSpacing: 'clamp(10px,3vw,20px)',
           color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
         }}>Р ✦ Ж</p>
-        <p style={{ fontSize: '9px', letterSpacing: '5px', color: 'var(--soft)', fontWeight: 300 }}>{t.footer}</p>
+        <p style={{ fontSize: '9px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300 }}>{t.footer}</p>
         <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
           <WaveLine />
           <GoldDiamond />
