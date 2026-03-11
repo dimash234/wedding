@@ -1,8 +1,6 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --cream: #FDF8F2;
@@ -22,9 +20,7 @@
   --border: rgba(201, 168, 76, 0.3);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Raleway', sans-serif;
@@ -33,82 +29,63 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3 {
-  font-family: 'Cormorant Garamond', serif;
+/* Antarctic font via CDN */
+@font-face {
+  font-family: 'Antarctic';
+  src: url('https://fonts.cdnfonts.com/s/15672/Antarctic.woff') format('woff');
+  font-weight: normal;
 }
+
+.antarctic {
+  font-family: 'Antarctic', 'Cormorant Garamond', serif;
+}
+
+h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes floatPetal {
   0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 0.6; }
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
-
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
-
 @keyframes pulse-gold {
   0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
   50% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
 }
-
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 @keyframes countdown-tick {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
-
-.animate-fade-up {
-  animation: fadeInUp 0.9s ease both;
-}
-
-.animate-fade {
-  animation: fadeIn 1.2s ease both;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--ivory);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 3px;
-}
-
-/* Extra animations */
 @keyframes wave {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
 }
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(201,168,76,0.3); }
-  50% { box-shadow: 0 0 30px rgba(201,168,76,0.6); }
+@keyframes timeline-line {
+  from { height: 0; }
+  to { height: 100%; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+  50% { box-shadow: 0 0 20px 6px rgba(201,168,76,0.15); }
 }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.15); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.1); }
-  70% { transform: scale(1); }
-}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
