@@ -1,34 +1,40 @@
 import React, { useContext } from 'react'
-import KazakhOrnament from './KazakhOrnament'
 import { LangContext } from '../App'
-
 export default function MapSection() {
   const { t } = useContext(LangContext)
   return (
-    <section id="map" style={{ padding:'80px 20px', background:'var(--ivory)', position:'relative' }}>
-      <div style={{ maxWidth:'900px', margin:'0 auto' }}>
-        <div style={{ textAlign:'center', marginBottom:'48px' }}>
-          <KazakhOrnament type="divider" color="var(--gold)" />
-          <p style={{ letterSpacing:'5px', fontSize:'11px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'12px', marginTop:'32px' }}>{t.map.label}</p>
-          <h2 style={{ fontSize:'clamp(28px,5vw,48px)', fontWeight:300, fontStyle:'italic', color:'var(--text-dark)', marginBottom:'12px' }}>{t.map.title}</h2>
-          <p style={{ fontSize:'15px', color:'var(--text-light)' }}>{t.map.sub}</p>
+    <section id="map" style={{padding:'80px 20px',background:'var(--ivory)'}}>
+      <div style={{maxWidth:'860px',margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:'40px'}}>
+          <p style={{fontSize:'9px',letterSpacing:'5px',textTransform:'lowercase',color:'var(--text-light)',marginBottom:'14px',display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'}}>
+            <span style={{display:'inline-block',width:'24px',height:'1px',background:'var(--line)'}}/>
+            {t.map.label}
+            <span style={{display:'inline-block',width:'24px',height:'1px',background:'var(--line)'}}/>
+          </p>
+          <h2 className="display-font" style={{fontSize:'clamp(22px,4vw,34px)',fontWeight:300,color:'var(--text-dark)',letterSpacing:'3px',textTransform:'lowercase',marginBottom:'8px'}}>{t.map.title}</h2>
+          <p style={{fontSize:'11px',letterSpacing:'2px',color:'var(--text-light)'}}>{t.map.sub}</p>
         </div>
-        <div style={{ borderRadius:'8px', overflow:'hidden', border:'1px solid var(--border)', boxShadow:'0 8px 40px rgba(201,168,76,0.12)' }}>
-          <div style={{ height:'4px', background:'linear-gradient(to right, var(--gold), var(--rose-light), var(--gold))' }} />
+        <div style={{overflow:'hidden',border:'1px solid var(--border)'}}>
           <iframe src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A43.305975%2C%22lon%22%3A77.04876%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22almaty%22%7D%2C%22org%22%3A%2270000001054095105%22%7D"
-            width="100%" height="450" style={{ border:'none', display:'block' }} title="Той орны" allowFullScreen />
+            width="100%" height="400" style={{border:'none',display:'block'}} title="map" allowFullScreen />
         </div>
-        <div style={{ marginTop:'24px', display:'flex', flexWrap:'wrap', gap:'16px', justifyContent:'center' }}>
-          <a href="https://2gis.kz/almaty/firm/70000001054095105/77.04876,43.305975" target="_blank" rel="noopener noreferrer"
-            style={{ display:'inline-flex', alignItems:'center', gap:'10px', padding:'14px 32px', background:'linear-gradient(135deg,var(--gold),var(--gold-light))', color:'white', textDecoration:'none', borderRadius:'4px', fontFamily:"'Raleway',sans-serif", fontSize:'13px', letterSpacing:'2px', textTransform:'uppercase', fontWeight:500, boxShadow:'0 4px 16px rgba(201,168,76,0.3)', transition:'all 0.3s ease' }}
-            onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 24px rgba(201,168,76,0.4)'}}
-            onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 16px rgba(201,168,76,0.3)'}}
-          >{t.map.open2gis}</a>
-          <a href="https://maps.google.com/?q=43.305975,77.04876" target="_blank" rel="noopener noreferrer"
-            style={{ display:'inline-flex', alignItems:'center', gap:'10px', padding:'14px 32px', background:'var(--white)', border:'1px solid var(--border)', color:'var(--text-mid)', textDecoration:'none', borderRadius:'4px', fontFamily:"'Raleway',sans-serif", fontSize:'13px', letterSpacing:'2px', textTransform:'uppercase', fontWeight:500, transition:'all 0.3s ease' }}
-            onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.color='var(--gold)'}}
-            onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.color='var(--text-mid)'}}
-          >{t.map.openGoogle}</a>
+        <div style={{marginTop:'20px',display:'flex',gap:'12px',justifyContent:'center',flexWrap:'wrap'}}>
+          {[
+            {href:'https://2gis.kz/almaty/firm/70000001054095105/77.04876,43.305975',label:t.map.open2gis,dark:true},
+            {href:'https://maps.google.com/?q=43.305975,77.04876',label:t.map.openGoogle,dark:false},
+          ].map((btn,i)=>(
+            <a key={i} href={btn.href} target="_blank" rel="noopener noreferrer" style={{
+              display:'inline-block', padding:'12px 28px',
+              background: btn.dark ? 'var(--text-dark)' : 'transparent',
+              border:`1px solid ${btn.dark?'var(--text-dark)':'var(--line)'}`,
+              color: btn.dark ? 'var(--white)' : 'var(--text-mid)',
+              textDecoration:'none', fontSize:'10px', letterSpacing:'3px',
+              textTransform:'lowercase', transition:'all 0.3s'
+            }}
+            onMouseEnter={e=>{e.currentTarget.style.opacity='0.75'}}
+            onMouseLeave={e=>{e.currentTarget.style.opacity='1'}}
+            >{btn.label}</a>
+          ))}
         </div>
       </div>
     </section>

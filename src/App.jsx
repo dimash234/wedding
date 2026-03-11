@@ -9,10 +9,10 @@ import { translations } from './lang'
 
 export const LangContext = createContext()
 
-// ─── Global audio instance ────────────────────────────────────────────────────
+// Single shared audio instance
 const audio = new Audio('./music/mahabbat.mp3')
 audio.loop = true
-audio.volume = 0.5
+audio.volume = 0.55
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false)
@@ -40,7 +40,7 @@ export default function App() {
         <HeroSection />
         <CountdownSection />
         <ScheduleSection />
-        <StorySection />
+        <DetailsSection />
         <CalendarSection />
         <MapSection />
         <RSVPForm />
@@ -50,179 +50,133 @@ export default function App() {
   )
 }
 
-// ─── Language Switch ──────────────────────────────────────────────────────────
-function LangSwitch() {
+// ── Lang Switch ────────────────────────────────────────────────────────────────
+function LangSwitch({ dark }) {
   const { lang, setLang } = useContext(LangContext)
   return (
-    <div style={{ display:'flex', gap:'2px', background:'rgba(201,168,76,0.1)', borderRadius:'20px', padding:'3px', border:'1px solid rgba(201,168,76,0.25)' }}>
+    <div style={{ display:'flex', gap:'1px' }}>
       {['kz','ru'].map(l => (
         <button key={l} onClick={() => setLang(l)} style={{
-          padding:'4px 12px', borderRadius:'16px', border:'none', cursor:'pointer',
-          fontSize:'11px', fontFamily:"'Raleway',sans-serif", fontWeight:600,
-          letterSpacing:'1px', textTransform:'uppercase',
-          background: lang===l ? 'linear-gradient(135deg,var(--gold),var(--gold-light))' : 'transparent',
-          color: lang===l ? 'white' : 'var(--text-light)',
-          transition:'all 0.3s ease',
-          boxShadow: lang===l ? '0 2px 8px rgba(201,168,76,0.3)' : 'none'
-        }}>{l==='kz'?'ҚАЗ':'РУС'}</button>
+          padding:'5px 10px', border:'none', cursor:'pointer', background:'transparent',
+          fontSize:'10px', fontFamily:'inherit', letterSpacing:'2px', textTransform:'uppercase',
+          color: lang===l ? (dark ? 'var(--text-dark)' : 'var(--white)') : 'var(--text-light)',
+          fontWeight: lang===l ? 600 : 400,
+          borderBottom: lang===l ? `1px solid ${dark ? 'var(--text-dark)' : 'rgba(255,255,255,0.6)'}` : '1px solid transparent',
+          transition:'all 0.3s',
+        }}>{l==='kz'?'қаз':'рус'}</button>
       ))}
     </div>
   )
 }
 
-// ─── Nav ──────────────────────────────────────────────────────────────────────
+// ── Nav ───────────────────────────────────────────────────────────────────────
 function Nav({ scrolled }) {
   const { t } = useContext(LangContext)
   return (
     <nav style={{
       position:'fixed', top:0, left:0, right:0, zIndex:200,
-      padding:'10px 24px',
-      background: scrolled ? 'rgba(253,248,242,0.97)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(16px)' : 'none',
+      padding:'14px 32px',
+      background: scrolled ? 'rgba(250,250,248,0.96)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(20px)' : 'none',
       borderBottom: scrolled ? '1px solid var(--border)' : 'none',
-      transition:'all 0.4s ease',
-      display:'flex', justifyContent:'center', alignItems:'center', gap:'20px', flexWrap:'wrap'
+      transition:'all 0.5s ease',
+      display:'flex', justifyContent:'space-between', alignItems:'center',
     }}>
-      {[
-        { label: t.nav.home, href:'#hero' },
-        { label: t.nav.time, href:'#countdown' },
-        { label: t.nav.schedule, href:'#schedule' },
-        { label: t.nav.place, href:'#map' },
-        { label: t.nav.rsvp, href:'#rsvp' },
-      ].map(item => (
-        <a key={item.href} href={item.href} style={{
-          fontFamily:"'Raleway',sans-serif", fontWeight:400, fontSize:'12px',
-          letterSpacing:'2px', textTransform:'uppercase',
-          color:'var(--text-mid)', textDecoration:'none', transition:'color 0.3s',
-        }}
-        onMouseEnter={e=>e.target.style.color='var(--gold)'}
-        onMouseLeave={e=>e.target.style.color='var(--text-mid)'}
-        >{item.label}</a>
-      ))}
-      <LangSwitch />
+      <div style={{ display:'flex', gap:'28px' }}>
+        {[
+          { l: t.nav.home, h:'#hero' },
+          { l: t.nav.schedule, h:'#schedule' },
+          { l: t.nav.place, h:'#map' },
+          { l: t.nav.rsvp, h:'#rsvp' },
+        ].map(item => (
+          <a key={item.h} href={item.h} style={{
+            fontSize:'10px', letterSpacing:'2px', textTransform:'lowercase',
+            color: scrolled ? 'var(--text-mid)' : 'var(--text-mid)',
+            textDecoration:'none', transition:'color 0.3s',
+          }}
+          onMouseEnter={e=>e.target.style.color='var(--gold)'}
+          onMouseLeave={e=>e.target.style.color='var(--text-mid)'}
+          >{item.l}</a>
+        ))}
+      </div>
+      <LangSwitch dark />
     </nav>
   )
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
+// ── Hero ──────────────────────────────────────────────────────────────────────
 function HeroSection() {
   const { t, playing, toggleMusic } = useContext(LangContext)
   return (
-    <section id="hero" style={{
-      minHeight:'100vh', display:'flex', flexDirection:'column',
-      alignItems:'center', position:'relative', overflow:'hidden',
-      background:'var(--cream)'
-    }}>
-      {/* Full bleed photo */}
-      <div style={{
-        width:'100%', maxHeight:'70vh', overflow:'hidden',
-        position:'relative',
-        boxShadow:'0 20px 60px rgba(0,0,0,0.1)'
-      }}>
-        <img
-          src="./couple.jpg"
-          alt="Р & Ж"
-          style={{
-            width:'100%', height:'70vh', objectFit:'cover', objectPosition:'center top',
-            display:'block',
-            animation:'fadeIn 1.5s ease both',
-            filter:'brightness(0.95) contrast(1.05)'
-          }}
-        />
-        {/* Subtle vignette */}
-        <div style={{
-          position:'absolute', inset:0,
-          background:'linear-gradient(to bottom, transparent 50%, rgba(253,248,242,0.6) 85%, var(--cream) 100%)'
-        }}/>
+    <section id="hero" style={{ minHeight:'100vh', display:'flex', flexDirection:'column', background:'var(--cream)', position:'relative', overflow:'hidden' }}>
 
-        {/* Top ornament over photo */}
-        <div style={{ position:'absolute', top:0, left:0, right:0, animation:'fadeIn 2s ease 0.5s both' }}>
-          <KazakhOrnament type="band" color="var(--gold)" opacity={0.45} />
-        </div>
+      {/* Full photo - no yurt */}
+      <div style={{ width:'100%', height:'75vh', position:'relative', overflow:'hidden' }}>
+        <img src="./couple.jpg" alt=""
+          style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 30%', display:'block', animation:'fadeIn 1.8s ease both' }}
+        />
+        {/* Bottom fade into cream */}
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, transparent 55%, rgba(250,250,248,0.7) 85%, var(--cream) 100%)' }} />
       </div>
 
-      {/* Below photo content */}
+      {/* Content below photo */}
       <div style={{
-        width:'100%', maxWidth:'700px', textAlign:'center',
-        padding:'0 24px 80px',
-        display:'flex', flexDirection:'column', alignItems:'center',
-        position:'relative', zIndex:2
+        flex:1, display:'flex', flexDirection:'column', alignItems:'center',
+        padding:'0 24px 80px', textAlign:'center',
+        animation:'fadeInUp 1s ease 0.6s both'
       }}>
-        {/* Invite label */}
-        <p style={{
-          letterSpacing:'6px', fontSize:'10px', textTransform:'uppercase',
-          color:'var(--gold)', marginTop:'32px', marginBottom:'20px',
-          animation:'fadeInUp 1s ease 0.4s both'
-        }}>{t.hero.invite}</p>
+        {/* Thin line */}
+        <div style={{ width:'1px', height:'48px', background:'linear-gradient(to bottom, transparent, var(--line))', marginBottom:'24px' }} />
 
-        {/* R & Ж — Antarctic font */}
-        <div style={{ animation:'fadeInUp 1s ease 0.6s both', marginBottom:'16px' }}>
-          <h1 style={{
-            fontFamily:'Antarctic, "Cormorant Garamond", serif',
-            fontSize:'clamp(72px, 16vw, 140px)',
-            fontWeight:400,
-            letterSpacing:'8px',
-            lineHeight:1,
-            color:'var(--text-dark)',
-          }}>
-            <span style={{ color:'var(--brown)' }}>Р</span>
-            <span style={{ color:'var(--gold)', margin:'0 12px', fontSize:'0.6em', verticalAlign:'middle' }}>✦</span>
-            <span style={{ color:'var(--rose)' }}>Ж</span>
-          </h1>
-        </div>
+        {/* Invite text */}
+        <p style={{ fontSize:'10px', letterSpacing:'5px', textTransform:'lowercase', color:'var(--text-light)', marginBottom:'20px' }}>
+          {t.hero.invite}
+        </p>
 
-        {/* Date pill */}
-        <div style={{
-          display:'inline-flex', alignItems:'center', gap:'14px',
-          background:'rgba(253,248,242,0.9)',
-          border:'1px solid var(--border)', borderRadius:'60px',
-          padding:'12px 32px', marginBottom:'10px',
-          boxShadow:'0 4px 20px rgba(201,168,76,0.1)',
-          animation:'fadeInUp 1s ease 0.8s both'
+        {/* R & Ж — big display */}
+        <h1 className="display-font" style={{
+          fontSize:'clamp(64px, 18vw, 130px)',
+          fontWeight:300, letterSpacing:'12px',
+          lineHeight:1, color:'var(--text-dark)',
+          marginBottom:'28px',
         }}>
-          <KazakhOrnament type="star" color="var(--gold)" size={13} />
-          <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', letterSpacing:'3px', color:'var(--text-mid)' }}>
-            {t.hero.date}
-          </span>
-          <KazakhOrnament type="star" color="var(--gold)" size={13} />
-        </div>
+          Р <span style={{ color:'var(--gold)', fontSize:'0.5em', letterSpacing:'0', verticalAlign:'middle' }}>✦</span> Ж
+        </h1>
 
-        <p style={{ fontSize:'11px', letterSpacing:'4px', color:'var(--text-light)', textTransform:'uppercase', marginBottom:'28px', animation:'fadeInUp 1s ease 0.9s both' }}>
+        {/* Date */}
+        <p style={{ fontSize:'12px', letterSpacing:'5px', textTransform:'lowercase', color:'var(--text-mid)', marginBottom:'6px' }}>
+          {t.hero.date}
+        </p>
+        <p style={{ fontSize:'10px', letterSpacing:'4px', color:'var(--text-light)', marginBottom:'36px' }}>
           {t.hero.day}
         </p>
 
-        {/* ── MUSIC PLAYER inline ── */}
+        {/* ── Inline Music Player ── */}
         <InlineMusicPlayer />
 
         {/* Quote */}
-        <p style={{
-          fontFamily:"'Cormorant Garamond',serif",
-          fontSize:'18px', fontStyle:'italic',
-          color:'var(--text-light)', lineHeight:2,
-          marginTop:'28px',
-          animation:'fadeInUp 1s ease 1.2s both'
-        }}>{t.hero.quote}</p>
-
-        {/* Bottom ornament */}
-        <div style={{ width:'100%', marginTop:'32px', animation:'fadeIn 2s ease 1s both' }}>
-          <KazakhOrnament type="band" color="var(--gold)" opacity={0.4} />
+        <div style={{ marginTop:'36px', display:'flex', alignItems:'center', gap:'16px' }}>
+          <div style={{ height:'1px', width:'40px', background:'var(--line)' }} />
+          <p style={{ fontSize:'13px', fontStyle:'italic', color:'var(--text-light)', letterSpacing:'0.5px' }}>
+            {t.hero.quote}
+          </p>
+          <div style={{ height:'1px', width:'40px', background:'var(--line)' }} />
         </div>
       </div>
 
-      {/* Scroll arrow */}
-      <div style={{ position:'absolute', bottom:'24px', zIndex:2, display:'flex', flexDirection:'column', alignItems:'center', gap:'6px', animation:'fadeIn 2s ease 2s both' }}>
-        <div style={{ width:'1px', height:'40px', background:'linear-gradient(to bottom, transparent, var(--gold))' }} />
-        <span style={{ fontSize:'14px', color:'var(--gold)', opacity:0.7 }}>↓</span>
+      {/* Scroll indicator */}
+      <div style={{ position:'absolute', bottom:'20px', left:'50%', transform:'translateX(-50%)', display:'flex', flexDirection:'column', alignItems:'center', gap:'4px', animation:'fadeIn 3s ease 2s both' }}>
+        <div style={{ width:'1px', height:'36px', background:'linear-gradient(to bottom, transparent, var(--gold))', animation:'pulse-soft 2s ease infinite' }} />
       </div>
     </section>
   )
 }
 
-// ─── Inline Music Player ──────────────────────────────────────────────────────
+// ── Inline Music Player ───────────────────────────────────────────────────────
 function InlineMusicPlayer() {
   const { t, playing, toggleMusic } = useContext(LangContext)
   const [progress, setProgress] = useState(0)
-  const [volume, setVolume] = useState(0.5)
+  const [volume, setVolume] = useState(0.55)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
 
@@ -248,285 +202,217 @@ function InlineMusicPlayer() {
     setVolume(v); audio.volume = v
   }
 
-  const fmt = (s) => !s || isNaN(s) ? '0:00' : `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`
+  const fmt = s => !s || isNaN(s) ? '0:00' : `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`
 
   return (
     <div style={{
-      width:'100%', maxWidth:'420px',
-      background:'rgba(255,255,255,0.85)',
-      backdropFilter:'blur(12px)',
+      width:'100%', maxWidth:'360px',
+      background:'var(--white)',
       border:'1px solid var(--border)',
-      borderRadius:'20px',
+      borderRadius:'2px',
       padding:'20px 24px',
-      boxShadow:'0 8px 40px rgba(201,168,76,0.12)',
-      animation:'fadeInUp 1s ease 1s both',
-      position:'relative', overflow:'hidden'
+      boxShadow:'0 2px 24px rgba(0,0,0,0.04)',
     }}>
-      {/* Top gold line */}
-      <div style={{ position:'absolute', top:0, left:0, right:0, height:'3px', background:'linear-gradient(to right, var(--gold), var(--rose-light), var(--gold))' }} />
-
-      {/* Song info row */}
+      {/* Song row */}
       <div style={{ display:'flex', alignItems:'center', gap:'14px', marginBottom:'16px' }}>
-        {/* Vinyl disc */}
+        {/* Vinyl */}
         <div style={{
-          width:'52px', height:'52px', borderRadius:'50%', flexShrink:0,
-          background:'conic-gradient(from 0deg, var(--gold), var(--rose-light), var(--gold-pale), var(--brown), var(--gold))',
+          width:'44px', height:'44px', borderRadius:'50%', flexShrink:0,
+          background:'conic-gradient(from 0deg, var(--text-dark) 0%, #5a4a3a 25%, var(--text-dark) 50%, #3a2a1a 75%, var(--text-dark) 100%)',
           display:'flex', alignItems:'center', justifyContent:'center',
-          boxShadow:'0 4px 16px rgba(201,168,76,0.3)',
-          animation: playing ? 'spin-slow 3s linear infinite' : 'none',
-          transition:'animation 0.3s'
+          animation: playing ? 'spin-slow 4s linear infinite' : 'none',
+          boxShadow:'0 2px 8px rgba(0,0,0,0.12)'
         }}>
-          <div style={{ width:'16px', height:'16px', borderRadius:'50%', background:'var(--cream)', border:'2px solid rgba(201,168,76,0.4)' }} />
+          <div style={{ width:'12px', height:'12px', borderRadius:'50%', background:'var(--cream)' }} />
         </div>
 
         <div style={{ flex:1, textAlign:'left' }}>
-          <p style={{ fontSize:'14px', fontWeight:600, color:'var(--text-dark)', marginBottom:'3px', letterSpacing:'0.5px' }}>
-            {translations.kz.music.title}
+          <p style={{ fontSize:'12px', letterSpacing:'1px', color:'var(--text-dark)', marginBottom:'3px' }}>
+            Махаббат деген қандай
           </p>
-          <p style={{ fontSize:'11px', color:'var(--gold)', letterSpacing:'1px' }}>
-            {playing ? '♪ Ойнауда...' : '♪ ' + translations.kz.music.sub}
+          <p style={{ fontSize:'10px', letterSpacing:'2px', color:'var(--text-light)', textTransform:'lowercase' }}>
+            {t.music}
           </p>
         </div>
 
-        {/* Play/Pause big button */}
+        {/* Play button */}
         <button onClick={toggleMusic} style={{
-          width:'52px', height:'52px', borderRadius:'50%',
-          background:'linear-gradient(135deg, var(--gold), var(--gold-light))',
-          border:'none', cursor:'pointer', flexShrink:0,
-          display:'flex', alignItems:'center', justifyContent:'center',
-          fontSize:'22px', color:'white',
-          boxShadow: playing ? '0 0 0 6px rgba(201,168,76,0.2), 0 4px 16px rgba(201,168,76,0.4)' : '0 4px 16px rgba(201,168,76,0.3)',
+          width:'40px', height:'40px', borderRadius:'50%', flexShrink:0,
+          background: playing ? 'var(--text-dark)' : 'var(--white)',
+          border:`1px solid ${playing ? 'var(--text-dark)' : 'var(--line)'}`,
+          cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center',
+          fontSize:'14px', color: playing ? 'var(--white)' : 'var(--text-dark)',
           transition:'all 0.3s ease',
-          animation: playing ? 'pulse-gold 2s ease infinite' : 'none'
+          animation: playing ? 'pulse-gold 2.5s ease infinite' : 'none'
         }}>
           {playing ? '⏸' : '▶'}
         </button>
       </div>
 
       {/* Progress bar */}
-      <div onClick={seek} style={{ height:'5px', borderRadius:'3px', background:'var(--gold-pale)', cursor:'pointer', marginBottom:'8px', position:'relative' }}>
-        <div style={{ height:'100%', borderRadius:'3px', width:`${progress}%`, background:'linear-gradient(to right, var(--gold), var(--rose-light))', transition:'width 0.5s linear', position:'relative' }}>
-          <div style={{ position:'absolute', right:'-6px', top:'-4px', width:'13px', height:'13px', borderRadius:'50%', background:'var(--gold)', boxShadow:'0 1px 4px rgba(201,168,76,0.6)' }} />
+      <div onClick={seek} style={{ height:'3px', borderRadius:'2px', background:'var(--gold-pale)', cursor:'pointer', marginBottom:'8px', position:'relative' }}>
+        <div style={{ height:'100%', borderRadius:'2px', width:`${progress}%`, background:'var(--text-dark)', transition:'width 0.5s linear', position:'relative' }}>
+          <div style={{ position:'absolute', right:'-5px', top:'-4px', width:'11px', height:'11px', borderRadius:'50%', background:'var(--text-dark)' }} />
         </div>
       </div>
 
       {/* Time + Volume */}
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontSize:'10px', color:'var(--text-light)' }}>{fmt(currentTime)} / {fmt(duration)}</span>
+        <span style={{ fontSize:'9px', letterSpacing:'1px', color:'var(--text-light)' }}>
+          {fmt(currentTime)} / {fmt(duration)}
+        </span>
         <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
-          <span style={{ fontSize:'12px' }}>{volume===0?'🔇':volume<0.5?'🔉':'🔊'}</span>
+          <span style={{ fontSize:'11px' }}>{volume===0?'🔇':volume<0.5?'🔉':'🔊'}</span>
           <input type="range" min="0" max="1" step="0.05" value={volume} onChange={changeVol}
-            style={{ width:'70px', accentColor:'var(--gold)', cursor:'pointer' }} />
+            style={{ width:'60px', accentColor:'var(--text-dark)', cursor:'pointer' }} />
         </div>
       </div>
     </div>
   )
 }
 
-// ─── Countdown ────────────────────────────────────────────────────────────────
+// ── Countdown ─────────────────────────────────────────────────────────────────
 function CountdownSection() {
   const { t } = useContext(LangContext)
   return (
-    <section id="countdown" style={{ padding:'80px 20px', background:'var(--ivory)', position:'relative', overflow:'hidden' }}>
-      <div style={{ maxWidth:'900px', margin:'0 auto', textAlign:'center' }}>
-        <KazakhOrnament type="corner-set" color="var(--gold)" opacity={0.2} />
-        <p style={{ letterSpacing:'5px', fontSize:'11px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'12px' }}>{t.countdown.label}</p>
-        <h2 style={{ fontSize:'clamp(28px,5vw,48px)', fontWeight:300, color:'var(--text-dark)', marginBottom:'48px', fontStyle:'italic' }}>{t.countdown.title}</h2>
+    <section id="countdown" style={{ padding:'80px 20px', background:'var(--ivory)' }}>
+      <div style={{ maxWidth:'700px', margin:'0 auto', textAlign:'center' }}>
+        <SectionLabel>{t.countdown.label}</SectionLabel>
         <Countdown targetDate="2026-06-28T18:00:00" />
       </div>
     </section>
   )
 }
 
-// ─── Schedule ─────────────────────────────────────────────────────────────────
-// Decorative placeholder images for each schedule item
-const SCHEDULE_IMGS = [
-  'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80',  // wedding veil / ceremony
-  'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80',  // champagne glasses
-  'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80',  // wedding cake
-]
-
+// ── Schedule ──────────────────────────────────────────────────────────────────
 function ScheduleSection() {
   const { t } = useContext(LangContext)
+  const photos = ['./photo1.jpg','./photo2.jpg','./couple.jpg']
+
   return (
-    <section id="schedule" style={{ padding:'80px 20px', background:'var(--cream)', position:'relative' }}>
-      <div style={{ maxWidth:'900px', margin:'0 auto' }}>
-        {/* Header */}
+    <section id="schedule" style={{ padding:'80px 20px', background:'var(--cream)' }}>
+      <div style={{ maxWidth:'680px', margin:'0 auto' }}>
         <div style={{ textAlign:'center', marginBottom:'60px' }}>
-          <KazakhOrnament type="divider" color="var(--gold)" />
-          <p style={{ letterSpacing:'5px', fontSize:'11px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'12px', marginTop:'32px' }}>{t.schedule.label}</p>
-          <h2 style={{ fontSize:'clamp(28px,5vw,48px)', fontWeight:300, fontStyle:'italic', color:'var(--text-dark)' }}>{t.schedule.title}</h2>
+          <SectionLabel>{t.schedule.label}</SectionLabel>
+          <h2 className="display-font" style={{ fontSize:'clamp(22px,4vw,36px)', fontWeight:300, color:'var(--text-dark)', letterSpacing:'3px', textTransform:'lowercase' }}>
+            {t.schedule.title}
+          </h2>
         </div>
 
-        {/* Timeline items */}
-        <div style={{ display:'flex', flexDirection:'column', gap:'0' }}>
-          {t.schedule.items.map((item, i) => (
-            <ScheduleItem key={i} item={item} index={i} imgSrc={SCHEDULE_IMGS[i]} isLast={i === t.schedule.items.length - 1} />
-          ))}
+        {/* Minimal two-column: icon+line | text — alternating photo */}
+        <div style={{ position:'relative' }}>
+          {/* Center vertical line */}
+          <div style={{
+            position:'absolute', left:'50%', top:0, bottom:0,
+            width:'1px', background:'var(--line)',
+            transform:'translateX(-50%)',
+            animation:'line-grow 1.5s ease both'
+          }} />
+
+          {t.schedule.items.map((item, i) => {
+            const isLeft = i % 2 === 0
+            return (
+              <div key={i} style={{
+                display:'grid',
+                gridTemplateColumns:'1fr 60px 1fr',
+                alignItems:'center',
+                marginBottom: i < t.schedule.items.length-1 ? '56px' : '0',
+                animation:'fadeInUp 0.8s ease both',
+                animationDelay:`${i*0.2}s`
+              }}>
+
+                {/* Left */}
+                <div style={{ display:'flex', justifyContent:'flex-end', paddingRight:'32px' }}>
+                  {isLeft
+                    ? <ScheduleTextCard item={item} align="right" />
+                    : <SchedulePhoto src={photos[i]} />
+                  }
+                </div>
+
+                {/* Center dot */}
+                <div style={{ display:'flex', justifyContent:'center', alignItems:'center' }}>
+                  <div style={{
+                    width:'10px', height:'10px', borderRadius:'50%',
+                    background:'var(--gold)',
+                    boxShadow:'0 0 0 4px var(--cream), 0 0 0 5px var(--line)',
+                    zIndex:2
+                  }} />
+                </div>
+
+                {/* Right */}
+                <div style={{ display:'flex', justifyContent:'flex-start', paddingLeft:'32px' }}>
+                  {isLeft
+                    ? <SchedulePhoto src={photos[i]} />
+                    : <ScheduleTextCard item={item} align="left" />
+                  }
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
   )
 }
 
-function ScheduleItem({ item, index, imgSrc, isLast }) {
-  const isLeft = index % 2 === 0
-
+function ScheduleTextCard({ item, align }) {
   return (
-    <div style={{
-      display:'grid',
-      gridTemplateColumns: isLeft ? '1fr 60px 1fr' : '1fr 60px 1fr',
-      gap:'0',
-      alignItems:'stretch',
-      minHeight:'220px'
-    }}>
-      {/* Left side */}
-      <div style={{
-        display:'flex', justifyContent: isLeft ? 'flex-end' : 'flex-start',
-        alignItems:'center', padding:'16px 24px 16px 0',
-        animation:'fadeInUp 0.8s ease both',
-        animationDelay: `${index * 0.15}s`
-      }}>
-        {isLeft ? (
-          <ScheduleCard item={item} align="right" />
-        ) : (
-          <SchedulePhoto src={imgSrc} alt={item.title} />
-        )}
-      </div>
-
-      {/* Center timeline */}
-      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', position:'relative' }}>
-        {/* Vertical line top */}
-        {index > 0 && <div style={{ width:'1px', flex:'1', background:'linear-gradient(to bottom, var(--border), rgba(201,168,76,0.5))' }} />}
-        {index === 0 && <div style={{ flex:'1' }} />}
-
-        {/* Dot */}
-        <div style={{
-          width:'44px', height:'44px', borderRadius:'50%', flexShrink:0,
-          background:'linear-gradient(135deg, var(--gold), var(--gold-light))',
-          display:'flex', alignItems:'center', justifyContent:'center',
-          fontSize:'20px', zIndex:2,
-          boxShadow:'0 0 0 6px rgba(201,168,76,0.12), 0 4px 16px rgba(201,168,76,0.3)',
-          animation:'glow-pulse 3s ease infinite',
-          animationDelay: `${index * 0.5}s`
-        }}>
-          {item.emoji}
-        </div>
-
-        {/* Vertical line bottom */}
-        {!isLast && <div style={{ width:'1px', flex:'1', background:'linear-gradient(to bottom, rgba(201,168,76,0.5), var(--border))' }} />}
-        {isLast && <div style={{ flex:'1' }} />}
-      </div>
-
-      {/* Right side */}
-      <div style={{
-        display:'flex', justifyContent: isLeft ? 'flex-start' : 'flex-end',
-        alignItems:'center', padding:'16px 0 16px 24px',
-        animation:'fadeInUp 0.8s ease both',
-        animationDelay: `${index * 0.15 + 0.1}s`
-      }}>
-        {isLeft ? (
-          <SchedulePhoto src={imgSrc} alt={item.title} />
-        ) : (
-          <ScheduleCard item={item} align="left" />
-        )}
-      </div>
-    </div>
-  )
-}
-
-function ScheduleCard({ item, align }) {
-  return (
-    <div style={{
-      maxWidth:'280px', width:'100%',
-      background:'var(--white)',
-      border:'1px solid var(--border)',
-      borderRadius:'8px',
-      padding:'24px',
-      textAlign: align,
-      position:'relative', overflow:'hidden',
-      boxShadow:'0 4px 24px rgba(201,168,76,0.08)',
-      transition:'transform 0.3s ease, box-shadow 0.3s ease'
-    }}
-    onMouseEnter={e=>{ e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)' }}
-    onMouseLeave={e=>{ e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 24px rgba(201,168,76,0.08)' }}
-    >
-      <div style={{
-        position:'absolute', top:0, left:0, right:0, height:'3px',
-        background:'linear-gradient(to right, var(--gold), var(--rose-light))'
-      }} />
-      <p style={{
-        fontFamily:'Antarctic,"Cormorant Garamond",serif',
-        fontSize:'32px', color:'var(--gold)', letterSpacing:'2px',
-        marginBottom:'8px', fontWeight:400
+    <div style={{ maxWidth:'240px', width:'100%', textAlign: align }}>
+      <p className="display-font" style={{
+        fontSize:'clamp(28px,5vw,40px)', fontWeight:300,
+        color:'var(--gold)', letterSpacing:'2px', lineHeight:1,
+        marginBottom:'10px'
       }}>{item.time}</p>
-      <h3 style={{
-        fontFamily:"'Cormorant Garamond',serif",
-        fontSize:'22px', fontWeight:500,
-        color:'var(--text-dark)', marginBottom:'8px'
-      }}>{item.title}</h3>
-      <p style={{ fontSize:'13px', color:'var(--text-light)', lineHeight:1.7 }}>{item.desc}</p>
+      <p style={{ fontSize:'14px', fontWeight:500, color:'var(--text-dark)', letterSpacing:'1px', marginBottom:'6px' }}>
+        {item.title}
+      </p>
+      <p style={{ fontSize:'11px', color:'var(--text-light)', lineHeight:1.7, letterSpacing:'0.3px' }}>
+        {item.desc}
+      </p>
     </div>
   )
 }
 
-function SchedulePhoto({ src, alt }) {
+function SchedulePhoto({ src }) {
+  const [loaded, setLoaded] = useState(false)
   return (
     <div style={{
-      maxWidth:'260px', width:'100%', height:'180px',
-      borderRadius:'8px', overflow:'hidden',
-      border:'1px solid var(--border)',
-      boxShadow:'0 4px 24px rgba(0,0,0,0.08)',
-      position:'relative'
+      width:'clamp(120px,25vw,200px)',
+      height:'clamp(150px,30vw,240px)',
+      borderRadius:'2px',
+      overflow:'hidden',
+      background:'var(--gold-pale)',
+      flexShrink:0
     }}>
-      <img src={src} alt={alt} style={{
-        width:'100%', height:'100%', objectFit:'cover', display:'block',
-        filter:'sepia(15%) saturate(90%)',
-        transition:'transform 0.5s ease'
-      }}
-      onMouseEnter={e=>e.target.style.transform='scale(1.05)'}
-      onMouseLeave={e=>e.target.style.transform='scale(1)'}
-      onError={e=>{
-        e.target.style.display='none'
-        e.target.parentElement.style.background='linear-gradient(135deg, var(--gold-pale), var(--rose-pale))'
-        e.target.parentElement.style.display='flex'
-        e.target.parentElement.style.alignItems='center'
-        e.target.parentElement.style.justifyContent='center'
-        e.target.parentElement.innerHTML='<span style="font-size:40px">✨</span>'
-      }}
+      <img src={src} alt="" onLoad={()=>setLoaded(true)}
+        style={{
+          width:'100%', height:'100%', objectFit:'cover', display:'block',
+          opacity: loaded ? 1 : 0, transition:'opacity 0.5s ease',
+          filter:'brightness(1.02) saturate(0.92)'
+        }}
       />
-      {/* overlay */}
-      <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, transparent 60%, rgba(253,248,242,0.3) 100%)' }} />
     </div>
   )
 }
 
-// ─── Story cards ──────────────────────────────────────────────────────────────
-function StorySection() {
+// ── Details cards ─────────────────────────────────────────────────────────────
+function DetailsSection() {
   const { t } = useContext(LangContext)
   return (
-    <section style={{ padding:'80px 20px', background:'var(--ivory)', position:'relative' }}>
-      <div style={{ maxWidth:'700px', margin:'0 auto', textAlign:'center' }}>
-        <KazakhOrnament type="divider" color="var(--gold)" />
-        <p style={{ letterSpacing:'5px', fontSize:'11px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'12px', marginTop:'40px' }}>{t.story.label}</p>
-        <h2 style={{ fontSize:'clamp(28px,5vw,48px)', fontWeight:300, fontStyle:'italic', color:'var(--text-dark)', marginBottom:'28px' }}>{t.story.title}</h2>
-        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', lineHeight:2, color:'var(--text-mid)', fontStyle:'italic', marginBottom:'12px' }}>
-          {t.story.text1}<br/>{t.story.text2}
-        </p>
-        <div style={{ margin:'40px 0' }}>
-          <KazakhOrnament type="full-border" color="var(--gold)" opacity={0.2} />
+    <section style={{ padding:'60px 20px', background:'var(--ivory)' }}>
+      <div style={{ maxWidth:'600px', margin:'0 auto' }}>
+        <div style={{ textAlign:'center', marginBottom:'40px' }}>
+          <SectionLabel>{t.details.label}</SectionLabel>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:'20px' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'1px', background:'var(--border)' }}>
           {[
-            { icon:'📅', label:t.story.date, value:t.story.dateVal },
-            { icon:'🕕', label:t.story.time, value:t.story.timeVal },
-            { icon:'📍', label:t.story.place, value:t.story.placeVal },
-          ].map((item, i) => (
-            <div key={i} style={{ padding:'28px 20px', background:'var(--white)', border:'1px solid var(--border)', borderRadius:'4px', position:'relative', overflow:'hidden' }}>
-              <div style={{ position:'absolute', top:0, left:0, right:0, height:'3px', background:'linear-gradient(to right, var(--gold), var(--rose-light))' }} />
-              <div style={{ fontSize:'28px', marginBottom:'12px' }}>{item.icon}</div>
-              <p style={{ fontSize:'11px', letterSpacing:'3px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'6px' }}>{item.label}</p>
-              <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', color:'var(--text-dark)' }}>{item.value}</p>
+            { icon:'◦', label:t.details.date,  value:t.details.dateVal  },
+            { icon:'◦', label:t.details.time,  value:t.details.timeVal  },
+            { icon:'◦', label:t.details.place, value:t.details.placeVal },
+          ].map((item,i) => (
+            <div key={i} style={{ padding:'28px 20px', background:'var(--cream)', textAlign:'center' }}>
+              <p style={{ fontSize:'9px', letterSpacing:'3px', textTransform:'lowercase', color:'var(--text-light)', marginBottom:'10px' }}>{item.label}</p>
+              <p className="display-font" style={{ fontSize:'clamp(14px,3vw,18px)', color:'var(--text-dark)', letterSpacing:'1px' }}>{item.value}</p>
             </div>
           ))}
         </div>
@@ -535,37 +421,45 @@ function StorySection() {
   )
 }
 
-// ─── Calendar ─────────────────────────────────────────────────────────────────
+// ── Calendar ──────────────────────────────────────────────────────────────────
 function CalendarSection() {
   const { t } = useContext(LangContext)
   return (
-    <section style={{ padding:'60px 20px 80px', background:'var(--cream)' }}>
-      <div style={{ maxWidth:'600px', margin:'0 auto', textAlign:'center' }}>
-        <p style={{ letterSpacing:'5px', fontSize:'11px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'12px' }}>{t.calendar.label}</p>
-        <h2 style={{ fontSize:'clamp(26px,4vw,42px)', fontWeight:300, fontStyle:'italic', color:'var(--text-dark)', marginBottom:'40px' }}>{t.calendar.title}</h2>
+    <section style={{ padding:'60px 20px', background:'var(--cream)' }}>
+      <div style={{ maxWidth:'480px', margin:'0 auto', textAlign:'center' }}>
+        <SectionLabel>{t.calendar.label}</SectionLabel>
         <Calendar weddingDate="2026-06-28" />
       </div>
     </section>
   )
 }
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
+// ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
   const { t } = useContext(LangContext)
   return (
-    <footer style={{ padding:'60px 20px', background:'var(--cream)', textAlign:'center', borderTop:'1px solid var(--border)' }}>
-      <KazakhOrnament type="band" color="var(--gold)" opacity={0.4} />
-      <div style={{ marginTop:'32px' }}>
-        <p style={{
-          fontFamily:'Antarctic,"Cormorant Garamond",serif',
-          fontSize:'clamp(28px,6vw,52px)',
-          color:'var(--text-mid)', marginBottom:'12px', letterSpacing:'6px'
-        }}>Р ✦ Ж</p>
-        <p style={{ fontSize:'13px', color:'var(--text-light)', letterSpacing:'3px' }}>{t.footer.date}</p>
-        <div style={{ marginTop:'20px', display:'flex', justifyContent:'center' }}>
-          <KazakhOrnament type="diamond" color="var(--gold)" size={18} />
-        </div>
-      </div>
+    <footer style={{ padding:'64px 20px', background:'var(--cream)', textAlign:'center', borderTop:'1px solid var(--border)' }}>
+      <div style={{ width:'1px', height:'48px', background:'linear-gradient(to bottom, transparent, var(--line))', margin:'0 auto 24px' }} />
+      <p className="display-font" style={{ fontSize:'clamp(36px,8vw,64px)', fontWeight:300, letterSpacing:'14px', color:'var(--text-dark)', marginBottom:'16px' }}>
+        Р ✦ Ж
+      </p>
+      <p style={{ fontSize:'10px', letterSpacing:'4px', color:'var(--text-light)' }}>{t.footer}</p>
+      <div style={{ width:'1px', height:'48px', background:'linear-gradient(to bottom, var(--line), transparent)', margin:'24px auto 0' }} />
     </footer>
+  )
+}
+
+// ── Utility ───────────────────────────────────────────────────────────────────
+function SectionLabel({ children }) {
+  return (
+    <p style={{
+      fontSize:'9px', letterSpacing:'5px', textTransform:'lowercase',
+      color:'var(--text-light)', marginBottom:'16px',
+      display:'flex', alignItems:'center', justifyContent:'center', gap:'12px'
+    }}>
+      <span style={{ display:'inline-block', width:'24px', height:'1px', background:'var(--line)' }} />
+      {children}
+      <span style={{ display:'inline-block', width:'24px', height:'1px', background:'var(--line)' }} />
+    </p>
   )
 }
