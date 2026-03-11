@@ -4,7 +4,7 @@ import MapSection from './components/MapSection'
 import RSVPForm   from './components/RSVPForm'
 import Calendar   from './components/Calendar'
 import Petals     from './components/Petals'
-import { translations } from './lang'
+import { translations } from './lang.js'
 
 export const LangContext = createContext()
 
