@@ -14,6 +14,23 @@ const audio = new Audio('./music/mahabbat.mp3')
 audio.loop = true
 audio.volume = 0.55
 
+// Try autoplay immediately when module loads
+const tryAutoPlay = () => {
+  audio.play().catch(() => {
+    // Browser blocked - wait for first interaction
+    const unlock = () => {
+      audio.play().catch(()=>{})
+      document.removeEventListener('click', unlock)
+      document.removeEventListener('touchstart', unlock)
+      document.removeEventListener('scroll', unlock)
+    }
+    document.addEventListener('click', unlock, { once: true })
+    document.addEventListener('touchstart', unlock, { once: true })
+    document.addEventListener('scroll', unlock, { once: true })
+  })
+}
+tryAutoPlay()
+
 export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [lang, setLang] = useState('kz')
@@ -23,6 +40,18 @@ export default function App() {
     const h = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', h)
     return () => window.removeEventListener('scroll', h)
+  }, [])
+
+  useEffect(() => {
+    // Sync playing state with audio element
+    const onPlay = () => setPlaying(true)
+    const onPause = () => setPlaying(false)
+    audio.addEventListener('play', onPlay)
+    audio.addEventListener('pause', onPause)
+    return () => {
+      audio.removeEventListener('play', onPlay)
+      audio.removeEventListener('pause', onPause)
+    }
   }, [])
 
   const toggleMusic = () => {
@@ -112,7 +141,7 @@ function HeroSection() {
 
       {/* Full photo - no yurt */}
       <div style={{ width:'100%', height:'75vh', position:'relative', overflow:'hidden' }}>
-        <img src="./couple.jpg" alt=""
+        <img src="./photo1.jpg" alt=""
           style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 30%', display:'block', animation:'fadeIn 1.8s ease both' }}
         />
         {/* Bottom fade into cream */}
@@ -175,98 +204,30 @@ function HeroSection() {
 // ── Inline Music Player ───────────────────────────────────────────────────────
 function InlineMusicPlayer() {
   const { t, playing, toggleMusic } = useContext(LangContext)
-  const [progress, setProgress] = useState(0)
-  const [volume, setVolume] = useState(0.55)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-
-  useEffect(() => {
-    const onMeta = () => setDuration(audio.duration)
-    const onTime = () => {
-      setCurrentTime(audio.currentTime)
-      if (audio.duration) setProgress(audio.currentTime / audio.duration * 100)
-    }
-    audio.addEventListener('loadedmetadata', onMeta)
-    audio.addEventListener('timeupdate', onTime)
-    return () => { audio.removeEventListener('loadedmetadata', onMeta); audio.removeEventListener('timeupdate', onTime) }
-  }, [])
-
-  const seek = (e) => {
-    if (!audio.duration) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration
-  }
-
-  const changeVol = (e) => {
-    const v = parseFloat(e.target.value)
-    setVolume(v); audio.volume = v
-  }
-
-  const fmt = s => !s || isNaN(s) ? '0:00' : `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`
-
   return (
-    <div style={{
-      width:'100%', maxWidth:'360px',
-      background:'var(--white)',
-      border:'1px solid var(--border)',
-      borderRadius:'2px',
-      padding:'20px 24px',
-      boxShadow:'0 2px 24px rgba(0,0,0,0.04)',
-    }}>
-      {/* Song row */}
-      <div style={{ display:'flex', alignItems:'center', gap:'14px', marginBottom:'16px' }}>
-        {/* Vinyl */}
-        <div style={{
-          width:'44px', height:'44px', borderRadius:'50%', flexShrink:0,
-          background:'conic-gradient(from 0deg, var(--text-dark) 0%, #5a4a3a 25%, var(--text-dark) 50%, #3a2a1a 75%, var(--text-dark) 100%)',
-          display:'flex', alignItems:'center', justifyContent:'center',
-          animation: playing ? 'spin-slow 4s linear infinite' : 'none',
-          boxShadow:'0 2px 8px rgba(0,0,0,0.12)'
-        }}>
-          <div style={{ width:'12px', height:'12px', borderRadius:'50%', background:'var(--cream)' }} />
-        </div>
-
-        <div style={{ flex:1, textAlign:'left' }}>
-          <p style={{ fontSize:'12px', letterSpacing:'1px', color:'var(--text-dark)', marginBottom:'3px' }}>
-            Махаббат деген қандай
-          </p>
-          <p style={{ fontSize:'10px', letterSpacing:'2px', color:'var(--text-light)', textTransform:'lowercase' }}>
-            {t.music}
-          </p>
-        </div>
-
-        {/* Play button */}
-        <button onClick={toggleMusic} style={{
-          width:'40px', height:'40px', borderRadius:'50%', flexShrink:0,
-          background: playing ? 'var(--text-dark)' : 'var(--white)',
-          border:`1px solid ${playing ? 'var(--text-dark)' : 'var(--line)'}`,
-          cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center',
-          fontSize:'14px', color: playing ? 'var(--white)' : 'var(--text-dark)',
-          transition:'all 0.3s ease',
-          animation: playing ? 'pulse-gold 2.5s ease infinite' : 'none'
+    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
+      {/* Single round button */}
+      <button onClick={toggleMusic} style={{
+        width:'60px', height:'60px', borderRadius:'50%',
+        background: playing ? 'var(--text-dark)' : 'transparent',
+        border:'1.5px solid var(--text-dark)',
+        cursor:'pointer',
+        display:'flex', alignItems:'center', justifyContent:'center',
+        transition:'all 0.4s ease',
+        boxShadow: playing ? '0 0 0 8px rgba(42,32,24,0.07), 0 4px 20px rgba(42,32,24,0.15)' : 'none',
+        animation: playing ? 'pulse-soft 3s ease infinite' : 'none'
+      }}>
+        <span style={{
+          fontSize:'20px',
+          color: playing ? 'var(--white)' : 'var(--text-dark)',
+          marginLeft: playing ? '0' : '2px'
         }}>
           {playing ? '⏸' : '▶'}
-        </button>
-      </div>
-
-      {/* Progress bar */}
-      <div onClick={seek} style={{ height:'3px', borderRadius:'2px', background:'var(--gold-pale)', cursor:'pointer', marginBottom:'8px', position:'relative' }}>
-        <div style={{ height:'100%', borderRadius:'2px', width:`${progress}%`, background:'var(--text-dark)', transition:'width 0.5s linear', position:'relative' }}>
-          <div style={{ position:'absolute', right:'-5px', top:'-4px', width:'11px', height:'11px', borderRadius:'50%', background:'var(--text-dark)' }} />
-        </div>
-      </div>
-
-      {/* Time + Volume */}
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontSize:'9px', letterSpacing:'1px', color:'var(--text-light)' }}>
-          {fmt(currentTime)} / {fmt(duration)}
         </span>
-        <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
-          <span style={{ fontSize:'11px' }}>{volume===0?'🔇':volume<0.5?'🔉':'🔊'}</span>
-          <input type="range" min="0" max="1" step="0.05" value={volume} onChange={changeVol}
-            style={{ width:'60px', accentColor:'var(--text-dark)', cursor:'pointer' }} />
-        </div>
-      </div>
+      </button>
+      <p style={{ fontSize:'9px', letterSpacing:'3px', color:'var(--text-light)', textTransform:'lowercase' }}>
+        {playing ? 'Махаббат деген қандай' : t.music}
+      </p>
     </div>
   )
 }
