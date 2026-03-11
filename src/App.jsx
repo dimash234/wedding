@@ -1,10 +1,10 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import Countdown  from './components/Countdown.jsx'
-import MapSection from './components/MapSection.jsx'
-import RSVPForm   from './components/RSVPForm.jsx'
-import Calendar   from './components/Calendar.jsx'
-import Petals     from './components/Petals.jsx'
-import { translations } from './lang.js'
+import Countdown  from './components/Countdown'
+import MapSection from './components/MapSection'
+import RSVPForm   from './components/RSVPForm'
+import Calendar   from './components/Calendar'
+import Petals     from './components/Petals'
+import { translations } from './lang'
 
 export const LangContext = createContext()
 
@@ -89,6 +89,12 @@ export default function App() {
         <Petals />
         <Navbar scrolled={scrolled} />
         <Hero />
+        {/* ── Ornament between hero and schedule ── */}
+        <Reveal delay={0}>
+          <div style={{ padding: '24px 0 0', background: 'var(--white)', textAlign: 'center' }}>
+            <ShanyraqOrnament size={48} opacity={0.35} />
+          </div>
+        </Reveal>
         <ScheduleSection />
         <CalendarSection />
         <DetailsSection />
@@ -307,6 +313,13 @@ function Hero() {
           }}>{t.quote}</p>
         </Reveal>
 
+        {/* Floral ornament */}
+        <Reveal delay={0.36}>
+          <div style={{ marginTop: 'clamp(16px,3vh,24px)' }}>
+            <FloralDivider opacity={0.5} />
+          </div>
+        </Reveal>
+
         {/* Greeting */}
         <Reveal delay={0.42}>
           <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
@@ -401,6 +414,11 @@ function CountdownSection() {
         </Reveal>
         <Reveal delay={0.12} y={20}>
           <Countdown targetDate="2026-06-28T18:00:00" />
+        </Reveal>
+        <Reveal delay={0.3}>
+          <div style={{ marginTop: '40px' }}>
+            <ScrollDivider opacity={0.4} />
+          </div>
         </Reveal>
       </div>
     </section>
@@ -571,7 +589,14 @@ function DetailsSection() {
 function CalendarSection() {
   const { t } = useContext(LangContext)
   return (
-    <section style={{ padding: 'clamp(56px,9vh,80px) 20px', background: 'var(--white)' }}>
+    <section style={{ padding: 'clamp(56px,9vh,80px) 20px', background: 'var(--white)', position: 'relative' }}>
+      {/* Corner florals */}
+      <div style={{ position: 'absolute', top: '20px', left: '20px', pointerEvents: 'none' }}>
+        <CornerFloral position="tl" size={60} opacity={0.28} />
+      </div>
+      <div style={{ position: 'absolute', top: '20px', right: '20px', pointerEvents: 'none' }}>
+        <CornerFloral position="tr" size={60} opacity={0.28} />
+      </div>
       <div style={{ maxWidth: '440px', margin: '0 auto', textAlign: 'center' }}>
         <Reveal delay={0}>
           <SectionLabel>{t.calendar.label}</SectionLabel>
@@ -652,6 +677,105 @@ function GoldDiamond() {
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
       <path d="M7 0.5 L13.5 7 L7 13.5 L0.5 7 Z" fill="none" stroke="var(--gold)" strokeWidth="0.8" />
       <circle cx="7" cy="7" r="1.8" fill="var(--gold)" opacity="0.8" />
+    </svg>
+  )
+}
+
+/* ─── Rich SVG Ornaments ──────────────────────────────────────────── */
+
+// Delicate floral branch divider
+export function FloralDivider({ opacity = 0.6 }) {
+  return (
+    <svg viewBox="0 0 320 40" style={{ width: '100%', maxWidth: '320px', display: 'block', margin: '0 auto', opacity }}>
+      <line x1="0" y1="20" x2="100" y2="20" stroke="var(--gold2)" strokeWidth="0.7"/>
+      {/* Left florals */}
+      <circle cx="95" cy="20" r="2.5" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
+      <line x1="92" y1="14" x2="95" y2="18" stroke="var(--gold2)" strokeWidth="0.8"/>
+      <circle cx="91" cy="12" r="2" fill="var(--gold2)" opacity="0.5"/>
+      <line x1="98" y1="14" x2="95" y2="18" stroke="var(--gold2)" strokeWidth="0.8"/>
+      <circle cx="99" cy="12" r="2" fill="var(--gold2)" opacity="0.5"/>
+      {/* Centre diamond */}
+      <path d="M160,8 L168,20 L160,32 L152,20Z" fill="none" stroke="var(--gold)" strokeWidth="1"/>
+      <circle cx="160" cy="20" r="3" fill="var(--gold)" opacity="0.5"/>
+      {/* Right florals (mirror) */}
+      <circle cx="225" cy="20" r="2.5" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
+      <line x1="228" y1="14" x2="225" y2="18" stroke="var(--gold2)" strokeWidth="0.8"/>
+      <circle cx="229" cy="12" r="2" fill="var(--gold2)" opacity="0.5"/>
+      <line x1="222" y1="14" x2="225" y2="18" stroke="var(--gold2)" strokeWidth="0.8"/>
+      <circle cx="221" cy="12" r="2" fill="var(--gold2)" opacity="0.5"/>
+      <line x1="220" y1="20" x2="320" y2="20" stroke="var(--gold2)" strokeWidth="0.7"/>
+    </svg>
+  )
+}
+
+// Corner botanical corner piece
+export function CornerFloral({ position = 'tl', size = 80, opacity = 0.35 }) {
+  const transforms = {
+    tl: 'translate(0,0)',
+    tr: `translate(${size},0) scale(-1,1)`,
+    bl: `translate(0,${size}) scale(1,-1)`,
+    br: `translate(${size},${size}) scale(-1,-1)`,
+  }
+  return (
+    <svg viewBox={`0 0 ${size} ${size}`} style={{ width: size, height: size, display: 'block', opacity }} xmlns="http://www.w3.org/2000/svg">
+      <g transform={transforms[position]}>
+        <path d="M4,4 L4,36 Q4,40 8,40 L36,40" fill="none" stroke="var(--gold)" strokeWidth="1.2"/>
+        <path d="M10,4 L10,30 Q10,34 14,34 L36,34" fill="none" stroke="var(--gold2)" strokeWidth="0.7"/>
+        {/* Floral tip */}
+        <circle cx="4" cy="4" r="3" fill="none" stroke="var(--gold)" strokeWidth="1"/>
+        <circle cx="4" cy="4" r="1.2" fill="var(--gold)" opacity="0.6"/>
+        {/* Leaf at end */}
+        <path d="M36,40 Q42,36 38,30 Q34,34 36,40Z" fill="var(--gold2)" opacity="0.4"/>
+        {/* Small dot accents */}
+        <circle cx="20" cy="4" r="1.5" fill="var(--gold2)" opacity="0.5"/>
+        <circle cx="4" cy="22" r="1.5" fill="var(--gold2)" opacity="0.5"/>
+      </g>
+    </svg>
+  )
+}
+
+// Ornate section separator with rings and scrolls
+export function ScrollDivider({ opacity = 0.55 }) {
+  return (
+    <svg viewBox="0 0 400 28" style={{ width: '100%', maxWidth: '400px', display: 'block', margin: '0 auto', opacity }}>
+      {/* Left scroll */}
+      <path d="M0,14 Q20,4 40,14 Q20,24 0,14Z" fill="none" stroke="var(--gold2)" strokeWidth="0.8"/>
+      <path d="M40,14 L170,14" stroke="var(--gold2)" strokeWidth="0.6"/>
+      {/* Small diamonds on line */}
+      <path d="M90,10 L94,14 L90,18 L86,14Z" fill="var(--gold2)" opacity="0.45"/>
+      <path d="M140,10 L144,14 L140,18 L136,14Z" fill="var(--gold2)" opacity="0.45"/>
+      {/* Centre ring with inner star */}
+      <circle cx="200" cy="14" r="10" fill="none" stroke="var(--gold)" strokeWidth="1"/>
+      <circle cx="200" cy="14" r="5" fill="none" stroke="var(--gold)" strokeWidth="0.7"/>
+      <line x1="200" y1="4" x2="200" y2="24" stroke="var(--gold)" strokeWidth="0.6" opacity="0.5"/>
+      <line x1="190" y1="14" x2="210" y2="14" stroke="var(--gold)" strokeWidth="0.6" opacity="0.5"/>
+      <circle cx="200" cy="14" r="2" fill="var(--gold)" opacity="0.7"/>
+      {/* Right mirror */}
+      <path d="M230,14 L360,14" stroke="var(--gold2)" strokeWidth="0.6"/>
+      <path d="M260,10 L264,14 L260,18 L256,14Z" fill="var(--gold2)" opacity="0.45"/>
+      <path d="M310,10 L314,14 L310,18 L306,14Z" fill="var(--gold2)" opacity="0.45"/>
+      <path d="M400,14 Q380,4 360,14 Q380,24 400,14Z" fill="none" stroke="var(--gold2)" strokeWidth="0.8"/>
+    </svg>
+  )
+}
+
+// Shanyrak (yurt crown symbol) — cultural Kazakh ornament
+export function ShanyraqOrnament({ size = 56, opacity = 0.45 }) {
+  return (
+    <svg viewBox="0 0 56 56" style={{ width: size, height: size, display: 'block', margin: '0 auto', opacity }}>
+      <circle cx="28" cy="28" r="24" fill="none" stroke="var(--gold)" strokeWidth="1"/>
+      <circle cx="28" cy="28" r="16" fill="none" stroke="var(--gold2)" strokeWidth="0.8"/>
+      <circle cx="28" cy="28" r="6" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
+      {/* Spokes */}
+      {[0,30,60,90,120,150].map(a => {
+        const rad = a * Math.PI / 180
+        return <line key={a}
+          x1={28 + 6*Math.cos(rad)} y1={28 + 6*Math.sin(rad)}
+          x2={28 + 24*Math.cos(rad)} y2={28 + 24*Math.sin(rad)}
+          stroke="var(--gold2)" strokeWidth="0.7" opacity="0.7"
+        />
+      })}
+      <circle cx="28" cy="28" r="2.5" fill="var(--gold)" opacity="0.7"/>
     </svg>
   )
 }
