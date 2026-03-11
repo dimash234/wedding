@@ -1,27 +1,36 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { LangContext } from '../App'
 
-// Single animated digit that flips on change
-function FlipDigit({ value }) {
-  const [prev, setPrev] = useState(value)
-  const [flipping, setFlipping] = useState(false)
+/* Single digit pair with flip animation on change */
+function FlipBlock({ value }) {
+  const [disp,     setDisp]     = useState(value)
+  const [animKey,  setAnimKey]  = useState(0)
 
   useEffect(() => {
-    if (value !== prev) {
-      setFlipping(true)
-      const t = setTimeout(() => { setPrev(value); setFlipping(false) }, 300)
+    if (value !== disp) {
+      setAnimKey(k => k + 1)
+      // show new value after flip midpoint
+      const t = setTimeout(() => setDisp(value), 200)
       return () => clearTimeout(t)
     }
   }, [value])
 
   return (
-    <span style={{
-      display:'inline-block',
-      transition: flipping ? 'transform 0.15s ease-in, opacity 0.15s ease-in' : 'transform 0.15s ease-out, opacity 0.15s ease-out',
-      transform: flipping ? 'translateY(-6px) scaleY(0.6)' : 'translateY(0) scaleY(1)',
-      opacity: flipping ? 0 : 1,
-    }}>
-      {String(value).padStart(2, '0')}
+    <span
+      key={animKey}
+      className="display-font"
+      style={{
+        display: 'inline-block',
+        fontFamily: "'Bodoni Moda','Cormorant Garamond',serif",
+        fontSize: 'clamp(36px,8.5vw,72px)',
+        fontWeight: 300,
+        color: 'var(--ink)',
+        lineHeight: 1,
+        letterSpacing: '-1px',
+        animation: animKey > 0 ? 'flipUp 0.38s cubic-bezier(.4,0,.2,1) both' : 'none',
+      }}
+    >
+      {String(disp).padStart(2, '0')}
     </span>
   )
 }
@@ -40,7 +49,7 @@ export default function Countdown({ targetDate }) {
     }
   }
 
-  const [tl, setTl]     = useState(calc())
+  const [tl,    setTl]    = useState(calc)
   const [blink, setBlink] = useState(true)
 
   useEffect(() => {
@@ -52,9 +61,11 @@ export default function Countdown({ targetDate }) {
   }, [])
 
   if (!tl) return (
-    <p style={{ fontSize:'16px', letterSpacing:'4px', color:'var(--gold)', textAlign:'center', fontStyle:'italic' }}>
-      {t.countdown.passed}
-    </p>
+    <p style={{
+      fontFamily: "'Bodoni Moda','Cormorant Garamond',serif",
+      fontSize: '22px', fontStyle: 'italic',
+      letterSpacing: '3px', color: 'var(--gold)',
+    }}>{t.countdown.done}</p>
   )
 
   const units = [
@@ -64,92 +75,95 @@ export default function Countdown({ targetDate }) {
     { v: tl.seconds, l: t.countdown.seconds },
   ]
 
-  // Separator style
-  const sep = {
-    fontSize:'clamp(28px,6vw,52px)',
-    fontWeight:300,
-    color:'var(--gold)',
-    lineHeight:1,
-    opacity: blink ? 1 : 0.15,
-    transition:'opacity 0.4s ease',
-    alignSelf:'flex-start',
-    paddingTop:'4px',
-    flexShrink:0,
-  }
-
   return (
-    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
 
-      {/* One single row — no wrap on desktop, compact on mobile */}
+      {/* ── Single row, no wrap ── */}
       <div style={{
-        display:'flex',
-        alignItems:'flex-start',
-        justifyContent:'center',
-        gap:'clamp(4px, 1vw, 12px)',
-        flexWrap:'nowrap',   // NEVER wrap to next line
-        overflowX:'auto',    // scroll on tiny screens instead of wrapping
-        width:'100%',
-        paddingBottom:'4px', // space for scrollbar if needed
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        gap: 'clamp(4px, 1vw, 10px)',
+        flexWrap: 'nowrap',
+        width: '100%',
+        overflowX: 'auto',
+        paddingBottom: '2px',
       }}>
         {units.map((u, i) => (
           <React.Fragment key={i}>
-            {/* Unit block */}
-            <div style={{ display:'flex', flexDirection:'column', alignItems:'center', flexShrink:0 }}>
-              {/* Number card */}
-              <div style={{
-                width:'clamp(58px, 14vw, 110px)',
-                height:'clamp(66px, 16vw, 124px)',
-                background:'var(--white)',
-                border:'1px solid var(--border)',
-                display:'flex', alignItems:'center', justifyContent:'center',
-                position:'relative', overflow:'hidden',
-                flexShrink:0,
-              }}>
-                {/* Top shimmer */}
-                <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent, var(--gold), transparent)' }} />
-                {/* Bottom shimmer */}
-                <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent, var(--gold-light), transparent)' }} />
-                {/* Middle split line */}
-                <div style={{ position:'absolute', top:'50%', left:'8px', right:'8px', height:'1px', background:'var(--border)', zIndex:1 }} />
 
-                <span className="display-font" style={{
-                  fontSize:'clamp(28px, 7vw, 58px)',
-                  fontWeight:300,
-                  color:'var(--text-dark)',
-                  lineHeight:1,
-                  letterSpacing:'-1px',
-                  zIndex:2, position:'relative',
-                }}>
-                  <FlipDigit value={u.v} />
-                </span>
+            {/* Unit card */}
+            <div style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              flexShrink: 0,
+            }}>
+              {/* Number box */}
+              <div style={{
+                width: 'clamp(62px,14vw,112px)',
+                height: 'clamp(70px,16vw,126px)',
+                background: 'var(--white)',
+                border: '1px solid var(--border)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                position: 'relative', overflow: 'hidden',
+              }}>
+                {/* Top gold accent */}
+                <div style={{
+                  position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px',
+                  background: 'linear-gradient(to right, transparent, var(--gold), transparent)',
+                }} />
+                {/* Centre fold line */}
+                <div style={{
+                  position: 'absolute', top: '50%', left: '10%', right: '10%',
+                  height: '1px', background: 'var(--border)', zIndex: 1,
+                }} />
+                {/* Bottom gold accent */}
+                <div style={{
+                  position: 'absolute', bottom: 0, left: '15%', right: '15%', height: '1px',
+                  background: 'linear-gradient(to right, transparent, var(--gold2), transparent)',
+                }} />
+
+                <div style={{ zIndex: 2, position: 'relative' }}>
+                  <FlipBlock value={u.v} />
+                </div>
               </div>
 
               {/* Label */}
               <p style={{
-                marginTop:'8px',
-                fontSize:'clamp(6px, 1.5vw, 9px)',
-                letterSpacing:'3px',
-                textTransform:'lowercase',
-                color:'var(--text-light)',
-                whiteSpace:'nowrap',
+                marginTop: '9px',
+                fontSize: 'clamp(7px,1.4vw,9px)',
+                letterSpacing: '3.5px',
+                textTransform: 'lowercase',
+                color: 'var(--soft)',
+                whiteSpace: 'nowrap',
+                fontWeight: 300,
               }}>{u.l}</p>
             </div>
 
-            {/* Colon separator */}
+            {/* Colon */}
             {i < 3 && (
-              <span className="display-font" style={sep}>:</span>
+              <span style={{
+                fontFamily: "'Bodoni Moda','Cormorant Garamond',serif",
+                fontSize: 'clamp(28px,6vw,52px)',
+                fontWeight: 300,
+                color: 'var(--gold2)',
+                lineHeight: 1,
+                marginTop: 'clamp(10px,2vw,18px)',
+                flexShrink: 0,
+                opacity: blink ? 1 : 0.1,
+                transition: 'opacity 0.35s ease',
+              }}>:</span>
             )}
           </React.Fragment>
         ))}
       </div>
 
-      {/* Subtitle */}
-      <div style={{ display:'flex', alignItems:'center', gap:'14px', opacity:0.45, marginTop:'4px' }}>
-        <div style={{ width:'32px', height:'1px', background:'var(--line)' }} />
-        <p style={{ fontSize:'8px', letterSpacing:'4px', textTransform:'lowercase', color:'var(--text-light)', whiteSpace:'nowrap' }}>
+      {/* Date subtitle */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px', opacity: 0.45 }}>
+        <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'var(--gold2)' }} />
+        <p style={{ fontSize: '8px', letterSpacing: '4.5px', textTransform: 'lowercase', color: 'var(--soft)', whiteSpace: 'nowrap', fontWeight: 300 }}>
           28 · 06 · 2026
         </p>
-        <div style={{ width:'32px', height:'1px', background:'var(--line)' }} />
+        <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'var(--gold2)' }} />
       </div>
     </div>
   )
