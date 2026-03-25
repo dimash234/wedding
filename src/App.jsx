@@ -208,7 +208,7 @@ function Hero() {
         }}>
           <h1 className="rise-1" style={{
             fontFamily: "'Anastasia Script', Georgia, serif",
-            fontSize: 'clamp(85px,18vw,140px)',
+           fontSize: 'clamp(120px,25vw,220px)',
             fontWeight: 300, letterSpacing: 'clamp(10px,3.5vw,26px)',
             color: 'white', lineHeight: 1,
             textShadow: '0 3px 40px rgba(0,0,0,0.3)',
