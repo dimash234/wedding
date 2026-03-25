@@ -24,11 +24,30 @@ function Reveal({ children, delay = 0 }) {
   )
 }
 
+// SVG heart shape drawn with bezier curves
+function Heart({ size = 22, color = '#E53E3E' }) {
+  return (
+    <svg
+      viewBox="0 0 32 30"
+      style={{ width: size, height: size * 0.94, display: 'block' }}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16,27 C16,27 2,18 2,9 C2,4.5 5.5,1 10,1 C12.5,1 14.7,2.2 16,4 C17.3,2.2 19.5,1 22,1 C26.5,1 30,4.5 30,9 C30,18 16,27 16,27Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export default function Calendar({ weddingDate }) {
   const { t } = useContext(LangContext)
   const year = 2026, month = 5
-  const firstDay   = new Date(year, month, 1).getDay()
-  const startDay   = firstDay === 0 ? 6 : firstDay - 1
+  const firstDay    = new Date(year, month, 1).getDay()
+  const startDay    = firstDay === 0 ? 6 : firstDay - 1
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const cells = []
   for (let i = 0; i < startDay; i++) cells.push(null)
@@ -37,7 +56,6 @@ export default function Calendar({ weddingDate }) {
 
   return (
     <Reveal delay={0.1}>
-      {/* No border on the container */}
       <div style={{
         background: 'transparent',
         padding: 'clamp(16px,4vw,28px)',
@@ -46,9 +64,9 @@ export default function Calendar({ weddingDate }) {
         {/* Month title */}
         <p style={{
           textAlign: 'center',
-          fontFamily: "'Shelley Volante','Cormorant Garamond',serif",
-          fontSize: 'clamp(16px,3.5vw,22px)',
-          fontWeight: 300, letterSpacing: '4px',
+          fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+          fontSize: 'clamp(18px,4vw,26px)',
+          fontWeight: 400, letterSpacing: '3px',
           color: 'var(--ink)',
           marginBottom: '24px',
           textTransform: 'lowercase',
@@ -74,29 +92,22 @@ export default function Calendar({ weddingDate }) {
             return (
               <div key={i} style={{
                 textAlign: 'center',
-                padding: '6px 2px',
+                padding: isWed ? '2px 2px 2px' : '6px 2px',
                 position: 'relative',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
+                gap: '1px',
               }}>
-                {/* Red circle outline around wedding day */}
-                {isWed && (
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    borderRadius: '50%',
-                    border: '1.5px solid #E53E3E',
-                    margin: '1px',
-                  }} />
-                )}
+                {/* Heart on wedding day */}
+                {isWed && <Heart size={20} color="#E53E3E" />}
+
                 <span style={{
                   fontSize: 'clamp(11px,2.2vw,13px)',
                   fontWeight: isWed ? 500 : 300,
                   color: isWed ? '#E53E3E' : day ? 'var(--ink)' : 'transparent',
-                  position: 'relative', zIndex: 1,
-                  fontFamily: isWed ? "'Shelley Volante',serif" : 'inherit',
-                  letterSpacing: isWed ? '0.5px' : '0',
+                  lineHeight: 1.2,
                 }}>
                   {day || ''}
                 </span>
@@ -111,11 +122,12 @@ export default function Calendar({ weddingDate }) {
           borderTop: '1px solid rgba(0,0,0,0.08)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
         }}>
-          <div style={{
-            width: '14px', height: '14px', borderRadius: '50%',
-            border: '1.5px solid #E53E3E', flexShrink: 0,
-          }} />
-          <span style={{ fontSize: '10px', letterSpacing: '2.5px', color: 'var(--ink)', textTransform: 'lowercase', fontWeight: 300, opacity: 0.6 }}>
+          <Heart size={14} color="#E53E3E" />
+          <span style={{
+            fontSize: '10px', letterSpacing: '2.5px',
+            color: 'var(--ink)', textTransform: 'lowercase',
+            fontWeight: 300, opacity: 0.6,
+          }}>
             {t.calendar.legend}
           </span>
         </div>
