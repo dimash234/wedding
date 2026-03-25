@@ -24,20 +24,47 @@ function Reveal({ children, delay = 0 }) {
   )
 }
 
-// SVG heart shape drawn with bezier curves
-function Heart({ size = 22, color = '#E53E3E' }) {
+// Heart with number inside — SVG viewBox sized to fit digit
+function HeartWithNumber({ number, size = 36 }) {
   return (
     <svg
-      viewBox="0 0 32 30"
-      style={{ width: size, height: size * 0.94, display: 'block' }}
+      viewBox="0 0 40 38"
+      style={{ width: size, height: size * 0.95, display: 'block' }}
       xmlns="http://www.w3.org/2000/svg"
     >
+      {/* Heart outline */}
       <path
-        d="M16,27 C16,27 2,18 2,9 C2,4.5 5.5,1 10,1 C12.5,1 14.7,2.2 16,4 C17.3,2.2 19.5,1 22,1 C26.5,1 30,4.5 30,9 C30,18 16,27 16,27Z"
+        d="M20,34 C20,34 3,22 3,11 C3,5.5 7.2,2 12,2 C15.2,2 18,3.8 20,6.2 C22,3.8 24.8,2 28,2 C32.8,2 37,5.5 37,11 C37,22 20,34 20,34Z"
         fill="none"
-        stroke={color}
+        stroke="#E53E3E"
         strokeWidth="1.5"
         strokeLinejoin="round"
+      />
+      {/* Number inside */}
+      <text
+        x="20"
+        y="22"
+        textAnchor="middle"
+        style={{
+          fontSize: '13px',
+          fill: '#E53E3E',
+          fontFamily: "'Anastasia Script', Georgia, serif",
+          fontWeight: 400,
+        }}
+      >
+        {number}
+      </text>
+    </svg>
+  )
+}
+
+// Small heart for legend
+function HeartSmall({ size = 14 }) {
+  return (
+    <svg viewBox="0 0 32 30" style={{ width: size, height: size * 0.94, display: 'block' }}>
+      <path
+        d="M16,27 C16,27 2,18 2,9 C2,4.5 5.5,1 10,1 C12.5,1 14.7,2.2 16,4 C17.3,2.2 19.5,1 22,1 C26.5,1 30,4.5 30,9 C30,18 16,27 16,27Z"
+        fill="none" stroke="#E53E3E" strokeWidth="1.5" strokeLinejoin="round"
       />
     </svg>
   )
@@ -64,7 +91,7 @@ export default function Calendar({ weddingDate }) {
         {/* Month title */}
         <p style={{
           textAlign: 'center',
-          fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+          fontFamily: "'Anastasia Script', Georgia, serif",
           fontSize: 'clamp(18px,4vw,26px)',
           fontWeight: 400, letterSpacing: '3px',
           color: 'var(--ink)',
@@ -92,25 +119,24 @@ export default function Calendar({ weddingDate }) {
             return (
               <div key={i} style={{
                 textAlign: 'center',
-                padding: isWed ? '2px 2px 2px' : '6px 2px',
-                position: 'relative',
+                padding: isWed ? '0' : '6px 2px',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '1px',
               }}>
-                {/* Heart on wedding day */}
-                {isWed && <Heart size={20} color="#E53E3E" />}
-
-                <span style={{
-                  fontSize: 'clamp(11px,2.2vw,13px)',
-                  fontWeight: isWed ? 500 : 300,
-                  color: isWed ? '#E53E3E' : day ? 'var(--ink)' : 'transparent',
-                  lineHeight: 1.2,
-                }}>
-                  {day || ''}
-                </span>
+                {isWed ? (
+                  /* Heart with number inside */
+                  <HeartWithNumber number={28} size={38} />
+                ) : (
+                  <span style={{
+                    fontSize: 'clamp(11px,2.2vw,13px)',
+                    fontWeight: 300,
+                    color: day ? 'var(--ink)' : 'transparent',
+                    lineHeight: 1.2,
+                  }}>
+                    {day || ''}
+                  </span>
+                )}
               </div>
             )
           })}
@@ -122,7 +148,7 @@ export default function Calendar({ weddingDate }) {
           borderTop: '1px solid rgba(0,0,0,0.08)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
         }}>
-          <Heart size={14} color="#E53E3E" />
+          <HeartSmall size={14} />
           <span style={{
             fontSize: '10px', letterSpacing: '2.5px',
             color: 'var(--ink)', textTransform: 'lowercase',

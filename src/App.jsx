@@ -362,31 +362,33 @@ function MusicRing({ playing, onClick }) {
         </defs>
         <text style={{
           fontSize: '6.5px',
-          fill: playing ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.55)',
+          fill: 'rgba(0,0,0,0.6)',
           letterSpacing: '2.2px', fontFamily: "'Anastasia Script', Georgia, serif", fontWeight: 300,
         }}>
           <textPath href="#cp">{TEXT}</textPath>
         </text>
       </svg>
 
-      {/* Button disc — WHITE when paused (▶), DARK when playing (⏸) */}
+      {/* Button disc — always white/light, dark icon inside */}
       <div style={{
         width: '56px', height: '56px', borderRadius: '50%',
-        background: playing ? 'rgba(0,0,0,0.82)' : 'rgba(255,255,255,0.92)',
+        background: 'rgba(255,255,255,0.88)',
         backdropFilter: 'blur(12px)',
-        border: playing ? '1.5px solid rgba(255,255,255,0.25)' : '1.5px solid rgba(255,255,255,0.95)',
+        border: '1.5px solid rgba(255,255,255,0.95)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all 0.4s cubic-bezier(.16,1,.3,1)',
         boxShadow: playing
-          ? '0 0 0 6px rgba(0,0,0,0.15), 0 4px 20px rgba(0,0,0,0.3)'
-          : '0 2px 20px rgba(0,0,0,0.2)',
+          ? '0 0 0 6px rgba(255,255,255,0.15), 0 4px 20px rgba(0,0,0,0.15)'
+          : '0 2px 20px rgba(0,0,0,0.15)',
       }}>
         {playing ? (
+          /* Pause: two dark bars */
           <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-            <span style={{ width: '3px', height: '14px', background: 'white', borderRadius: '2px', display: 'block' }} />
-            <span style={{ width: '3px', height: '14px', background: 'white', borderRadius: '2px', display: 'block' }} />
+            <span style={{ width: '3px', height: '14px', background: '#111', borderRadius: '2px', display: 'block' }} />
+            <span style={{ width: '3px', height: '14px', background: '#111', borderRadius: '2px', display: 'block' }} />
           </div>
         ) : (
+          /* Play: dark triangle */
           <svg viewBox="0 0 16 18" style={{ width: '14px', height: '16px', marginLeft: '3px' }}>
             <path d="M2,1 L15,9 L2,17 Z" fill="#111111" />
           </svg>
