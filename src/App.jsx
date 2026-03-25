@@ -3,7 +3,6 @@ import Countdown  from './components/Countdown'
 import MapSection from './components/MapSection'
 import RSVPForm   from './components/RSVPForm'
 import Calendar   from './components/Calendar'
-import KazakhOrnament from './components/KazakhOrnament'
 import { translations } from './lang'
 
 export const LangContext = createContext()
@@ -89,12 +88,6 @@ export default function App() {
         {/* Petals removed */}
         <Navbar scrolled={scrolled} />
         <Hero />
-        {/* ── Ornament between hero and schedule ── */}
-        <Reveal delay={0}>
-          <div style={{ padding: '24px 0 0', background: 'var(--white)', textAlign: 'center' }}>
-            <KazakhOrnament type="diamond" color="#111111" opacity={0.4} size={48} />
-          </div>
-        </Reveal>
         <ScheduleSection />
         <CalendarSection />
         <DetailsSection />
@@ -294,18 +287,11 @@ function Hero() {
           }}>28.06.2026</p>
         </Reveal>
 
-        {/* Kazakh ornament divider */}
-        <Reveal delay={0.22}>
-          <div style={{ margin: 'clamp(16px,3vh,28px) 0' }}>
-            <KazakhOrnament type="divider" color="#111111" opacity={0.6} />
-          </div>
-        </Reveal>
-
-        {/* Greeting — Маусым 2026 font */}
+        {/* Greeting — Bickham_Script_Pro_3 font */}
         <Reveal delay={0.36}>
           <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
             <p style={{
-              fontFamily: "'Маусым 2026', Georgia, serif",
+              fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
               fontSize: 'clamp(18px,4vw,28px)',
               fontWeight: 400, color: 'var(--ink)',
               letterSpacing: '1px', marginBottom: '12px',
@@ -589,13 +575,6 @@ function CalendarSection() {
   const { t } = useContext(LangContext)
   return (
     <section style={{ padding: 'clamp(56px,9vh,80px) 20px', background: 'var(--white)', position: 'relative' }}>
-      {/* Corner ornaments */}
-      <div style={{ position: 'absolute', top: '20px', left: '20px', pointerEvents: 'none' }}>
-        <KazakhOrnament type="corner-set" color="#111111" opacity={0.3} />
-      </div>
-      <div style={{ position: 'absolute', top: '20px', right: '20px', pointerEvents: 'none' }}>
-        <KazakhOrnament type="corner-set" color="#111111" opacity={0.3} />
-      </div>
       <div style={{ maxWidth: '440px', margin: '0 auto', textAlign: 'center' }}>
         <Reveal delay={0}>
           <SectionLabel>{t.calendar.label}</SectionLabel>
@@ -648,7 +627,7 @@ function SectionLabel({ children }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px',
       fontSize: '8.5px', letterSpacing: '5px', textTransform: 'lowercase',
       color: 'var(--soft)', marginBottom: '20px', fontWeight: 300,
-      fontFamily: "'Jost', sans-serif",
+      fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
     }}>
       <ThinLine />
       {children}
