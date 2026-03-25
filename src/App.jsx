@@ -3,6 +3,7 @@ import Countdown  from './components/Countdown'
 import MapSection from './components/MapSection'
 import RSVPForm   from './components/RSVPForm'
 import Calendar   from './components/Calendar'
+import KazakhOrnament from './components/KazakhOrnament'
 import { translations } from './lang'
 
 export const LangContext = createContext()
@@ -91,7 +92,7 @@ export default function App() {
         {/* ── Ornament between hero and schedule ── */}
         <Reveal delay={0}>
           <div style={{ padding: '24px 0 0', background: 'var(--white)', textAlign: 'center' }}>
-            <ShanyraqOrnament size={48} opacity={0.35} />
+            <KazakhOrnament type="diamond" color="#111111" opacity={0.4} size={48} />
           </div>
         </Reveal>
         <ScheduleSection />
@@ -126,7 +127,7 @@ function Navbar({ scrolled }) {
     }}>
       {/* Logo */}
       <span style={{
-        fontFamily: "'Anastasia Script', Georgia, serif",
+        fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
         fontSize: '15px', letterSpacing: '5px',
         color: logoColor, fontWeight: 300,
         transition: 'color 0.4s',
@@ -213,7 +214,7 @@ function Hero() {
           pointerEvents: 'none',
         }}>
           <h1 className="rise-1" style={{
-            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
             fontSize: 'clamp(58px,15vw,116px)',
             fontWeight: 300, letterSpacing: 'clamp(8px,3vw,22px)',
             color: 'white', lineHeight: 1,
@@ -296,14 +297,7 @@ function Hero() {
         {/* Kazakh ornament divider */}
         <Reveal delay={0.22}>
           <div style={{ margin: 'clamp(16px,3vh,28px) 0' }}>
-            <KazakhScrollOrnament />
-          </div>
-        </Reveal>
-
-        {/* Floral ornament — was after quote, now after divider */}
-        <Reveal delay={0.3}>
-          <div style={{ marginTop: 'clamp(8px,2vh,16px)' }}>
-            <FloralDivider opacity={0.5} />
+            <KazakhOrnament type="divider" color="#111111" opacity={0.6} />
           </div>
         </Reveal>
 
@@ -431,9 +425,9 @@ function ScheduleSection() {
             <SectionLabel>{t.schedule.label}</SectionLabel>
           </Reveal>
           <Reveal delay={0.1}>
-            {/* "той кестесі" — Anastasia Script font */}
+            {/* "той кестесі" — Bickham_Script_Pro_3 font */}
             <h2 style={{
-              fontFamily: "'Anastasia Script', Georgia, serif",
+              fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
               fontSize: 'clamp(24px,5vw,42px)',
               fontWeight: 300, fontStyle: 'italic',
               color: 'var(--ink)', letterSpacing: '2px',
@@ -562,7 +556,7 @@ function DetailsSection() {
                 }}>{l}</p>
                 <p style={{
                   fontFamily: "'Jost', sans-serif",
-                  fontSize: 'clamp(13px,3vw,18px)',
+                  fontSize: 'clamp(16px,3.5vw,22px)',
                   color: 'var(--ink)', letterSpacing: '1.5px', fontWeight: 300,
                 }}>{v}</p>
               </div>
@@ -580,7 +574,7 @@ function DetailsSection() {
             }}>{t.details.place}</p>
             <p style={{
               fontFamily: "'Jost', sans-serif",
-              fontSize: 'clamp(13px,3vw,18px)',
+              fontSize: 'clamp(16px,3.5vw,22px)',
               color: 'var(--ink)', letterSpacing: '1px', fontWeight: 300,
             }}>{t.details.pv}</p>
           </div>
@@ -595,12 +589,12 @@ function CalendarSection() {
   const { t } = useContext(LangContext)
   return (
     <section style={{ padding: 'clamp(56px,9vh,80px) 20px', background: 'var(--white)', position: 'relative' }}>
-      {/* Corner florals */}
+      {/* Corner ornaments */}
       <div style={{ position: 'absolute', top: '20px', left: '20px', pointerEvents: 'none' }}>
-        <CornerFloral position="tl" size={60} opacity={0.28} />
+        <KazakhOrnament type="corner-set" color="#111111" opacity={0.3} />
       </div>
       <div style={{ position: 'absolute', top: '20px', right: '20px', pointerEvents: 'none' }}>
-        <CornerFloral position="tr" size={60} opacity={0.28} />
+        <KazakhOrnament type="corner-set" color="#111111" opacity={0.3} />
       </div>
       <div style={{ maxWidth: '440px', margin: '0 auto', textAlign: 'center' }}>
         <Reveal delay={0}>
@@ -627,14 +621,14 @@ function FooterSection() {
       <Reveal delay={0}>
         <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.15))', margin: '0 auto 32px' }} />
         <p style={{
-          fontFamily: "'Anastasia Script', Georgia, serif",
+          fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
           fontSize: 'clamp(44px,11vw,80px)',
           fontWeight: 300, letterSpacing: 'clamp(10px,3vw,20px)',
           color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
         }}>Р ✦ Ж</p>
         <p style={{
-          fontSize: '9px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300,
-          fontFamily: "'Jost', sans-serif",
+          fontSize: '12px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300,
+          fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
         }}>{t.footer}</p>
         <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
           <WaveLine />
@@ -673,44 +667,7 @@ function ThinLine() {
 }
 
 /* ─── Kazakh Scroll Ornament ────────────────────────────────────── */
-function KazakhScrollOrnament({ width = 280, opacity = 0.7 }) {
-  return (
-    <svg
-      viewBox="0 0 280 48"
-      style={{ width: '100%', maxWidth: width, height: 'auto', display: 'block', margin: '0 auto', opacity }}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M140,8 C143,14 143,20 140,24 C137,20 137,14 140,8Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M140,40 C143,34 143,28 140,24 C137,28 137,34 140,40Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M128,24 C134,21 140,21 144,24 C140,27 134,27 128,24Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M152,24 C146,21 140,21 136,24 C140,27 146,27 152,24Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M132,12 C136,17 137,22 135,25 C132,22 131,17 132,12Z" fill="var(--ink)" opacity="0.45"/>
-      <path d="M148,12 C144,17 143,22 145,25 C148,22 149,17 148,12Z" fill="var(--ink)" opacity="0.45"/>
-      <path d="M132,36 C136,31 137,26 135,23 C132,26 131,31 132,36Z" fill="var(--ink)" opacity="0.45"/>
-      <path d="M148,36 C144,31 143,26 145,23 C148,26 149,31 148,36Z" fill="var(--ink)" opacity="0.45"/>
-      <circle cx="140" cy="24" r="4.5" fill="none" stroke="var(--ink)" strokeWidth="1"/>
-      <circle cx="140" cy="24" r="2" fill="var(--ink)" opacity="0.8"/>
-      <line x1="0" y1="24" x2="108" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.5"/>
-      <line x1="172" y1="24" x2="280" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.5"/>
-      <path d="M108,24 Q100,14 92,18 Q88,22 92,26 Q96,30 100,26 Q102,22 98,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.75"/>
-      <path d="M92,24 Q80,10 68,16 Q62,20 66,27 Q70,33 78,29 Q84,25 80,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.65"/>
-      <path d="M68,24 Q54,8 40,15 Q34,20 38,28 Q44,35 54,30 Q62,25 56,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
-      <path d="M40,24 Q28,16 20,20 Q16,24 20,28 Q28,32 36,26" fill="none" stroke="var(--ink)" strokeWidth="0.9" opacity="0.4"/>
-      <circle cx="106" cy="18" r="1.5" fill="var(--ink)" opacity="0.5"/>
-      <circle cx="88" cy="14" r="1.5" fill="var(--ink)" opacity="0.4"/>
-      <circle cx="64" cy="12" r="1.5" fill="var(--ink)" opacity="0.35"/>
-      <circle cx="36" cy="16" r="1.5" fill="var(--ink)" opacity="0.3"/>
-      <path d="M172,24 Q180,14 188,18 Q192,22 188,26 Q184,30 180,26 Q178,22 182,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.75"/>
-      <path d="M188,24 Q200,10 212,16 Q218,20 214,27 Q210,33 202,29 Q196,25 200,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.65"/>
-      <path d="M212,24 Q226,8 240,15 Q246,20 242,28 Q236,35 226,30 Q218,25 224,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
-      <path d="M240,24 Q252,16 260,20 Q264,24 260,28 Q252,32 244,26" fill="none" stroke="var(--ink)" strokeWidth="0.9" opacity="0.4"/>
-      <circle cx="174" cy="18" r="1.5" fill="var(--ink)" opacity="0.5"/>
-      <circle cx="192" cy="14" r="1.5" fill="var(--ink)" opacity="0.4"/>
-      <circle cx="216" cy="12" r="1.5" fill="var(--ink)" opacity="0.35"/>
-      <circle cx="244" cy="16" r="1.5" fill="var(--ink)" opacity="0.3"/>
-    </svg>
-  )
-}
+
 
 function WaveLine() {
   return (
@@ -732,48 +689,7 @@ function GoldDiamond() {
 
 /* ─── Rich SVG Ornaments ──────────────────────────────────────────── */
 
-export function FloralDivider({ opacity = 0.6 }) {
-  return (
-    <svg viewBox="0 0 320 40" style={{ width: '100%', maxWidth: '320px', display: 'block', margin: '0 auto', opacity }}>
-      <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(0,0,0,0.2)" strokeWidth="0.7"/>
-      <circle cx="95" cy="20" r="2.5" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
-      <line x1="92" y1="14" x2="95" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
-      <circle cx="91" cy="12" r="2" fill="#888" opacity="0.4"/>
-      <line x1="98" y1="14" x2="95" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
-      <circle cx="99" cy="12" r="2" fill="#888" opacity="0.4"/>
-      <path d="M160,8 L168,20 L160,32 L152,20Z" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
-      <circle cx="160" cy="20" r="3" fill="#111" opacity="0.4"/>
-      <circle cx="225" cy="20" r="2.5" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
-      <line x1="228" y1="14" x2="225" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
-      <circle cx="229" cy="12" r="2" fill="#888" opacity="0.4"/>
-      <line x1="222" y1="14" x2="225" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
-      <circle cx="221" cy="12" r="2" fill="#888" opacity="0.4"/>
-      <line x1="220" y1="20" x2="320" y2="20" stroke="rgba(0,0,0,0.2)" strokeWidth="0.7"/>
-    </svg>
-  )
-}
 
-export function CornerFloral({ position = 'tl', size = 80, opacity = 0.35 }) {
-  const transforms = {
-    tl: 'translate(0,0)',
-    tr: `translate(${size},0) scale(-1,1)`,
-    bl: `translate(0,${size}) scale(1,-1)`,
-    br: `translate(${size},${size}) scale(-1,-1)`,
-  }
-  return (
-    <svg viewBox={`0 0 ${size} ${size}`} style={{ width: size, height: size, display: 'block', opacity }} xmlns="http://www.w3.org/2000/svg">
-      <g transform={transforms[position]}>
-        <path d="M4,4 L4,36 Q4,40 8,40 L36,40" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1.2"/>
-        <path d="M10,4 L10,30 Q10,34 14,34 L36,34" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="0.7"/>
-        <circle cx="4" cy="4" r="3" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
-        <circle cx="4" cy="4" r="1.2" fill="var(--gold)" opacity="0.6"/>
-        <path d="M36,40 Q42,36 38,30 Q34,34 36,40Z" fill="var(--gold2)" opacity="0.4"/>
-        <circle cx="20" cy="4" r="1.5" fill="#888" opacity="0.4"/>
-        <circle cx="4" cy="22" r="1.5" fill="#888" opacity="0.4"/>
-      </g>
-    </svg>
-  )
-}
 
 export function ScrollDivider({ opacity = 0.55 }) {
   return (
@@ -795,21 +711,3 @@ export function ScrollDivider({ opacity = 0.55 }) {
   )
 }
 
-export function ShanyraqOrnament({ size = 56, opacity = 0.45 }) {
-  return (
-    <svg viewBox="0 0 56 56" style={{ width: size, height: size, display: 'block', margin: '0 auto', opacity }}>
-      <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
-      <circle cx="28" cy="28" r="16" fill="none" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
-      <circle cx="28" cy="28" r="6" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
-      {[0,30,60,90,120,150].map(a => {
-        const rad = a * Math.PI / 180
-        return <line key={a}
-          x1={28 + 6*Math.cos(rad)} y1={28 + 6*Math.sin(rad)}
-          x2={28 + 24*Math.cos(rad)} y2={28 + 24*Math.sin(rad)}
-          stroke="rgba(0,0,0,0.2)" strokeWidth="0.7" opacity="0.7"
-        />
-      })}
-      <circle cx="28" cy="28" r="2.5" fill="var(--gold)" opacity="0.7"/>
-    </svg>
-  )
-}
