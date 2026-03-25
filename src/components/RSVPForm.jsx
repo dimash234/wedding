@@ -94,7 +94,7 @@ export default function RSVPForm() {
           <polygon points="142,24 145,30 142,36 139,30" fill="var(--gold2)" opacity="0.3"/>
         </svg>
         <p style={{
-          fontFamily:"'Bodoni Moda','Cormorant Garamond',serif",
+          fontFamily:"'Jost',sans-serif",
           fontSize:'clamp(26px,6vw,42px)', fontWeight:300, fontStyle:'italic',
           color:'var(--ink)', letterSpacing:'2px', marginBottom:'14px',
         }}>{form.attendance==='yes' ? t.rsvp.thankYes : t.rsvp.thankNo}</p>
@@ -113,7 +113,7 @@ export default function RSVPForm() {
           <div style={{ textAlign:'center', marginBottom:'clamp(36px,6vh,52px)' }}>
             <SectionLabel>{t.rsvp.label}</SectionLabel>
             <h2 style={{
-              fontFamily:"'Bodoni Moda','Cormorant Garamond',serif",
+              fontFamily:"'Jost',sans-serif",
               fontSize:'clamp(26px,5vw,42px)', fontWeight:300, fontStyle:'italic',
               color:'var(--ink)', letterSpacing:'2px', marginBottom:'8px',
             }}>{t.rsvp.title}</h2>

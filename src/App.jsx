@@ -414,7 +414,7 @@ function ScheduleSection() {
             {/* "той кестесі" — Bickham_Script_Pro_3 font */}
             <h2 style={{
               fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
-              fontSize: 'clamp(24px,5vw,42px)',
+              fontSize: 'clamp(28px,6vw,48px)',
               fontWeight: 300, fontStyle: 'italic',
               color: 'var(--ink)', letterSpacing: '2px',
             }}>{t.schedule.title}</h2>
