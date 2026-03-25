@@ -127,7 +127,7 @@ function Navbar({ scrolled }) {
     }}>
       {/* Logo */}
       <span style={{
-        fontFamily: "'Cormorant SC', serif",
+        fontFamily: "'Anastasia Script', Georgia, serif",
         fontSize: '15px', letterSpacing: '5px',
         color: logoColor, fontWeight: 300,
         transition: 'color 0.4s',
@@ -212,7 +212,7 @@ function Hero() {
           pointerEvents: 'none',
         }}>
           <h1 className="rise-1" style={{
-            fontFamily: "'Shelley Volante', 'Cormorant SC', serif",
+            fontFamily: "'Anastasia Script', Georgia, serif",
             fontSize: 'clamp(58px,15vw,116px)',
             fontWeight: 300, letterSpacing: 'clamp(8px,3vw,22px)',
             color: 'white', lineHeight: 1,
@@ -253,7 +253,7 @@ function Hero() {
           color: 'rgba(255,255,255,0.5)',
           fontWeight: 300,
           pointerEvents: 'none',
-        }}>сенбі · 28 маусым 2026 · 18:00</p>
+        }}>сенбі · 28.06.2026 · 18:00</p>
       </div>
 
       {/* ══ BELOW PHOTO — white area ═══════════════════════════════ */}
@@ -267,7 +267,7 @@ function Hero() {
         {/* Names */}
         <Reveal delay={0}>
           <h2 style={{
-            fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+            fontFamily: "'Anastasia Script', Georgia, serif",
             fontSize: 'clamp(28px,7.5vw,58px)',
             fontWeight: 300, fontStyle: 'italic',
             letterSpacing: 'clamp(1px,0.5vw,4px)',
@@ -283,29 +283,24 @@ function Hero() {
         <Reveal delay={0.12}>
           <p style={{
             marginTop: '16px',
-            fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
-            fontSize: 'clamp(18px,4vw,32px)',
-            fontWeight: 300, letterSpacing: 'clamp(3px,1.5vw,8px)',
+            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontSize: 'clamp(22px,5vw,38px)',
+            fontWeight: 400, letterSpacing: 'clamp(2px,1vw,5px)',
             color: 'var(--ink)',
-          }}>28 · 06 · 2026</p>
+          }}>28.06.2026</p>
         </Reveal>
 
-        {/* Ornament divider */}
+        {/* Kazakh ornament divider */}
         <Reveal delay={0.22}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '16px',
-            margin: 'clamp(20px,4vh,32px) 0',
-          }}>
-            <WaveLine />
-            <GoldDiamond />
-            <WaveLine />
+          <div style={{ margin: 'clamp(16px,3vh,28px) 0' }}>
+            <KazakhScrollOrnament />
           </div>
         </Reveal>
 
         {/* Quote */}
         <Reveal delay={0.3}>
           <p style={{
-            fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+            fontFamily: "'Anastasia Script', Georgia, serif",
             fontSize: 'clamp(14px,3.5vw,20px)',
             fontStyle: 'italic', color: 'var(--ink)',
             lineHeight: 1.9, letterSpacing: '0.3px',
@@ -324,7 +319,7 @@ function Hero() {
         <Reveal delay={0.42}>
           <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
             <p style={{
-              fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+              fontFamily: "'Anastasia Script', Georgia, serif",
               fontSize: 'clamp(18px,4vw,28px)',
               fontWeight: 400, color: 'var(--ink)',
               letterSpacing: '1px', marginBottom: '12px',
@@ -368,34 +363,32 @@ function MusicRing({ playing, onClick }) {
         <text style={{
           fontSize: '6.5px',
           fill: playing ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.55)',
-          letterSpacing: '2.2px', fontFamily: "'Jost',sans-serif", fontWeight: 300,
+          letterSpacing: '2.2px', fontFamily: "'Anastasia Script', Georgia, serif", fontWeight: 300,
         }}>
           <textPath href="#cp">{TEXT}</textPath>
         </text>
       </svg>
 
-      {/* Button disc — BLACK when playing (shows ⏸), WHITE outline when paused (shows ▶) */}
+      {/* Button disc — WHITE when paused (▶), DARK when playing (⏸) */}
       <div style={{
         width: '56px', height: '56px', borderRadius: '50%',
-        background: playing ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.18)',
+        background: playing ? 'rgba(0,0,0,0.82)' : 'rgba(255,255,255,0.92)',
         backdropFilter: 'blur(12px)',
-        border: playing ? '1.5px solid rgba(255,255,255,0.3)' : '1.5px solid rgba(255,255,255,0.8)',
+        border: playing ? '1.5px solid rgba(255,255,255,0.25)' : '1.5px solid rgba(255,255,255,0.95)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all 0.4s cubic-bezier(.16,1,.3,1)',
         boxShadow: playing
-          ? '0 0 0 6px rgba(0,0,0,0.18), 0 4px 20px rgba(0,0,0,0.3)'
-          : '0 2px 16px rgba(0,0,0,0.15)',
+          ? '0 0 0 6px rgba(0,0,0,0.15), 0 4px 20px rgba(0,0,0,0.3)'
+          : '0 2px 20px rgba(0,0,0,0.2)',
       }}>
         {playing ? (
-          /* Pause: two vertical bars */
           <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
             <span style={{ width: '3px', height: '14px', background: 'white', borderRadius: '2px', display: 'block' }} />
             <span style={{ width: '3px', height: '14px', background: 'white', borderRadius: '2px', display: 'block' }} />
           </div>
         ) : (
-          /* Play: triangle */
           <svg viewBox="0 0 16 18" style={{ width: '14px', height: '16px', marginLeft: '3px' }}>
-            <path d="M2,1 L15,9 L2,17 Z" fill="white" />
+            <path d="M2,1 L15,9 L2,17 Z" fill="#111111" />
           </svg>
         )}
       </div>
@@ -446,7 +439,7 @@ function ScheduleSection() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 style={{
-              fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+              fontFamily: "'Anastasia Script', Georgia, serif",
               fontSize: 'clamp(24px,5vw,42px)',
               fontWeight: 300, fontStyle: 'italic',
               color: 'var(--ink)', letterSpacing: '2px',
@@ -501,7 +494,7 @@ function SchCard({ item, align }) {
   return (
     <div style={{ maxWidth: '220px', width: '100%', textAlign: align }}>
       <p style={{
-        fontFamily: "'Shelley Volante', 'Cormorant SC', serif",
+        fontFamily: "'Anastasia Script', Georgia, serif",
         fontSize: 'clamp(26px,5vw,38px)',
         fontWeight: 400, color: 'var(--gold)',
         letterSpacing: '2px', lineHeight: 1, marginBottom: '10px',
@@ -565,7 +558,7 @@ function DetailsSection() {
               <div key={i} style={{ padding: 'clamp(18px,4vw,28px) 16px', background: 'var(--white)', textAlign: 'center' }}>
                 <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--ink)', marginBottom: '9px', opacity: 0.45 }}>{l}</p>
                 <p style={{
-                  fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+                  fontFamily: "'Anastasia Script', Georgia, serif",
                   fontSize: 'clamp(13px,3vw,18px)',
                   color: 'var(--ink)', letterSpacing: '1.5px', fontWeight: 300,
                 }}>{v}</p>
@@ -579,7 +572,7 @@ function DetailsSection() {
           <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderTop: 'none', padding: 'clamp(18px,4vw,28px) 16px', textAlign: 'center' }}>
             <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--soft)', marginBottom: '9px' }}>{t.details.place}</p>
             <p style={{
-              fontFamily: "'Shelley Volante', 'Cormorant Garamond', serif",
+              fontFamily: "'Anastasia Script', Georgia, serif",
               fontSize: 'clamp(13px,3vw,18px)',
               color: 'var(--ink)', letterSpacing: '1px', fontWeight: 300,
             }}>{t.details.pv}</p>
@@ -627,7 +620,7 @@ function FooterSection() {
       <Reveal delay={0}>
         <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.15))', margin: '0 auto 32px' }} />
         <p style={{
-          fontFamily: "'Shelley Volante', 'Cormorant SC', serif",
+          fontFamily: "'Anastasia Script', Georgia, serif",
           fontSize: 'clamp(44px,11vw,80px)',
           fontWeight: 300, letterSpacing: 'clamp(10px,3vw,20px)',
           color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
@@ -667,6 +660,63 @@ function ThinLine() {
     }} />
   )
 }
+
+/* ─── Kazakh Scroll Ornament (reference-inspired) ────────────────── */
+function KazakhScrollOrnament({ width = 280, opacity = 0.7 }) {
+  return (
+    <svg
+      viewBox="0 0 280 48"
+      style={{ width: '100%', maxWidth: width, height: 'auto', display: 'block', margin: '0 auto', opacity }}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* ── Centre floral motif ── */}
+      {/* Outer petals */}
+      <path d="M140,8 C143,14 143,20 140,24 C137,20 137,14 140,8Z" fill="var(--ink)" opacity="0.7"/>
+      <path d="M140,40 C143,34 143,28 140,24 C137,28 137,34 140,40Z" fill="var(--ink)" opacity="0.7"/>
+      <path d="M128,24 C134,21 140,21 144,24 C140,27 134,27 128,24Z" fill="var(--ink)" opacity="0.7"/>
+      <path d="M152,24 C146,21 140,21 136,24 C140,27 146,27 152,24Z" fill="var(--ink)" opacity="0.7"/>
+      {/* Diagonal petals */}
+      <path d="M132,12 C136,17 137,22 135,25 C132,22 131,17 132,12Z" fill="var(--ink)" opacity="0.45"/>
+      <path d="M148,12 C144,17 143,22 145,25 C148,22 149,17 148,12Z" fill="var(--ink)" opacity="0.45"/>
+      <path d="M132,36 C136,31 137,26 135,23 C132,26 131,31 132,36Z" fill="var(--ink)" opacity="0.45"/>
+      <path d="M148,36 C144,31 143,26 145,23 C148,26 149,31 148,36Z" fill="var(--ink)" opacity="0.45"/>
+      {/* Centre circle */}
+      <circle cx="140" cy="24" r="4.5" fill="none" stroke="var(--ink)" strokeWidth="1"/>
+      <circle cx="140" cy="24" r="2" fill="var(--ink)" opacity="0.8"/>
+
+      {/* ── Horizontal lines ── */}
+      <line x1="0" y1="24" x2="108" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.5"/>
+      <line x1="172" y1="24" x2="280" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.5"/>
+
+      {/* ── Left scroll curls ── */}
+      {/* Inner curl left */}
+      <path d="M108,24 Q100,14 92,18 Q88,22 92,26 Q96,30 100,26 Q102,22 98,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.75"/>
+      {/* Outer curl left */}
+      <path d="M92,24 Q80,10 68,16 Q62,20 66,27 Q70,33 78,29 Q84,25 80,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.65"/>
+      {/* Far curl left */}
+      <path d="M68,24 Q54,8 40,15 Q34,20 38,28 Q44,35 54,30 Q62,25 56,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
+      {/* Small leaf left */}
+      <path d="M40,24 Q28,16 20,20 Q16,24 20,28 Q28,32 36,26" fill="none" stroke="var(--ink)" strokeWidth="0.9" opacity="0.4"/>
+      {/* Dot accents left */}
+      <circle cx="106" cy="18" r="1.5" fill="var(--ink)" opacity="0.5"/>
+      <circle cx="88" cy="14" r="1.5" fill="var(--ink)" opacity="0.4"/>
+      <circle cx="64" cy="12" r="1.5" fill="var(--ink)" opacity="0.35"/>
+      <circle cx="36" cy="16" r="1.5" fill="var(--ink)" opacity="0.3"/>
+
+      {/* ── Right scroll curls (mirror) ── */}
+      <path d="M172,24 Q180,14 188,18 Q192,22 188,26 Q184,30 180,26 Q178,22 182,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.75"/>
+      <path d="M188,24 Q200,10 212,16 Q218,20 214,27 Q210,33 202,29 Q196,25 200,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.65"/>
+      <path d="M212,24 Q226,8 240,15 Q246,20 242,28 Q236,35 226,30 Q218,25 224,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
+      <path d="M240,24 Q252,16 260,20 Q264,24 260,28 Q252,32 244,26" fill="none" stroke="var(--ink)" strokeWidth="0.9" opacity="0.4"/>
+      {/* Dot accents right */}
+      <circle cx="174" cy="18" r="1.5" fill="var(--ink)" opacity="0.5"/>
+      <circle cx="192" cy="14" r="1.5" fill="var(--ink)" opacity="0.4"/>
+      <circle cx="216" cy="12" r="1.5" fill="var(--ink)" opacity="0.35"/>
+      <circle cx="244" cy="16" r="1.5" fill="var(--ink)" opacity="0.3"/>
+    </svg>
+  )
+}
+
 
 function WaveLine() {
   return (

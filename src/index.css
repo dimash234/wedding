@@ -1,17 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=Jost:wght@200;300;400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
 
 @font-face {
-  font-family: 'Shelley Volante';
-  src: url('./fonts/ShelleyVolante.ttf') format('truetype');
+  font-family: 'Anastasia Script';
+  src: url('./fonts/AnastasiaScript.ttf') format('truetype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Shelley Volante';
-  src: url('./fonts/ShelleyVolanteBold.ttf') format('truetype');
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -40,7 +32,7 @@ html {
 }
 
 body {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Anastasia Script', 'Cormorant Garamond', Georgia, serif;
   background: var(--white);
   color: var(--ink);
   overflow-x: hidden;
