@@ -287,11 +287,11 @@ function Hero() {
           }}>28.06.2026</p>
         </Reveal>
 
-        {/* Greeting — Bickham_Script_Pro_3 font */}
+        {/* Greeting — normal font */}
         <Reveal delay={0.36}>
           <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
             <p style={{
-              fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+              fontFamily: "'Jost', sans-serif",
               fontSize: 'clamp(18px,4vw,28px)',
               fontWeight: 400, color: 'var(--ink)',
               letterSpacing: '1px', marginBottom: '12px',
@@ -627,7 +627,7 @@ function SectionLabel({ children }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px',
       fontSize: '8.5px', letterSpacing: '5px', textTransform: 'lowercase',
       color: 'var(--soft)', marginBottom: '20px', fontWeight: 300,
-      fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+      fontFamily: "'Jost', sans-serif",
     }}>
       <ThinLine />
       {children}
