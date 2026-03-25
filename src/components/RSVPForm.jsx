@@ -98,7 +98,7 @@ export default function RSVPForm() {
           fontSize:'clamp(26px,6vw,42px)', fontWeight:300, fontStyle:'italic',
           color:'var(--ink)', letterSpacing:'2px', marginBottom:'14px',
         }}>{form.attendance==='yes' ? t.rsvp.thankYes : t.rsvp.thankNo}</p>
-        <p style={{ fontSize:'13px', color:'var(--ink)', lineHeight:2, fontWeight:300 }}>
+        <p style={{ fontSize:'13px', color:'var(--ink)', lineHeight:2, fontWeight:300, fontFamily:"'Jost',sans-serif" }}>
           {form.attendance==='yes' ? t.rsvp.msgYes(form.name) : t.rsvp.msgNo(form.name)}
         </p>
         <div style={{ width:'1px', height:'56px', background:'linear-gradient(to bottom,var(--gold2),transparent)', margin:'28px auto 0' }}/>
@@ -117,7 +117,7 @@ export default function RSVPForm() {
               fontSize:'clamp(26px,5vw,42px)', fontWeight:300, fontStyle:'italic',
               color:'var(--ink)', letterSpacing:'2px', marginBottom:'8px',
             }}>{t.rsvp.title}</h2>
-            <p style={{ fontSize:'11px', letterSpacing:'1.5px', color:'var(--ink)', fontWeight:300, opacity:0.6 }}>
+            <p style={{ fontSize:'11px', letterSpacing:'1.5px', color:'var(--ink)', fontWeight:300, opacity:0.6, fontFamily:"'Jost',sans-serif" }}>
               {t.rsvp.sub}
             </p>
           </div>
