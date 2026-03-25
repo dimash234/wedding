@@ -307,11 +307,11 @@ function Hero() {
           </div>
         </Reveal>
 
-        {/* Greeting — Anastasia Script font */}
+        {/* Greeting — Маусым 2026 font */}
         <Reveal delay={0.36}>
           <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
             <p style={{
-              fontFamily: "'Anastasia Script', Georgia, serif",
+              fontFamily: "'Маусым 2026', Georgia, serif",
               fontSize: 'clamp(18px,4vw,28px)',
               fontWeight: 400, color: 'var(--ink)',
               letterSpacing: '1px', marginBottom: '12px',
