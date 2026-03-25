@@ -27,8 +27,8 @@ function Reveal({ children, delay = 0 }) {
 export default function Calendar({ weddingDate }) {
   const { t } = useContext(LangContext)
   const year = 2026, month = 5
-  const firstDay = new Date(year, month, 1).getDay()
-  const startDay = firstDay === 0 ? 6 : firstDay - 1
+  const firstDay   = new Date(year, month, 1).getDay()
+  const startDay   = firstDay === 0 ? 6 : firstDay - 1
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const cells = []
   for (let i = 0; i < startDay; i++) cells.push(null)
@@ -37,20 +37,16 @@ export default function Calendar({ weddingDate }) {
 
   return (
     <Reveal delay={0.1}>
+      {/* No border on the container */}
       <div style={{
-        background: 'var(--white)',
-        border: '1px solid var(--border)',
-        padding: 'clamp(20px,5vw,32px)',
-        maxWidth: '420px', margin: '0 auto',
-        position: 'relative', overflow: 'hidden',
+        background: 'transparent',
+        padding: 'clamp(16px,4vw,28px)',
+        maxWidth: '380px', margin: '0 auto',
       }}>
-        {/* Top gold accent line */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--gold), transparent)' }} />
-
         {/* Month title */}
         <p style={{
           textAlign: 'center',
-          fontFamily: "'Bodoni Moda','Cormorant Garamond',serif",
+          fontFamily: "'Shelley Volante','Cormorant Garamond',serif",
           fontSize: 'clamp(16px,3.5vw,22px)',
           fontWeight: 300, letterSpacing: '4px',
           color: 'var(--ink)',
@@ -66,45 +62,44 @@ export default function Calendar({ weddingDate }) {
             <div key={d} style={{
               textAlign: 'center', padding: '4px 0',
               fontSize: '9px', letterSpacing: '1px',
-              textTransform: 'lowercase', color: 'var(--ink)', opacity: 0.4,
-              fontWeight: 400,
+              textTransform: 'lowercase', color: 'var(--ink)', opacity: 0.35,
             }}>{d}</div>
           ))}
         </div>
 
         {/* Days grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '3px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '4px' }}>
           {cells.map((day, i) => {
             const isWed = day === 28
             return (
               <div key={i} style={{
                 textAlign: 'center',
-                padding: isWed ? '5px 2px 3px' : '7px 2px',
-                background: isWed ? 'var(--ink)' : 'transparent',
+                padding: '6px 2px',
                 position: 'relative',
-                borderRadius: isWed ? '2px' : '0',
-                transition: 'background 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
+                {/* Red circle outline around wedding day */}
+                {isWed && (
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    borderRadius: '50%',
+                    border: '1.5px solid #E53E3E',
+                    margin: '1px',
+                  }} />
+                )}
                 <span style={{
-                  fontSize: 'clamp(10px,2.2vw,13px)',
-                  fontWeight: isWed ? 400 : 300,
-                  color: isWed ? 'white' : day ? 'var(--ink)' : 'transparent',
-                  display: 'block',
-                  lineHeight: 1.3,
-                  fontFamily: isWed ? "'Bodoni Moda',serif" : 'inherit',
+                  fontSize: 'clamp(11px,2.2vw,13px)',
+                  fontWeight: isWed ? 500 : 300,
+                  color: isWed ? '#E53E3E' : day ? 'var(--ink)' : 'transparent',
+                  position: 'relative', zIndex: 1,
+                  fontFamily: isWed ? "'Shelley Volante',serif" : 'inherit',
+                  letterSpacing: isWed ? '0.5px' : '0',
                 }}>
                   {day || ''}
                 </span>
-                {/* Heart on wedding day */}
-                {isWed && (
-                  <span style={{
-                    display: 'block',
-                    fontSize: '9px',
-                    lineHeight: 1,
-                    marginTop: '1px',
-                    filter: 'brightness(1.4)',
-                  }}>🤍</span>
-                )}
               </div>
             )
           })}
@@ -113,11 +108,14 @@ export default function Calendar({ weddingDate }) {
         {/* Legend */}
         <div style={{
           marginTop: '20px', paddingTop: '16px',
-          borderTop: '1px solid var(--border)',
+          borderTop: '1px solid rgba(0,0,0,0.08)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
         }}>
-          <div style={{ width: '12px', height: '12px', background: 'var(--ink)', borderRadius: '2px', flexShrink: 0 }} />
-          <span style={{ fontSize: '10px', letterSpacing: '2.5px', color: 'var(--ink)', textTransform: 'lowercase', fontWeight: 300 }}>
+          <div style={{
+            width: '14px', height: '14px', borderRadius: '50%',
+            border: '1.5px solid #E53E3E', flexShrink: 0,
+          }} />
+          <span style={{ fontSize: '10px', letterSpacing: '2.5px', color: 'var(--ink)', textTransform: 'lowercase', fontWeight: 300, opacity: 0.6 }}>
             {t.calendar.legend}
           </span>
         </div>
