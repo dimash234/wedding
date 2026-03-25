@@ -120,7 +120,7 @@ function Navbar({ scrolled }) {
     }}>
       {/* Logo */}
       <span style={{
-        fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+        fontFamily: "'Anastasia Script', Georgia, serif",
         fontSize: '28px', letterSpacing: '5px',
         color: logoColor, fontWeight: 300,
         transition: 'color 0.4s',
@@ -207,7 +207,7 @@ function Hero() {
           pointerEvents: 'none',
         }}>
           <h1 className="rise-1" style={{
-            fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+            fontFamily: "'Anastasia Script', Georgia, serif",
             fontSize: 'clamp(85px,18vw,140px)',
             fontWeight: 300, letterSpacing: 'clamp(10px,3.5vw,26px)',
             color: 'white', lineHeight: 1,
@@ -413,7 +413,7 @@ function ScheduleSection() {
           <Reveal delay={0.1}>
             {/* "той кестесі" — Bickham_Script_Pro_3 font */}
             <h2 style={{
-              fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+              fontFamily: "'Anastasia Script', Georgia, serif",
               fontSize: 'clamp(42px,8vw,64px)',
               fontWeight: 300, fontStyle: 'italic',
               color: 'var(--ink)', letterSpacing: '2px',
@@ -600,14 +600,14 @@ function FooterSection() {
       <Reveal delay={0}>
         <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.15))', margin: '0 auto 32px' }} />
         <p style={{
-          fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+          fontFamily: "'Anastasia Script', Georgia, serif",
           fontSize: 'clamp(65px,14vw,110px)',
           fontWeight: 300, letterSpacing: 'clamp(12px,3.5vw,25px)',
           color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
         }}>Р ✦ Ж</p>
         <p style={{
           fontSize: '18px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300,
-          fontFamily: "'Bickham_Script_Pro_3', Georgia, serif",
+          fontFamily: "'Anastasia Script', Georgia, serif",
         }}>{t.footer}</p>
         <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
           <WaveLine />
