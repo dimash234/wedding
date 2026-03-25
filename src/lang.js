@@ -2,7 +2,6 @@ export const translations = {
   kz: {
     nav: { schedule:'бағдарлама', place:'орын', rsvp:'қатысу' },
     invite: 'той шақыру',
-    quote:  'Екі жүрек — бір ғұмыр',
     greeting: 'Құрметті қонақтар!',
     subGreeting: 'Сізді біздің бақытты күнімізде бірге болуға шақырамыз',
     countdown: { label:'тойға дейін', days:'күн', hours:'сағат', minutes:'минут', seconds:'секунд', done:'Той болып өтті 🤍' },
@@ -34,7 +33,6 @@ export const translations = {
   ru: {
     nav: { schedule:'программа', place:'место', rsvp:'участие' },
     invite: 'свадебное приглашение',
-    quote:  'Два сердца — одна судьба',
     greeting: 'Дорогие гости!',
     subGreeting: 'Приглашаем вас разделить с нами этот счастливый день',
     countdown: { label:'до свадьбы', days:'дней', hours:'часов', minutes:'минут', seconds:'секунд', done:'Свадьба состоялась 🤍' },

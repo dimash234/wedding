@@ -3,7 +3,6 @@ import Countdown  from './components/Countdown'
 import MapSection from './components/MapSection'
 import RSVPForm   from './components/RSVPForm'
 import Calendar   from './components/Calendar'
-import Petals     from './components/Petals'
 import { translations } from './lang'
 
 export const LangContext = createContext()
@@ -86,7 +85,7 @@ export default function App() {
   return (
     <LangContext.Provider value={{ t, lang, setLang, playing, toggle }}>
       <div style={{ background: 'var(--white)' }}>
-        <Petals />
+        {/* Petals removed */}
         <Navbar scrolled={scrolled} />
         <Hero />
         {/* ── Ornament between hero and schedule ── */}
@@ -139,6 +138,7 @@ function Navbar({ scrolled }) {
           <a key={h} href={h} style={{
             fontSize: '9.5px', letterSpacing: '2.5px', textTransform: 'lowercase',
             color: linkColor, textDecoration: 'none', transition: 'color 0.3s',
+            fontFamily: "'Jost', sans-serif",
           }}
             onMouseEnter={e => e.target.style.color = linkHover}
             onMouseLeave={e => e.target.style.color = linkColor}
@@ -160,6 +160,7 @@ function Navbar({ scrolled }) {
                 ? `1px solid ${scrolled ? 'var(--gold)' : 'rgba(255,255,255,0.7)'}`
                 : '1px solid transparent',
               transition: 'all 0.3s',
+              fontFamily: "'Jost', sans-serif",
             }}>{l === 'kz' ? 'қаз' : 'рус'}</button>
           ))}
         </div>
@@ -234,6 +235,7 @@ function Hero() {
             fontSize: '8.5px', letterSpacing: '7px', textTransform: 'lowercase',
             color: 'rgba(255,255,255,0.55)',
             fontWeight: 300,
+            fontFamily: "'Jost', sans-serif",
           }}>{t.invite}</p>
         </div>
 
@@ -253,6 +255,7 @@ function Hero() {
           color: 'rgba(255,255,255,0.5)',
           fontWeight: 300,
           pointerEvents: 'none',
+          fontFamily: "'Jost', sans-serif",
         }}>сенбі · 28.06.2026 · 18:00</p>
       </div>
 
@@ -297,26 +300,15 @@ function Hero() {
           </div>
         </Reveal>
 
-        {/* Quote */}
+        {/* Floral ornament — was after quote, now after divider */}
         <Reveal delay={0.3}>
-          <p style={{
-            fontFamily: "'Anastasia Script', Georgia, serif",
-            fontSize: 'clamp(14px,3.5vw,20px)',
-            fontStyle: 'italic', color: 'var(--ink)',
-            lineHeight: 1.9, letterSpacing: '0.3px',
-            maxWidth: '420px',
-          }}>{t.quote}</p>
-        </Reveal>
-
-        {/* Floral ornament */}
-        <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(16px,3vh,24px)' }}>
+          <div style={{ marginTop: 'clamp(8px,2vh,16px)' }}>
             <FloralDivider opacity={0.5} />
           </div>
         </Reveal>
 
-        {/* Greeting */}
-        <Reveal delay={0.42}>
+        {/* Greeting — Anastasia Script font */}
+        <Reveal delay={0.36}>
           <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
             <p style={{
               fontFamily: "'Anastasia Script', Georgia, serif",
@@ -328,6 +320,7 @@ function Hero() {
               fontSize: '12.5px', letterSpacing: '0.5px',
               color: 'var(--ink)', lineHeight: 2,
               fontWeight: 300,
+              fontFamily: "'Jost', sans-serif",
             }}>{t.subGreeting}</p>
           </div>
         </Reveal>
@@ -369,7 +362,7 @@ function MusicRing({ playing, onClick }) {
         </text>
       </svg>
 
-      {/* Button disc — always white/light, dark icon inside */}
+      {/* Button disc */}
       <div style={{
         width: '56px', height: '56px', borderRadius: '50%',
         background: 'rgba(255,255,255,0.88)',
@@ -382,13 +375,11 @@ function MusicRing({ playing, onClick }) {
           : '0 2px 20px rgba(0,0,0,0.15)',
       }}>
         {playing ? (
-          /* Pause: two dark bars */
           <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
             <span style={{ width: '3px', height: '14px', background: '#111', borderRadius: '2px', display: 'block' }} />
             <span style={{ width: '3px', height: '14px', background: '#111', borderRadius: '2px', display: 'block' }} />
           </div>
         ) : (
-          /* Play: dark triangle */
           <svg viewBox="0 0 16 18" style={{ width: '14px', height: '16px', marginLeft: '3px' }}>
             <path d="M2,1 L15,9 L2,17 Z" fill="#111111" />
           </svg>
@@ -440,6 +431,7 @@ function ScheduleSection() {
             <SectionLabel>{t.schedule.label}</SectionLabel>
           </Reveal>
           <Reveal delay={0.1}>
+            {/* "той кестесі" — Anastasia Script font */}
             <h2 style={{
               fontFamily: "'Anastasia Script', Georgia, serif",
               fontSize: 'clamp(24px,5vw,42px)',
@@ -449,7 +441,7 @@ function ScheduleSection() {
           </Reveal>
         </div>
 
-        {/* Timeline */}
+        {/* Timeline — default font for content */}
         <div style={{ position: 'relative' }}>
           {/* Vertical line */}
           <div style={{
@@ -495,20 +487,24 @@ function ScheduleSection() {
 function SchCard({ item, align }) {
   return (
     <div style={{ maxWidth: '220px', width: '100%', textAlign: align }}>
+      {/* Time — Anastasia Script (keeps original design) */}
       <p style={{
         fontFamily: "'Anastasia Script', Georgia, serif",
         fontSize: 'clamp(26px,5vw,38px)',
         fontWeight: 400, color: 'var(--gold)',
         letterSpacing: '2px', lineHeight: 1, marginBottom: '10px',
       }}>{item.time}</p>
+      {/* Title and desc — default font */}
       <p style={{
         fontSize: '12.5px', fontWeight: 500,
         letterSpacing: '0.8px', color: 'var(--ink)',
         marginBottom: '5px',
+        fontFamily: "'Jost', sans-serif",
       }}>{item.title}</p>
       <p style={{
         fontSize: '11px', color: 'var(--ink)',
         lineHeight: 1.75, fontWeight: 300,
+        fontFamily: "'Jost', sans-serif",
       }}>{item.desc}</p>
     </div>
   )
@@ -547,6 +543,7 @@ function DetailsSection() {
     }}>
       <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center' }}>
         <Reveal delay={0}>
+          {/* "мәліметтер" label — default font */}
           <SectionLabel>{t.details.label}</SectionLabel>
         </Reveal>
 
@@ -558,9 +555,13 @@ function DetailsSection() {
               [t.details.time,  t.details.tv],
             ].map(([l, v], i) => (
               <div key={i} style={{ padding: 'clamp(18px,4vw,28px) 16px', background: 'var(--white)', textAlign: 'center' }}>
-                <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--ink)', marginBottom: '9px', opacity: 0.45 }}>{l}</p>
                 <p style={{
-                  fontFamily: "'Anastasia Script', Georgia, serif",
+                  fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase',
+                  color: 'var(--ink)', marginBottom: '9px', opacity: 0.45,
+                  fontFamily: "'Jost', sans-serif", fontWeight: 300,
+                }}>{l}</p>
+                <p style={{
+                  fontFamily: "'Jost', sans-serif",
                   fontSize: 'clamp(13px,3vw,18px)',
                   color: 'var(--ink)', letterSpacing: '1.5px', fontWeight: 300,
                 }}>{v}</p>
@@ -572,9 +573,13 @@ function DetailsSection() {
         {/* Bottom row: address full width */}
         <Reveal delay={0.2}>
           <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderTop: 'none', padding: 'clamp(18px,4vw,28px) 16px', textAlign: 'center' }}>
-            <p style={{ fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase', color: 'var(--soft)', marginBottom: '9px' }}>{t.details.place}</p>
             <p style={{
-              fontFamily: "'Anastasia Script', Georgia, serif",
+              fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase',
+              color: 'var(--soft)', marginBottom: '9px',
+              fontFamily: "'Jost', sans-serif", fontWeight: 300,
+            }}>{t.details.place}</p>
+            <p style={{
+              fontFamily: "'Jost', sans-serif",
               fontSize: 'clamp(13px,3vw,18px)',
               color: 'var(--ink)', letterSpacing: '1px', fontWeight: 300,
             }}>{t.details.pv}</p>
@@ -627,7 +632,10 @@ function FooterSection() {
           fontWeight: 300, letterSpacing: 'clamp(10px,3vw,20px)',
           color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
         }}>Р ✦ Ж</p>
-        <p style={{ fontSize: '9px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300 }}>{t.footer}</p>
+        <p style={{
+          fontSize: '9px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300,
+          fontFamily: "'Jost', sans-serif",
+        }}>{t.footer}</p>
         <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
           <WaveLine />
           <GoldDiamond />
@@ -646,6 +654,7 @@ function SectionLabel({ children }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px',
       fontSize: '8.5px', letterSpacing: '5px', textTransform: 'lowercase',
       color: 'var(--soft)', marginBottom: '20px', fontWeight: 300,
+      fontFamily: "'Jost', sans-serif",
     }}>
       <ThinLine />
       {children}
@@ -663,7 +672,7 @@ function ThinLine() {
   )
 }
 
-/* ─── Kazakh Scroll Ornament (reference-inspired) ────────────────── */
+/* ─── Kazakh Scroll Ornament ────────────────────────────────────── */
 function KazakhScrollOrnament({ width = 280, opacity = 0.7 }) {
   return (
     <svg
@@ -671,46 +680,30 @@ function KazakhScrollOrnament({ width = 280, opacity = 0.7 }) {
       style={{ width: '100%', maxWidth: width, height: 'auto', display: 'block', margin: '0 auto', opacity }}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* ── Centre floral motif ── */}
-      {/* Outer petals */}
       <path d="M140,8 C143,14 143,20 140,24 C137,20 137,14 140,8Z" fill="var(--ink)" opacity="0.7"/>
       <path d="M140,40 C143,34 143,28 140,24 C137,28 137,34 140,40Z" fill="var(--ink)" opacity="0.7"/>
       <path d="M128,24 C134,21 140,21 144,24 C140,27 134,27 128,24Z" fill="var(--ink)" opacity="0.7"/>
       <path d="M152,24 C146,21 140,21 136,24 C140,27 146,27 152,24Z" fill="var(--ink)" opacity="0.7"/>
-      {/* Diagonal petals */}
       <path d="M132,12 C136,17 137,22 135,25 C132,22 131,17 132,12Z" fill="var(--ink)" opacity="0.45"/>
       <path d="M148,12 C144,17 143,22 145,25 C148,22 149,17 148,12Z" fill="var(--ink)" opacity="0.45"/>
       <path d="M132,36 C136,31 137,26 135,23 C132,26 131,31 132,36Z" fill="var(--ink)" opacity="0.45"/>
       <path d="M148,36 C144,31 143,26 145,23 C148,26 149,31 148,36Z" fill="var(--ink)" opacity="0.45"/>
-      {/* Centre circle */}
       <circle cx="140" cy="24" r="4.5" fill="none" stroke="var(--ink)" strokeWidth="1"/>
       <circle cx="140" cy="24" r="2" fill="var(--ink)" opacity="0.8"/>
-
-      {/* ── Horizontal lines ── */}
       <line x1="0" y1="24" x2="108" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.5"/>
       <line x1="172" y1="24" x2="280" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.5"/>
-
-      {/* ── Left scroll curls ── */}
-      {/* Inner curl left */}
       <path d="M108,24 Q100,14 92,18 Q88,22 92,26 Q96,30 100,26 Q102,22 98,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.75"/>
-      {/* Outer curl left */}
       <path d="M92,24 Q80,10 68,16 Q62,20 66,27 Q70,33 78,29 Q84,25 80,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.65"/>
-      {/* Far curl left */}
       <path d="M68,24 Q54,8 40,15 Q34,20 38,28 Q44,35 54,30 Q62,25 56,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
-      {/* Small leaf left */}
       <path d="M40,24 Q28,16 20,20 Q16,24 20,28 Q28,32 36,26" fill="none" stroke="var(--ink)" strokeWidth="0.9" opacity="0.4"/>
-      {/* Dot accents left */}
       <circle cx="106" cy="18" r="1.5" fill="var(--ink)" opacity="0.5"/>
       <circle cx="88" cy="14" r="1.5" fill="var(--ink)" opacity="0.4"/>
       <circle cx="64" cy="12" r="1.5" fill="var(--ink)" opacity="0.35"/>
       <circle cx="36" cy="16" r="1.5" fill="var(--ink)" opacity="0.3"/>
-
-      {/* ── Right scroll curls (mirror) ── */}
       <path d="M172,24 Q180,14 188,18 Q192,22 188,26 Q184,30 180,26 Q178,22 182,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.75"/>
       <path d="M188,24 Q200,10 212,16 Q218,20 214,27 Q210,33 202,29 Q196,25 200,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.65"/>
       <path d="M212,24 Q226,8 240,15 Q246,20 242,28 Q236,35 226,30 Q218,25 224,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
       <path d="M240,24 Q252,16 260,20 Q264,24 260,28 Q252,32 244,26" fill="none" stroke="var(--ink)" strokeWidth="0.9" opacity="0.4"/>
-      {/* Dot accents right */}
       <circle cx="174" cy="18" r="1.5" fill="var(--ink)" opacity="0.5"/>
       <circle cx="192" cy="14" r="1.5" fill="var(--ink)" opacity="0.4"/>
       <circle cx="216" cy="12" r="1.5" fill="var(--ink)" opacity="0.35"/>
@@ -718,7 +711,6 @@ function KazakhScrollOrnament({ width = 280, opacity = 0.7 }) {
     </svg>
   )
 }
-
 
 function WaveLine() {
   return (
@@ -740,21 +732,17 @@ function GoldDiamond() {
 
 /* ─── Rich SVG Ornaments ──────────────────────────────────────────── */
 
-// Delicate floral branch divider
 export function FloralDivider({ opacity = 0.6 }) {
   return (
     <svg viewBox="0 0 320 40" style={{ width: '100%', maxWidth: '320px', display: 'block', margin: '0 auto', opacity }}>
       <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(0,0,0,0.2)" strokeWidth="0.7"/>
-      {/* Left florals */}
       <circle cx="95" cy="20" r="2.5" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
       <line x1="92" y1="14" x2="95" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
       <circle cx="91" cy="12" r="2" fill="#888" opacity="0.4"/>
       <line x1="98" y1="14" x2="95" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
       <circle cx="99" cy="12" r="2" fill="#888" opacity="0.4"/>
-      {/* Centre diamond */}
       <path d="M160,8 L168,20 L160,32 L152,20Z" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
       <circle cx="160" cy="20" r="3" fill="#111" opacity="0.4"/>
-      {/* Right florals (mirror) */}
       <circle cx="225" cy="20" r="2.5" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
       <line x1="228" y1="14" x2="225" y2="18" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
       <circle cx="229" cy="12" r="2" fill="#888" opacity="0.4"/>
@@ -765,7 +753,6 @@ export function FloralDivider({ opacity = 0.6 }) {
   )
 }
 
-// Corner botanical corner piece
 export function CornerFloral({ position = 'tl', size = 80, opacity = 0.35 }) {
   const transforms = {
     tl: 'translate(0,0)',
@@ -778,12 +765,9 @@ export function CornerFloral({ position = 'tl', size = 80, opacity = 0.35 }) {
       <g transform={transforms[position]}>
         <path d="M4,4 L4,36 Q4,40 8,40 L36,40" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1.2"/>
         <path d="M10,4 L10,30 Q10,34 14,34 L36,34" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="0.7"/>
-        {/* Floral tip */}
         <circle cx="4" cy="4" r="3" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
         <circle cx="4" cy="4" r="1.2" fill="var(--gold)" opacity="0.6"/>
-        {/* Leaf at end */}
         <path d="M36,40 Q42,36 38,30 Q34,34 36,40Z" fill="var(--gold2)" opacity="0.4"/>
-        {/* Small dot accents */}
         <circle cx="20" cy="4" r="1.5" fill="#888" opacity="0.4"/>
         <circle cx="4" cy="22" r="1.5" fill="#888" opacity="0.4"/>
       </g>
@@ -791,23 +775,18 @@ export function CornerFloral({ position = 'tl', size = 80, opacity = 0.35 }) {
   )
 }
 
-// Ornate section separator with rings and scrolls
 export function ScrollDivider({ opacity = 0.55 }) {
   return (
     <svg viewBox="0 0 400 28" style={{ width: '100%', maxWidth: '400px', display: 'block', margin: '0 auto', opacity }}>
-      {/* Left scroll */}
       <path d="M0,14 Q20,4 40,14 Q20,24 0,14Z" fill="none" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
       <path d="M40,14 L170,14" stroke="rgba(0,0,0,0.18)" strokeWidth="0.6"/>
-      {/* Small diamonds on line */}
       <path d="M90,10 L94,14 L90,18 L86,14Z" fill="#888" opacity="0.35"/>
       <path d="M140,10 L144,14 L140,18 L136,14Z" fill="#888" opacity="0.35"/>
-      {/* Centre ring with inner star */}
       <circle cx="200" cy="14" r="10" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
       <circle cx="200" cy="14" r="5" fill="none" stroke="var(--gold)" strokeWidth="0.7"/>
       <line x1="200" y1="4" x2="200" y2="24" stroke="var(--gold)" strokeWidth="0.6" opacity="0.5"/>
       <line x1="190" y1="14" x2="210" y2="14" stroke="var(--gold)" strokeWidth="0.6" opacity="0.5"/>
       <circle cx="200" cy="14" r="2" fill="var(--gold)" opacity="0.7"/>
-      {/* Right mirror */}
       <path d="M230,14 L360,14" stroke="rgba(0,0,0,0.18)" strokeWidth="0.6"/>
       <path d="M260,10 L264,14 L260,18 L256,14Z" fill="#888" opacity="0.35"/>
       <path d="M310,10 L314,14 L310,18 L306,14Z" fill="#888" opacity="0.35"/>
@@ -816,14 +795,12 @@ export function ScrollDivider({ opacity = 0.55 }) {
   )
 }
 
-// Shanyrak (yurt crown symbol) — cultural Kazakh ornament
 export function ShanyraqOrnament({ size = 56, opacity = 0.45 }) {
   return (
     <svg viewBox="0 0 56 56" style={{ width: size, height: size, display: 'block', margin: '0 auto', opacity }}>
       <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="1"/>
       <circle cx="28" cy="28" r="16" fill="none" stroke="rgba(0,0,0,0.22)" strokeWidth="0.8"/>
       <circle cx="28" cy="28" r="6" fill="none" stroke="var(--gold)" strokeWidth="0.8"/>
-      {/* Spokes */}
       {[0,30,60,90,120,150].map(a => {
         const rad = a * Math.PI / 180
         return <line key={a}

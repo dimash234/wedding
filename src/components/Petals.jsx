@@ -28,14 +28,5 @@ function Petal({ id }) {
 }
 
 export default function Petals() {
-  const [petals] = useState(() => Array.from({ length: 12 }, (_, i) => i))
-
-  return (
-    <div style={{
-      position: 'fixed', inset: 0,
-      pointerEvents: 'none', zIndex: 0, overflow: 'hidden'
-    }}>
-      {petals.map(id => <Petal key={id} id={id} />)}
-    </div>
-  )
+  return null
 }

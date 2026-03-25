@@ -48,7 +48,7 @@ function HeartWithNumber({ number, size = 36 }) {
         style={{
           fontSize: '13px',
           fill: '#E53E3E',
-          fontFamily: "'Anastasia Script', Georgia, serif",
+          fontFamily: "Georgia, serif",
           fontWeight: 400,
         }}
       >
@@ -88,7 +88,7 @@ export default function Calendar({ weddingDate }) {
         padding: 'clamp(16px,4vw,28px)',
         maxWidth: '380px', margin: '0 auto',
       }}>
-        {/* Month title */}
+        {/* Month title — Anastasia Script font (Маусым 2026) */}
         <p style={{
           textAlign: 'center',
           fontFamily: "'Anastasia Script', Georgia, serif",
@@ -101,18 +101,20 @@ export default function Calendar({ weddingDate }) {
           {t.calendar.months[month]} {year}
         </p>
 
-        {/* Day headers */}
+        {/* Day headers — default font */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '2px', marginBottom: '8px' }}>
           {t.calendar.days.map(d => (
             <div key={d} style={{
               textAlign: 'center', padding: '4px 0',
               fontSize: '9px', letterSpacing: '1px',
               textTransform: 'lowercase', color: 'var(--ink)', opacity: 0.35,
+              fontFamily: "'Jost', sans-serif",
+              fontWeight: 300,
             }}>{d}</div>
           ))}
         </div>
 
-        {/* Days grid */}
+        {/* Days grid — default font */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '4px' }}>
           {cells.map((day, i) => {
             const isWed = day === 28
@@ -125,12 +127,12 @@ export default function Calendar({ weddingDate }) {
                 justifyContent: 'center',
               }}>
                 {isWed ? (
-                  /* Heart with number inside */
                   <HeartWithNumber number={28} size={38} />
                 ) : (
                   <span style={{
                     fontSize: 'clamp(11px,2.2vw,13px)',
                     fontWeight: 300,
+                    fontFamily: "'Jost', sans-serif",
                     color: day ? 'var(--ink)' : 'transparent',
                     lineHeight: 1.2,
                   }}>
@@ -142,7 +144,7 @@ export default function Calendar({ weddingDate }) {
           })}
         </div>
 
-        {/* Legend */}
+        {/* Legend — default font */}
         <div style={{
           marginTop: '20px', paddingTop: '16px',
           borderTop: '1px solid rgba(0,0,0,0.08)',
@@ -153,6 +155,7 @@ export default function Calendar({ weddingDate }) {
             fontSize: '10px', letterSpacing: '2.5px',
             color: 'var(--ink)', textTransform: 'lowercase',
             fontWeight: 300, opacity: 0.6,
+            fontFamily: "'Jost', sans-serif",
           }}>
             {t.calendar.legend}
           </span>
