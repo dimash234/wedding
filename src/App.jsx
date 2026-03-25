@@ -1,87 +1,91 @@
-import React, { useState, useEffect, createContext, useContext, useRef } from 'react';
-import Countdown from './components/Countdown';
-import MapSection from './components/MapSection';
-import RSVPForm from './components/RSVPForm';
-import Calendar from './components/Calendar';
-import { translations } from './lang';
+import React, { useState, useEffect, createContext, useContext } from 'react'
+import Countdown  from './components/Countdown'
+import MapSection from './components/MapSection'
+import RSVPForm   from './components/RSVPForm'
+import Calendar   from './components/Calendar'
+import { translations } from './lang'
 
-export const LangContext = createContext();
+export const LangContext = createContext()
 
-/* ─── Hook: Scroll Reveal ────────────────────────────────────────── */
+/* ─── Scroll reveal hook ─────────────────────────────────────────── */
 function useScrollReveal(options = {}) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const ref = React.useRef(null)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const el = ref.current
+    if (!el) return
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: options.threshold ?? 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [options.threshold]);
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: options.threshold ?? 0.12, rootMargin: options.rootMargin ?? '0px 0px -40px 0px' }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
-  return [ref, visible];
+  return [ref, visible]
 }
 
-/* ─── Wrapper: Reveal ────────────────────────────────────────────── */
+/* ─── Reveal wrapper ─────────────────────────────────────────────── */
 function Reveal({ children, delay = 0, y = 28, style: extraStyle }) {
-  const [ref, visible] = useScrollReveal();
+  const [ref, visible] = useScrollReveal()
   return (
     <div ref={ref} style={{
-      opacity: visible ? 1 : 0,
+      opacity:   visible ? 1 : 0,
       transform: visible ? 'translateY(0)' : `translateY(${y}px)`,
-      transition: `opacity 0.8s cubic-bezier(.16,1,.3,1) ${delay}s, transform 0.8s cubic-bezier(.16,1,.3,1) ${delay}s`,
+      transition: `opacity 0.85s cubic-bezier(.16,1,.3,1) ${delay}s, transform 0.85s cubic-bezier(.16,1,.3,1) ${delay}s`,
       ...extraStyle,
     }}>
       {children}
     </div>
-  );
+  )
 }
 
-/* ─── Audio Logic ────────────────────────────────────────────────── */
-const audio = new Audio('./music/mahabbat.mp3');
-audio.loop = true;
-audio.volume = 0.5;
+/* ─── Audio ──────────────────────────────────────────────────────── */
+const audio = new Audio('./music/mahabbat.mp3')
+audio.loop = true
+audio.volume = 0.55
 
-/* ─── Main App ───────────────────────────────────────────────────── */
+const bootAudio = () => {
+  audio.play().catch(() => {
+    const go = () => audio.play().catch(() => {})
+    ;['click', 'touchstart', 'scroll'].forEach(ev =>
+      document.addEventListener(ev, go, { once: true })
+    )
+  })
+}
+bootAudio()
+
+/* ─── App ─────────────────────────────────────────────────────────── */
 export default function App() {
-  const [scrolled, setScrolled] = useState(false);
-  const [lang, setLang] = useState('kz');
-  const [playing, setPlaying] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false)
+  const [lang,      setLang]      = useState('kz')
+  const [playing,   setPlaying]   = useState(false)
 
   useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', h);
-    return () => window.removeEventListener('scroll', h);
-  }, []);
+    const h = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', h)
+    return () => window.removeEventListener('scroll', h)
+  }, [])
 
   useEffect(() => {
-    const on = () => setPlaying(true);
-    const off = () => setPlaying(false);
-    audio.addEventListener('play', on);
-    audio.addEventListener('pause', off);
+    const on  = () => setPlaying(true)
+    const off = () => setPlaying(false)
+    audio.addEventListener('play',  on)
+    audio.addEventListener('pause', off)
     return () => {
-      audio.removeEventListener('play', on);
-      audio.removeEventListener('pause', off);
-    };
-  }, []);
-
-  const toggleMusic = () => {
-    if (playing) {
-      audio.pause();
-    } else {
-      audio.play().catch(e => console.log("Audio play blocked", e));
+      audio.removeEventListener('play',  on)
+      audio.removeEventListener('pause', off)
     }
-  };
+  }, [])
 
-  const t = translations[lang];
+  const toggle = () => playing ? audio.pause() : audio.play().catch(() => {})
+  const t = translations[lang]
 
   return (
-    <LangContext.Provider value={{ t, lang, setLang, playing, toggle: toggleMusic }}>
+    <LangContext.Provider value={{ t, lang, setLang, playing, toggle }}>
       <div style={{ background: 'var(--white)' }}>
+        {/* Petals removed */}
         <Navbar scrolled={scrolled} />
         <Hero />
         <ScheduleSection />
@@ -93,158 +97,553 @@ export default function App() {
         <FooterSection />
       </div>
     </LangContext.Provider>
-  );
+  )
 }
 
 /* ─── Navbar ─────────────────────────────────────────────────────── */
 function Navbar({ scrolled }) {
-  const { t, lang, setLang } = useContext(LangContext);
-  const color = scrolled ? 'var(--ink)' : 'white';
+  const { t, lang, setLang } = useContext(LangContext)
+
+  const linkColor   = scrolled ? 'var(--mid)'             : 'rgba(255,255,255,0.75)'
+  const linkHover   = scrolled ? 'var(--ink)'             : 'white'
+  const logoColor   = scrolled ? 'var(--ink)'             : 'white'
 
   return (
     <nav style={{
       position: 'fixed', inset: '0 0 auto', zIndex: 300,
       height: '58px', padding: '0 clamp(20px,5vw,48px)',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      background: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(10px)' : 'none',
-      transition: 'all 0.4s ease',
+      background:     scrolled ? 'rgba(255,255,255,0.96)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(20px)'             : 'none',
+      borderBottom:   scrolled ? '1px solid var(--border)': 'none',
+      transition: 'all 0.5s cubic-bezier(.16,1,.3,1)',
     }}>
-      <span style={{ fontFamily: "'Anastasia Script', serif", fontSize: '26px', color }}>Р · Ж</span>
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+      {/* Logo */}
+      <span style={{
+        fontFamily: "'Anastasia Script', Georgia, serif",
+        fontSize: '28px', letterSpacing: '5px',
+        color: logoColor, fontWeight: 300,
+        transition: 'color 0.4s',
+      }}>Р · Ж</span>
+
+      {/* Links */}
+      <div style={{ display: 'flex', gap: 'clamp(16px,3vw,32px)', alignItems: 'center' }}>
         {[['#schedule', t.nav.schedule], ['#map', t.nav.place], ['#rsvp', t.nav.rsvp]].map(([h, l]) => (
-          <a key={h} href={h} style={{ fontSize: '10px', textTransform: 'lowercase', color, textDecoration: 'none', letterSpacing: '1px' }}>{l}</a>
+          <a key={h} href={h} style={{
+            fontSize: '9.5px', letterSpacing: '2.5px', textTransform: 'lowercase',
+            color: linkColor, textDecoration: 'none', transition: 'color 0.3s',
+            fontFamily: "'Jost', sans-serif",
+          }}
+            onMouseEnter={e => e.target.style.color = linkHover}
+            onMouseLeave={e => e.target.style.color = linkColor}
+          >{l}</a>
         ))}
-        <button onClick={() => setLang(lang === 'kz' ? 'ru' : 'kz')} style={{ background: 'none', border: `1px solid ${color}`, color, padding: '2px 8px', fontSize: '9px', cursor: 'pointer' }}>
-          {lang === 'kz' ? 'РУС' : 'ҚАЗ'}
-        </button>
+
+        {/* Lang */}
+        <div style={{ display: 'flex', gap: '0', marginLeft: '4px' }}>
+          {['kz', 'ru'].map(l => (
+            <button key={l} onClick={() => setLang(l)} style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              padding: '4px 9px',
+              fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase',
+              color: lang === l
+                ? (scrolled ? 'var(--ink)' : 'white')
+                : (scrolled ? 'var(--soft)' : 'rgba(255,255,255,0.4)'),
+              fontWeight: lang === l ? 500 : 300,
+              borderBottom: lang === l
+                ? `1px solid ${scrolled ? 'var(--gold)' : 'rgba(255,255,255,0.7)'}`
+                : '1px solid transparent',
+              transition: 'all 0.3s',
+              fontFamily: "'Jost', sans-serif",
+            }}>{l === 'kz' ? 'қаз' : 'рус'}</button>
+          ))}
+        </div>
       </div>
     </nav>
-  );
+  )
 }
 
 /* ─── Hero ───────────────────────────────────────────────────────── */
 function Hero() {
-  const { t, playing, toggle } = useContext(LangContext);
+  const { t, playing, toggle } = useContext(LangContext)
 
   return (
-    <section id="hero" style={{ position: 'relative', height: '100svh', overflow: 'hidden' }}>
-      <img src="./photo1.jpg" className="scale-in" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Hero" />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent, var(--white))' }} />
-      
-      <div style={{ position: 'absolute', top: '20%', width: '100%', textAlign: 'center', color: 'white' }}>
-        <h1 style={{ fontFamily: "'Bickham_Script_Pro_3', serif", fontSize: 'clamp(80px, 15vw, 120px)', lineHeight: 1 }}>Р & Ж</h1>
-        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '10px', letterSpacing: '6px', marginTop: '10px', opacity: 0.8 }}>{t.invite}</p>
+    <section id="hero">
+
+      {/* ══ FULL-SCREEN PHOTO ══════════════════════════════════════ */}
+      <div style={{
+        position: 'relative',
+        width: '100%', height: '100svh', minHeight: '600px',
+        overflow: 'hidden',
+        background: 'var(--cream)',
+      }}>
+        <img
+          src="./photo1.jpg" alt="Р & Ж"
+          className="scale-in"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center 30%',
+          }}
+        />
+
+        {/* Gradient overlay */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: [
+            'linear-gradient(180deg,',
+            '  rgba(10,8,5,0.55) 0%,',
+            '  rgba(10,8,5,0.10) 35%,',
+            '  rgba(10,8,5,0.06) 60%,',
+            '  rgba(255,255,255,0.0) 80%,',
+            '  var(--white) 100%)',
+          ].join(''),
+        }} />
+
+        {/* ── Initials — upper-center ── */}
+        <div style={{
+          position: 'absolute', top: '18%', left: 0, right: 0,
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          pointerEvents: 'none',
+        }}>
+          <h1 className="rise-1" style={{
+            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontSize: 'clamp(85px,18vw,140px)',
+            fontWeight: 300, letterSpacing: 'clamp(10px,3.5vw,26px)',
+            color: 'white', lineHeight: 1,
+            textShadow: '0 3px 40px rgba(0,0,0,0.3)',
+          }}>
+            Р{' '}
+            <span style={{
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: '0.42em',
+              letterSpacing: 0,
+              verticalAlign: 'middle',
+              fontStyle: 'italic',
+            }}>{'&'}</span>
+            {' '}Ж
+          </h1>
+
+          <p className="rise-2" style={{
+            marginTop: '14px',
+            fontSize: '8.5px', letterSpacing: '7px', textTransform: 'lowercase',
+            color: 'rgba(255,255,255,0.55)',
+            fontWeight: 300,
+            fontFamily: "'Jost', sans-serif",
+          }}>{t.invite}</p>
+        </div>
+
+        {/* ── Music button — lower centre ── */}
+        <div style={{
+          position: 'absolute', top: '65%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}>
+          <MusicRing playing={playing} onClick={toggle} />
+        </div>
+
+        {/* ── Subtle date bottom ── */}
+        <p className="rise-4" style={{
+          position: 'absolute', bottom: '10%', left: 0, right: 0,
+          textAlign: 'center',
+          fontSize: '9px', letterSpacing: '7px', textTransform: 'lowercase',
+          color: 'rgba(255,255,255,0.5)',
+          fontWeight: 300,
+          pointerEvents: 'none',
+          fontFamily: "'Jost', sans-serif",
+        }}>сенбі · 28.06.2026 · 18:00</p>
       </div>
 
-      <div style={{ position: 'absolute', bottom: '25%', left: '50%', transform: 'translateX(-50%)' }}>
-        <MusicRing playing={playing} onClick={toggle} />
+      {/* ══ BELOW PHOTO — white area ═══════════════════════════════ */}
+      <div style={{
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        padding: 'clamp(40px,8vh,72px) 24px clamp(52px,10vh,88px)',
+        background: 'var(--white)',
+        textAlign: 'center',
+      }}>
+
+        {/* Names */}
+        <Reveal delay={0}>
+          <h2 style={{
+            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontSize: 'clamp(28px,7.5vw,58px)',
+            fontWeight: 300, fontStyle: 'italic',
+            letterSpacing: 'clamp(1px,0.5vw,4px)',
+            color: 'var(--ink)', lineHeight: 1.2,
+          }}>
+            Райымбек{' '}
+            <span style={{ color: 'var(--gold)', fontStyle: 'normal', fontSize: '0.65em' }}>{'&'}</span>
+            {' '}Жансая
+          </h2>
+        </Reveal>
+
+        {/* Date */}
+        <Reveal delay={0.12}>
+          <p style={{
+            marginTop: '16px',
+            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontSize: 'clamp(22px,5vw,38px)',
+            fontWeight: 400, letterSpacing: 'clamp(2px,1vw,5px)',
+            color: 'var(--ink)',
+          }}>28.06.2026</p>
+        </Reveal>
+
+        {/* Greeting — normal font */}
+        <Reveal delay={0.36}>
+          <div style={{ marginTop: 'clamp(28px,5vh,44px)', maxWidth: '500px' }}>
+            <p style={{
+              fontFamily: "'Jost', sans-serif",
+              fontSize: 'clamp(20px,4vw,32px)',
+              fontWeight: 400, color: 'var(--ink)',
+              letterSpacing: '1px', marginBottom: '12px',
+            }}>{t.greeting}</p>
+            <p style={{
+              fontSize: '14px', letterSpacing: '0.5px',
+              color: 'var(--ink)', lineHeight: 2,
+              fontWeight: 300,
+              fontFamily: "'Jost', sans-serif",
+            }}>{t.subGreeting}</p>
+          </div>
+        </Reveal>
       </div>
     </section>
-  );
+  )
 }
 
-/* ─── Music Ring ─────────────────────────────────────────────────── */
+/* ─── Music ring ─────────────────────────────────────────────────── */
 function MusicRing({ playing, onClick }) {
+  const TEXT = 'МАХАББАТ · ДЕГЕН · ҚАНДАЙ · ТОЙ · МУЗЫКА · '
+
   return (
-    <button onClick={onClick} style={{ width: '90px', height: '90px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', border: '1px solid white', cursor: 'pointer', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <svg viewBox="0 0 100 100" style={{ position: 'absolute', width: '100%', height: '100%', animation: 'spinSlow 10s linear infinite', animationPlayState: playing ? 'running' : 'paused' }}>
-        <path id="circlePath" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
-        <text fill="white" fontSize="6" letterSpacing="2" fontFamily="'Jost'">
-          <textPath href="#circlePath">МАХАББАТ · ДЕГЕН · ҚАНДАЙ · ТОЙ · МУЗЫКА · </textPath>
+    <button
+      onClick={onClick}
+      aria-label={playing ? 'Pause' : 'Play'}
+      style={{
+        width: '100px', height: '100px', borderRadius: '50%',
+        background: 'none', border: 'none', cursor: 'pointer',
+        position: 'relative',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}
+    >
+      {/* Spinning text ring */}
+      <svg viewBox="0 0 100 100" style={{
+        position: 'absolute', inset: 0, width: '100px', height: '100px',
+        animation: 'spinSlow 12s linear infinite',
+        animationPlayState: playing ? 'running' : 'paused',
+      }}>
+        <defs>
+          <path id="cp" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+        </defs>
+        <text style={{
+          fontSize: '6.5px',
+          fill: 'rgba(0,0,0,0.6)',
+          letterSpacing: '2.2px', fontFamily: "'Anastasia Script', Georgia, serif", fontWeight: 300,
+        }}>
+          <textPath href="#cp">{TEXT}</textPath>
         </text>
       </svg>
-      <div style={{ color: 'white', fontSize: '12px' }}>{playing ? 'II' : '▶'}</div>
+
+      {/* Button disc */}
+      <div style={{
+        width: '56px', height: '56px', borderRadius: '50%',
+        background: 'rgba(255,255,255,0.88)',
+        backdropFilter: 'blur(12px)',
+        border: '1.5px solid rgba(255,255,255,0.95)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'all 0.4s cubic-bezier(.16,1,.3,1)',
+        boxShadow: playing
+          ? '0 0 0 6px rgba(255,255,255,0.15), 0 4px 20px rgba(0,0,0,0.15)'
+          : '0 2px 20px rgba(0,0,0,0.15)',
+      }}>
+        {playing ? (
+          <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+            <span style={{ width: '3px', height: '14px', background: '#111', borderRadius: '2px', display: 'block' }} />
+            <span style={{ width: '3px', height: '14px', background: '#111', borderRadius: '2px', display: 'block' }} />
+          </div>
+        ) : (
+          <svg viewBox="0 0 16 18" style={{ width: '14px', height: '16px', marginLeft: '3px' }}>
+            <path d="M2,1 L15,9 L2,17 Z" fill="#111111" />
+          </svg>
+        )}
+      </div>
     </button>
-  );
+  )
 }
 
-/* ─── Schedule Section ───────────────────────────────────────────── */
+/* ─── Countdown ──────────────────────────────────────────────────── */
+function CountdownSection() {
+  const { t } = useContext(LangContext)
+  return (
+    <section id="countdown" style={{
+      padding: 'clamp(56px,10vh,88px) 20px',
+      background: 'var(--off)',
+      borderTop: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+    }}>
+      <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+        <Reveal delay={0}>
+          <SectionLabel>{t.countdown.label}</SectionLabel>
+        </Reveal>
+        <Reveal delay={0.12} y={20}>
+          <Countdown targetDate="2026-06-28T18:00:00" />
+        </Reveal>
+        <Reveal delay={0.3}>
+          <div style={{ marginTop: '40px' }}>
+            <ScrollDivider opacity={0.4} />
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Schedule ───────────────────────────────────────────────────── */
 function ScheduleSection() {
-  const { t } = useContext(LangContext);
+  const { t } = useContext(LangContext)
+  const photos = ['./photo2.jpg', './couple.jpg', './photo1.jpg']
+
   return (
-    <section id="schedule" style={{ padding: '80px 20px', textAlign: 'center' }}>
-      <Reveal><SectionLabel>{t.schedule.label}</SectionLabel></Reveal>
-      <Reveal delay={0.1}>
-        <h2 style={{ fontFamily: "'Bickham_Script_Pro_3', serif", fontSize: 'clamp(40px, 8vw, 60px)', marginBottom: '40px' }}>{t.schedule.title}</h2>
-      </Reveal>
-      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        {t.schedule.items.map((item, i) => (
-          <Reveal key={i} delay={i * 0.1}>
-            <div style={{ marginBottom: '30px', borderBottom: '1px solid var(--border)', paddingBottom: '15px' }}>
-              <span style={{ fontFamily: "'Anastasia Script', serif", fontSize: '28px', color: 'var(--gold2)' }}>{item.time}</span>
-              <h3 style={{ fontSize: '16px', margin: '5px 0' }}>{item.title}</h3>
-              <p style={{ fontSize: '12px', opacity: 0.7 }}>{item.desc}</p>
-            </div>
+    <section id="schedule" style={{ padding: 'clamp(64px,10vh,96px) 20px', background: 'var(--white)' }}>
+      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(44px,8vh,72px)' }}>
+          <Reveal delay={0}>
+            <SectionLabel>{t.schedule.label}</SectionLabel>
           </Reveal>
-        ))}
+          <Reveal delay={0.1}>
+            {/* "той кестесі" — Bickham_Script_Pro_3 font */}
+            <h2 style={{
+              fontFamily: "'Anastasia Script', Georgia, serif",
+              fontSize: 'clamp(42px,8vw,64px)',
+              fontWeight: 300, fontStyle: 'italic',
+              color: 'var(--ink)', letterSpacing: '2px',
+            }}>{t.schedule.title}</h2>
+          </Reveal>
+        </div>
+
+        {/* Timeline — default font for content */}
+        <div style={{ position: 'relative' }}>
+          {/* Vertical line */}
+          <div style={{
+            position: 'absolute', left: '50%', top: 0, bottom: 0,
+            width: '1px', transform: 'translateX(-50%)',
+            background: 'linear-gradient(to bottom, transparent, var(--gold2) 12%, var(--gold2) 88%, transparent)',
+          }} />
+
+          {t.schedule.items.map((item, i) => {
+            const flip = i % 2 === 0
+            return (
+              <Reveal key={i} delay={i * 0.15} y={24} style={{ marginBottom: i < t.schedule.items.length - 1 ? 'clamp(40px,7vh,64px)' : 0 }}>
+                <div style={{
+                  display: 'grid', gridTemplateColumns: '1fr 48px 1fr',
+                  alignItems: 'center',
+                }}>
+                  {/* Left */}
+                  <div style={{ paddingRight: '24px', display: 'flex', justifyContent: 'flex-end' }}>
+                    {flip ? <SchCard item={item} align="right" /> : <SchPhoto src={photos[i]} />}
+                  </div>
+                  {/* Centre dot */}
+                  <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+                    <div style={{
+                      width: '11px', height: '11px', borderRadius: '50%',
+                      background: 'var(--gold)',
+                      boxShadow: '0 0 0 4px var(--white), 0 0 0 5.5px var(--gold2)',
+                    }} />
+                  </div>
+                  {/* Right */}
+                  <div style={{ paddingLeft: '24px', display: 'flex', justifyContent: 'flex-start' }}>
+                    {flip ? <SchPhoto src={photos[i]} /> : <SchCard item={item} align="left" />}
+                  </div>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
       </div>
     </section>
-  );
+  )
 }
 
-/* ─── Details Section ────────────────────────────────────────────── */
-function DetailsSection() {
-  const { t } = useContext(LangContext);
+function SchCard({ item, align }) {
   return (
-    <section style={{ padding: '60px 20px', background: 'var(--off)', textAlign: 'center' }}>
-      <Reveal><SectionLabel>{t.details.label}</SectionLabel></Reveal>
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '30px' }}>
-        <div style={{ background: 'white', padding: '30px', minWidth: '250px', border: '1px solid var(--border)' }}>
-          <p style={{ fontSize: '10px', letterSpacing: '2px', opacity: 0.5 }}>{t.details.date}</p>
-          <p style={{ fontFamily: "'Маусым 2026', serif", fontSize: '24px', marginTop: '10px' }}>{t.details.dv}</p>
-        </div>
-        <div style={{ background: 'white', padding: '30px', minWidth: '250px', border: '1px solid var(--border)' }}>
-          <p style={{ fontSize: '10px', letterSpacing: '2px', opacity: 0.5 }}>{t.details.place}</p>
-          <p style={{ fontSize: '18px', marginTop: '10px' }}>{t.details.pv}</p>
-        </div>
-      </div>
-    </section>
-  );
+    <div style={{ maxWidth: '220px', width: '100%', textAlign: align }}>
+      {/* Time — Anastasia Script (keeps original design) */}
+      <p style={{
+        fontFamily: "'Anastasia Script', Georgia, serif",
+        fontSize: 'clamp(26px,5vw,38px)',
+        fontWeight: 400, color: 'var(--gold)',
+        letterSpacing: '2px', lineHeight: 1, marginBottom: '10px',
+      }}>{item.time}</p>
+      {/* Title and desc — default font */}
+      <p style={{
+        fontSize: '12.5px', fontWeight: 500,
+        letterSpacing: '0.8px', color: 'var(--ink)',
+        marginBottom: '5px',
+        fontFamily: "'Jost', sans-serif",
+      }}>{item.title}</p>
+      <p style={{
+        fontSize: '11px', color: 'var(--ink)',
+        lineHeight: 1.75, fontWeight: 300,
+        fontFamily: "'Jost', sans-serif",
+      }}>{item.desc}</p>
+    </div>
+  )
 }
 
-/* ─── Common UI Components ───────────────────────────────────────── */
+function SchPhoto({ src }) {
+  const [ok, setOk] = useState(false)
+  return (
+    <div style={{
+      width: 'clamp(96px,18vw,175px)',
+      height: 'clamp(120px,22vw,215px)',
+      overflow: 'hidden', background: 'var(--mist)', flexShrink: 0,
+    }}>
+      <img
+        src={src} alt=""
+        onLoad={() => setOk(true)}
+        style={{
+          width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+          opacity: ok ? 1 : 0, transition: 'opacity 0.6s ease',
+          filter: 'brightness(1.01) saturate(0.88)',
+        }}
+      />
+    </div>
+  )
+}
+
+/* ─── Details ────────────────────────────────────────────────────── */
+function DetailsSection() {
+  const { t } = useContext(LangContext)
+  return (
+    <section style={{
+      padding: 'clamp(56px,9vh,80px) 20px',
+      background: 'var(--off)',
+      borderTop: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+    }}>
+      <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center' }}>
+        <Reveal delay={0}>
+          {/* "мәліметтер" label — default font */}
+          <SectionLabel>{t.details.label}</SectionLabel>
+        </Reveal>
+
+        {/* Top row: date + time */}
+        <Reveal delay={0.1}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)', marginBottom: '1px' }}>
+            {[
+              [t.details.date,  t.details.dv],
+              [t.details.time,  t.details.tv],
+            ].map(([l, v], i) => (
+              <div key={i} style={{ padding: 'clamp(18px,4vw,28px) 16px', background: 'var(--white)', textAlign: 'center' }}>
+                <p style={{
+                  fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase',
+                  color: 'var(--ink)', marginBottom: '9px', opacity: 0.45,
+                  fontFamily: "'Jost', sans-serif", fontWeight: 300,
+                }}>{l}</p>
+                <p style={{
+                  fontFamily: "'Jost', sans-serif",
+                  fontSize: 'clamp(16px,3.5vw,22px)',
+                  color: 'var(--ink)', letterSpacing: '1.5px', fontWeight: 300,
+                }}>{v}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Bottom row: address full width */}
+        <Reveal delay={0.2}>
+          <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderTop: 'none', padding: 'clamp(18px,4vw,28px) 16px', textAlign: 'center' }}>
+            <p style={{
+              fontSize: '8px', letterSpacing: '3px', textTransform: 'lowercase',
+              color: 'var(--soft)', marginBottom: '9px',
+              fontFamily: "'Jost', sans-serif", fontWeight: 300,
+            }}>{t.details.place}</p>
+            <p style={{
+              fontFamily: "'Jost', sans-serif",
+              fontSize: 'clamp(16px,3.5vw,22px)',
+              color: 'var(--ink)', letterSpacing: '1px', fontWeight: 300,
+            }}>{t.details.pv}</p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Calendar ───────────────────────────────────────────────────── */
+function CalendarSection() {
+  const { t } = useContext(LangContext)
+  return (
+    <section style={{ padding: 'clamp(56px,9vh,80px) 20px', background: 'var(--white)', position: 'relative' }}>
+      <div style={{ maxWidth: '440px', margin: '0 auto', textAlign: 'center' }}>
+        <Reveal delay={0}>
+          <SectionLabel>{t.calendar.label}</SectionLabel>
+        </Reveal>
+        <Reveal delay={0.12} y={20}>
+          <Calendar weddingDate="2026-06-28" />
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+function FooterSection() {
+  const { t } = useContext(LangContext)
+  return (
+    <footer style={{
+      padding: 'clamp(56px,10vh,88px) 20px',
+      background: 'var(--white)',
+      textAlign: 'center',
+      borderTop: '1px solid var(--border)',
+    }}>
+      <Reveal delay={0}>
+        <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.15))', margin: '0 auto 32px' }} />
+        <p style={{
+          fontFamily: "'Anastasia Script', Georgia, serif",
+          fontSize: 'clamp(65px,14vw,110px)',
+          fontWeight: 300, letterSpacing: 'clamp(12px,3.5vw,25px)',
+          color: 'var(--ink)', lineHeight: 1, marginBottom: '16px',
+        }}>Р ✦ Ж</p>
+        <p style={{
+          fontSize: '18px', letterSpacing: '5px', color: 'var(--ink)', fontWeight: 300,
+          fontFamily: "'Anastasia Script', Georgia, serif",
+        }}>{t.footer}</p>
+        <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
+          <WaveLine />
+          <GoldDiamond />
+          <WaveLine />
+        </div>
+        <div style={{ width: '1px', height: '64px', background: 'linear-gradient(to bottom, rgba(0,0,0,0.15), transparent)', margin: '24px auto 0' }} />
+      </Reveal>
+    </footer>
+  )
+}
+
+/* ─── Shared UI ──────────────────────────────────────────────────── */
 function SectionLabel({ children }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontSize: '9px', letterSpacing: '4px', textTransform: 'uppercase', opacity: 0.6, marginBottom: '20px' }}>
-      <div style={{ width: '40px', height: '1px', background: 'currentColor' }} />
+    <p style={{
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px',
+      fontSize: '8.5px', letterSpacing: '5px', textTransform: 'lowercase',
+      color: 'var(--soft)', marginBottom: '20px', fontWeight: 300,
+      fontFamily: "'Jost', sans-serif",
+    }}>
+      <ThinLine />
       {children}
-      <div style={{ width: '40px', height: '1px', background: 'currentColor' }} />
-    </div>
-  );
+      <ThinLine />
+    </p>
+  )
 }
 
-function CalendarSection() {
-  const { t } = useContext(LangContext);
+function ThinLine() {
   return (
-    <section style={{ padding: '60px 20px', textAlign: 'center' }}>
-      <Reveal><SectionLabel>{t.calendar.label}</SectionLabel></Reveal>
-      <Reveal delay={0.2}><Calendar weddingDate="2026-06-28" /></Reveal>
-    </section>
-  );
+    <span style={{
+      display: 'inline-block', width: '32px', height: '1px',
+      background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.15), transparent)',
+    }} />
+  )
 }
-
-function CountdownSection() {
-  const { t } = useContext(LangContext);
-  return (
-    <section style={{ padding: '60px 20px', background: 'var(--white)', textAlign: 'center' }}>
-      <Reveal><SectionLabel>{t.countdown.label}</SectionLabel></Reveal>
-      <Reveal delay={0.2}><Countdown targetDate="2026-06-28T18:00:00" /></Reveal>
-    </section>
-  );
-}
-
-function FooterSection() {
-  const { t } = useContext(LangContext);
-  return (
-    <footer style={{ padding: '80px 20px', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
-      <h2 style={{ fontFamily: "'Bickham_Script_Pro_3', serif", fontSize: '60px' }}>Р ✦ Ж</h2>
-      <p style={{ fontSize: '14px', letterSpacing: '3px', marginTop: '10px' }}>28.06.2026</p>
-    </footer>
-  );
-}
-
-// Функции WaveLine, GoldDiamond и ScrollDivider остаются как в вашем оригинале.
 
 /* ─── Kazakh Scroll Ornament ────────────────────────────────────── */
 
