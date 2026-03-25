@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'Anastasia Script';
   src: url('./fonts/Bickham_Script_Pro_3_Regular.otf') format('truetype');
-  font-weight: 400;
+  font-weight: 1600;
   font-style: normal;
   font-display: swap;
 }
@@ -11,7 +11,7 @@
 @font-face {
   font-family: 'Маусым 2026';
   src: url('./fonts/Bickham_Script_Pro_3_Regular.otf') format('truetype');
-  font-weight: 400;
+  font-weight: 1200;
   font-style: normal;
   font-display: swap;
 }
@@ -19,7 +19,7 @@
 @font-face {
   font-family: 'Bickham_Script_Pro_3';
   src: url('./fonts/Bickham_Script_Pro_3_Regular.otf') format('truetype');
-  font-weight: 400;
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
