@@ -255,8 +255,8 @@ function Hero() {
         {/* Floral SVG decoration */}
         <svg className="rise-5" viewBox="0 0 196.099 196.099" style={{
           position: 'absolute', bottom: '2%', left: '50%', transform: 'translateX(-50%)',
-          width: '60px', height: '60px', opacity: 0.7, pointerEvents: 'none',
-        }} fill="#FFFFFF" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+          width: '60px', height: '60px', opacity: 0.8, pointerEvents: 'none',
+        }} fill="var(--ink)" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <g>
             <path d="M195.812,106.351c-1.308-7.31-7.921-12.271-15.161-11.839c1.134-2.972,2.584-8.512-0.253-13.107
             c-1.202-1.922-3.46-2.905-5.438-3.768c-1.534-0.665-3.127-1.363-3.454-2.215c-0.242-0.614,0.032-1.042,0.749-1.933
