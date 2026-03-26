@@ -5,7 +5,7 @@ import { SectionLabel } from '../common/SectionLabel';
 
 export function ScheduleSection() {
   const { t } = useContext(LangContext);
-  const photos = ['./arch.png', './cake.png', './dance.png'];
+  const photos = ['./nev.png', './arch.png', './cake.png'];
 
   return (
     <section id="schedule" style={{ padding: 'clamp(64px,10vh,96px) 20px', background: 'var(--white)' }}>
@@ -72,7 +72,7 @@ function SchCard({ item, align }) {
 function SchPhoto({ src }) {
   return (
     <div style={{ width: 'clamp(96px,18vw,175px)', height: 'clamp(120px,22vw,215px)', overflow: 'hidden', background: 'var(--mist)', flexShrink: 0 }}>
-      <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(0.12) contrast(1.05)' }} />
+      <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'none' }} />
     </div>
   );
 }
