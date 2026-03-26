@@ -81,8 +81,9 @@ export function Hero() {
       alt="decor"
       style={{
         width: '300px',     // ← стало в 2 раза шире и больше
-        height: '50px',    // ← стало в 2 раза выше
-        display: 'block'
+        height: '150px',    // ← стало в 2 раза выше
+        display: 'block',
+        objectFit: 'fill'
       }}
     />
   </div>
