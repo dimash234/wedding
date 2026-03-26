@@ -46,26 +46,26 @@ export function FooterSection() {
           }}
         />
         <p
-        style={{
-          fontFamily: "'Bickham', cursive",
-          fontSize: 'clamp(65px,14vw,110px)',
-          fontWeight: 300,
-          color: 'var(--ink)',
-          lineHeight: 1,
-          marginBottom: '16px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '20px',
-        }}
-      >
-        <span>Р</span>
-        <span>✦</span>
-        <span>Ж</span>
-      </p>
+  style={{
+    fontFamily: "'Bickham', cursive",
+    fontSize: 'clamp(65px,14vw,110px)',
+    fontWeight: 300,
+    color: 'var(--ink)',
+    lineHeight: 1,
+    marginBottom: '16px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '20px',
+  }}
+>
+  <span>Р</span>
+  <span style={{ display: 'inline-block', transform: 'translateY(5%)' }}>✦</span>
+  <span>Ж</span>
+</p>
         <p
           style={{
-            fontSize: '18px',
+            fontSize: '36px',
             letterSpacing: '5px',
             color: 'var(--ink)',
             fontWeight: 300,
