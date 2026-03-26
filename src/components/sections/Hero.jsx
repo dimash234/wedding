@@ -69,6 +69,44 @@ export function Hero() {
           }}>28.06.2026</p>
         </Reveal>
 
+        <Reveal delay={0.28}>
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '16px',
+    marginTop: 'clamp(24px,5vh,40px)',
+    marginBottom: 'clamp(10px,2vh,20px)'
+  }}>
+    {/* Левая линия */}
+    <div style={{
+      flex: 1,
+      height: '1px',
+      background: 'rgba(0,0,0,0.2)',
+      maxWidth: '120px'
+    }} />
+
+    {/* SVG */}
+    <img
+      src="/public/floral.svg"
+      alt="decor"
+      style={{
+        width: '40px',
+        height: '40px',
+        opacity: 0.7
+      }}
+    />
+
+    {/* Правая линия */}
+    <div style={{
+      flex: 1,
+      height: '1px',
+      background: 'rgba(0,0,0,0.2)',
+      maxWidth: '120px'
+    }} />
+  </div>
+</Reveal>
+
         <Reveal delay={0.36}>
           <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
             <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(36px,7vw,52px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
