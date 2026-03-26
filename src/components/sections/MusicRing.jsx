@@ -54,9 +54,9 @@ export function MusicRing({ playing, onClick }) {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: 'rgba(255,255,255,0.88)',
+          background: '#111',
           backdropFilter: 'blur(12px)',
-          border: '1.5px solid rgba(255,255,255,0.95)',
+          border: '1.5px solid #111',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -72,7 +72,7 @@ export function MusicRing({ playing, onClick }) {
               style={{
                 width: '3px',
                 height: '14px',
-                background: '#111',
+                background: 'white',
                 borderRadius: '2px',
                 display: 'block',
               }}
@@ -81,7 +81,7 @@ export function MusicRing({ playing, onClick }) {
               style={{
                 width: '3px',
                 height: '14px',
-                background: '#111',
+                background: 'white',
                 borderRadius: '2px',
                 display: 'block',
               }}
