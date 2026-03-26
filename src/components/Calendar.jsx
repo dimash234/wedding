@@ -123,6 +123,7 @@ export default function Calendar({ weddingDate }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                fontFamily: "'Jost', sans-serif",
               }}>
                 {isWed ? (
                   /* Heart with number inside */
@@ -154,6 +155,7 @@ export default function Calendar({ weddingDate }) {
             fontSize: '10px', letterSpacing: '2.5px',
             color: 'var(--ink)', textTransform: 'lowercase',
             fontWeight: 300, opacity: 0.6,
+            fontFamily: "'Jost', sans-serif",
           }}>
             {t.calendar.legend}
           </span>
