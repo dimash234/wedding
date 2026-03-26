@@ -74,16 +74,18 @@ export function Hero() {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '16px',
+    gap: '20px',
     marginTop: 'clamp(24px,5vh,40px)',
-    marginBottom: 'clamp(10px,2vh,20px)'
+    marginBottom: 'clamp(10px,2vh,20px)',
+    width: '100%'
   }}>
+    
     {/* Левая линия */}
     <div style={{
       flex: 1,
       height: '1px',
-      background: 'rgba(0,0,0,0.2)',
-      maxWidth: '120px'
+      background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.4))',
+      maxWidth: '160px'
     }} />
 
     {/* SVG */}
@@ -91,9 +93,10 @@ export function Hero() {
       src="./floral.svg"
       alt="decor"
       style={{
-        width: '40px',
-        height: '40px',
-        opacity: 0.7
+        width: '64px',
+        height: '64px',
+        opacity: 0.85,
+        display: 'block'
       }}
     />
 
@@ -101,9 +104,10 @@ export function Hero() {
     <div style={{
       flex: 1,
       height: '1px',
-      background: 'rgba(0,0,0,0.2)',
-      maxWidth: '120px'
+      background: 'linear-gradient(to left, transparent, rgba(0,0,0,0.4))',
+      maxWidth: '160px'
     }} />
+
   </div>
 </Reveal>
 
