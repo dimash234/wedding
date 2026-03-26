@@ -88,7 +88,7 @@ export function Hero() {
 
     {/* SVG */}
     <img
-      src="/public/floral.svg"
+      src="./floral.svg"
       alt="decor"
       style={{
         width: '40px',
