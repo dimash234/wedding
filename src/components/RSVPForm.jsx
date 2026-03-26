@@ -23,7 +23,6 @@ export default function RSVPForm() {
         name: form.name,
         attendance: form.attendance,
         guests: form.attendance === 'yes' ? form.guests : 0,
-        message: form.message,
         createdAt: serverTimestamp(),
       });
       setSubmitted(true);
@@ -128,15 +127,6 @@ export default function RSVPForm() {
               </div>
             )}
 
-            <div>
-              <label style={lbl}>{t.rsvp.msgLabel}</label>
-              <textarea placeholder={t.rsvp.msgPh} value={form.message}
-                onChange={(e) => upd('message', e.target.value)} rows={3}
-                style={{ ...inp, resize: 'vertical', minHeight: '72px' }}
-                onFocus={e => e.target.style.borderColor = 'var(--ink)'}
-                onBlur={e => e.target.style.borderColor = 'rgba(0,0,0,0.15)'}
-              />
-            </div>
 
             {error && <p style={{ fontSize: '13px', color: '#c0392b', textAlign: 'center', fontFamily: FONT }}>{error}</p>}
 
