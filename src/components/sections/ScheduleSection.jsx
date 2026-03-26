@@ -55,36 +55,14 @@ export function ScheduleSection() {
 
 function SchCard({ item, align }) {
   return (
-    <div style={{ maxWidth: '280px', width: '100%', textAlign: align }}>
-      <p style={{ 
-        fontFamily: "'Bickham', Georgia, serif", 
-        fontSize: 'clamp(32px, 5vw, 42px)', // Сделали чуть крупнее
-        fontWeight: 400, 
-        color: 'var(--ink)', 
-        lineHeight: 1, 
-        marginBottom: '8px' 
-      }}>
+    <div style={{ maxWidth: '220px', width: '100%', textAlign: align }}>
+      <p style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(26px,5vw,38px)', fontWeight: 400, color: 'var(--ink)', letterSpacing: '2px', lineHeight: 1, marginBottom: '10px' }}>
         {item.time}
       </p>
-      <p style={{ 
-        fontSize: '14px', 
-        fontWeight: 500, 
-        textTransform: 'uppercase', // Добавим стиля заголовку
-        letterSpacing: '1.5px', 
-        color: 'var(--ink)', 
-        marginBottom: '6px', 
-        fontFamily: "'Jost', sans-serif" 
-      }}>
+      <p style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.8px', color: 'var(--ink)', marginBottom: '5px', fontFamily: "'Jost', sans-serif" }}>
         {item.title}
       </p>
-      <p style={{ 
-        fontSize: '13px', 
-        color: 'var(--ink)', 
-        lineHeight: 1.6, 
-        fontWeight: 300, 
-        fontFamily: "'Jost', sans-serif", 
-        opacity: 0.8 
-      }}>
+      <p style={{ fontSize: '12px', color: 'var(--ink)', lineHeight: 1.75, fontWeight: 300, fontFamily: "'Jost', sans-serif", opacity: 0.7 }}>
         {item.desc}
       </p>
     </div>
@@ -93,25 +71,8 @@ function SchCard({ item, align }) {
 
 function SchPhoto({ src }) {
   return (
-    <div style={{ 
-      width: 'clamp(140px, 25vw, 220px)', // Увеличили ширину
-      height: 'clamp(180px, 32vw, 280px)', // Увеличили высоту
-      overflow: 'hidden', 
-      flexShrink: 0,
-      borderRadius: '2px', // Легкое смягчение углов
-      boxShadow: '0 4px 15px rgba(0,0,0,0.05)' // Добавим глубины
-    }}>
-      <img 
-        src={src} 
-        alt="" 
-        style={{ 
-          width: '100%', 
-          height: '100%', 
-          objectFit: 'cover',
-          display: 'block' // Убирает лишние отступы снизу
-        }} 
-        onError={(e) => { e.target.style.display = 'none'; }} // Спрячет битую картинку
-      />
+    <div style={{ width: 'clamp(96px,18vw,175px)', height: 'clamp(120px,22vw,215px)', overflow: 'hidden', background: 'var(--white)', flexShrink: 0 }}>
+      <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'none' }} />
     </div>
   );
 }
