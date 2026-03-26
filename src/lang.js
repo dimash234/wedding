@@ -3,7 +3,7 @@ export const translations = {
     nav: { schedule:'бағдарлама', place:'орын', rsvp:'қатысу' },
     invite: 'Той шақыру',
     greeting: 'Құрметті қонақтар!',
-    subGreeting: 'Сізді біздің бақытты күнімізде бірге болуға шақырамыз',
+    subGreeting: 'Сіздерді ұлымыз Райымбек пен қызымыз Жансаяның шыңырақ көтеру тойына шақырамыз!',
     countdown: { label:'Тойға дейін', days:'күн', hours:'сағат', minutes:'минут', seconds:'секунд', done:'Той болып өтті 🤍' },
     schedule: {
       label: 'бағдарлама', title: 'Той кестесі',
@@ -34,7 +34,7 @@ export const translations = {
     nav: { schedule:'программа', place:'место', rsvp:'участие' },
     invite: 'Свадебное приглашение',
     greeting: 'Дорогие гости!',
-    subGreeting: 'Приглашаем вас разделить с нами этот счастливый день',
+    subGreeting: 'Приглашаем вас на свадебное торжество нашего сына Райымбека и нашей дочери Жансаи!',
     countdown: { label:'До свадьбы', days:'дней', hours:'часов', minutes:'минут', seconds:'секунд', done:'Свадьба состоялась 🤍' },
     schedule: {
       label: 'программа', title: 'Расписание торжества',

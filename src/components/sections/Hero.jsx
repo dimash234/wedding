@@ -76,47 +76,15 @@ export function Hero() {
 
         <Reveal delay={0.36}>
           <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
-            <p style={{ fontFamily: "'Ante', sans-serif", fontSize: 'clamp(18px,3.5vw,26px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
+            <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(18px,3.5vw,26px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
               {t.greeting}
             </p>
-            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'Jost', sans-serif" }}>
+            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'mia', sans-serif" }}>
               {t.subGreeting}
             </p>
           </div>
         </Reveal>
 
-         <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
-            <p style={{ fontFamily: "'mia', sans-serif", fontSize: 'clamp(18px,3.5vw,26px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
-              {t.greeting}
-            </p>
-            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'Jost', sans-serif" }}>
-              {t.subGreeting}
-            </p>
-          </div>
-        </Reveal>
-
-         <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(30px,6vh,51px)', maxWidth: '500px' }}>
-            <p style={{ fontFamily: "'kz', sans-serif", fontSize: 'clamp(18px,3.5vw,26px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
-              {t.greeting}
-            </p>
-            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'Jost', sans-serif" }}>
-              {t.subGreeting}
-            </p>
-          </div>
-        </Reveal>
-
-         <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
-            <p style={{ fontFamily: "'xio', sans-serif", fontSize: 'clamp(18px,3.5vw,26px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
-              {t.greeting}
-            </p>
-            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'Jost', sans-serif" }}>
-              {t.subGreeting}
-            </p>
-          </div>
-        </Reveal>
 
       </div>
     </section>
