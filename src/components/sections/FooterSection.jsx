@@ -47,7 +47,7 @@ export function FooterSection() {
         />
         <p
           style={{
-            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontFamily: "'Bickham', cursive",
             fontSize: 'clamp(65px,14vw,110px)',
             fontWeight: 300,
             letterSpacing: 'clamp(12px,3.5vw,25px)',
@@ -64,7 +64,7 @@ export function FooterSection() {
             letterSpacing: '5px',
             color: 'var(--ink)',
             fontWeight: 300,
-            fontFamily: "'Anastasia Script', Georgia, serif",
+            fontFamily: "'Bickham', cursive",
           }}
         >
           {t.footer}
