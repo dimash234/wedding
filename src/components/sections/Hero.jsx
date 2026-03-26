@@ -80,7 +80,7 @@ export function Hero() {
       src="./floral3.svg"
       alt="decor"
       style={{
-        width: 'auto',     // ← стало в 2 раза шире и больше
+        width: '360px',     // ← стало в 2 раза шире и больше
         height: 'auto',
         display: 'block'
       }}
