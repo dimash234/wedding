@@ -74,16 +74,13 @@ export function Hero() {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '30px',
-    marginBottom: '20px'
   }}>
     
-    {/* SVG */}
     <img
-      src="./floral1.svg"
+      src="./floral3.svg"
       alt="decor"
       style={{
-        width: '180px',     // ← стало в 2 раза шире и больше
+        width: '150px',     // ← стало в 2 раза шире и больше
         height: 'auto',
         display: 'block'
       }}
