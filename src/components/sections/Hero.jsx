@@ -74,35 +74,20 @@ export function Hero() {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '20px',
     marginTop: '30px',
     marginBottom: '20px'
   }}>
     
-    {/* Левая линия */}
-    <div style={{
-      width: '140px',
-      height: '1px',
-      background: '#000'
-    }} />
-
     {/* SVG */}
     <img
-      src="./floral.svg"
+      src="./floral1.svg"
       alt="decor"
       style={{
         width: '90px',
-        height: 'auto'
+        height: 'auto',
+        display: 'block'
       }}
     />
-
-    {/* Правая линия */}
-    <div style={{
-      width: '140px',
-      height: '1px',
-      background: '#000'
-    }} />
-
   </div>
 </Reveal>
 
