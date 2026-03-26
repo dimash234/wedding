@@ -48,7 +48,7 @@ function HeartWithNumber({ number, size = 36 }) {
         style={{
           fontSize: '13px',
           fill: '#E53E3E',
-          fontFamily: "'Anastasia Script', Georgia, serif",
+          fontFamily: "'Jost', sans-serif",
           fontWeight: 400,
         }}
       >
