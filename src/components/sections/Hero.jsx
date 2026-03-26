@@ -44,7 +44,7 @@ export function Hero() {
         {/* Date bottom */}
         <p className="rise-4" style={{
           position: 'absolute', bottom: '10%', left: 0, right: 0, textAlign: 'center',
-          fontSize: '20px', letterSpacing: '6px', textTransform: 'lowercase',
+          fontSize: '10px', letterSpacing: '6px', textTransform: 'lowercase',
           color: 'rgba(255,255,255,0.5)', fontWeight: 300, pointerEvents: 'none',
           fontFamily: "'Jost', sans-serif",
         }}>сенбі · 28.06.2026 · 18:00</p>
@@ -69,15 +69,9 @@ export function Hero() {
         <Reveal delay={0.12}>
           <p style={{
             marginTop: '16px', fontFamily: "'Bickham', Georgia, serif",
-            fontSize: 'clamp(22px,5vw,38px)', fontWeight: 400,
+            fontSize: 'clamp(50px,12vw,80px)', fontWeight: 400,
             letterSpacing: 'clamp(2px,1vw,5px)', color: 'var(--ink)',
           }}>28.06.2026</p>
-        </Reveal>
-
-        <Reveal delay={0.22}>
-          <div style={{ margin: 'clamp(16px,3vh,28px) 0' }}>
-            <KazakhScrollOrnament />
-          </div>
         </Reveal>
 
         <Reveal delay={0.36}>
