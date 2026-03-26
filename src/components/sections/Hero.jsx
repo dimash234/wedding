@@ -90,11 +90,11 @@ export function Hero() {
 </Reveal>
 
         <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
+          <div style={{ marginTop: '0', maxWidth: '500px' }}>
             <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(36px,7vw,52px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
               {t.greeting}
             </p>
-            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'mia', sans-serif" }}>
+            <p style={{ fontSize: '14px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'mia', sans-serif" , marginTop: '12px' }}>
               {t.subGreeting}
             </p>
           </div>
