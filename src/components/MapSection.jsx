@@ -35,7 +35,7 @@ export default function MapSection() {
           <div style={{ overflow: 'hidden', border: '1px solid var(--border)' }}>
             <div style={{ height: '2px', background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.15), transparent)' }} />
             <iframe
-              src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A43.305975%2C%22lon%22%3A77.04876%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22almaty%22%7D%2C%22org%22%3A%2270000001054095105%22%7D"
+              src="https://2gis.kz/almaty/firm/70000001064395301"
               width="100%" height="420"
               style={{ border: 'none', display: 'block' }}
               title="map" allowFullScreen
@@ -46,7 +46,7 @@ export default function MapSection() {
         <Reveal delay={0.25}>
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
             <a
-              href="https://2gis.kz/almaty/firm/70000001054095105/77.04876,43.305975"
+              href="https://2gis.kz/almaty/firm/70000001064395301"
               target="_blank" rel="noopener noreferrer"
               style={{
                 display: 'inline-block', padding: '14px 40px',
