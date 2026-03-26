@@ -63,7 +63,7 @@ export function MusicRing({ playing, onClick }) {
           transition: 'all 0.4s cubic-bezier(.16,1,.3,1)',
           boxShadow: playing
             ? '0 0 0 6px rgba(255,255,255,0.15), 0 4px 20px rgba(0,0,0,0.15)'
-            : '0 2px 20px rgba(0,0,0,0.15)',
+            : '0 2px 20px rgb(236, 233, 233)',
         }}
       >
         {playing ? (
@@ -89,7 +89,7 @@ export function MusicRing({ playing, onClick }) {
           </div>
         ) : (
           <svg viewBox="0 0 16 18" style={{ width: '14px', height: '16px', marginLeft: '3px' }}>
-            <path d="M2,1 L15,9 L2,17 Z" fill="#111111" />
+            <path d="M2,1 L15,9 L2,17 Z" fill="#f7f4f4" />
           </svg>
         )}
       </div>
