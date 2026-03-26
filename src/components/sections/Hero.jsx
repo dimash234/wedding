@@ -54,6 +54,7 @@ export function Hero() {
             fontSize: 'clamp(50px,12vw,80px)',
             fontWeight: 400, letterSpacing: 'clamp(1px,0.5vw,4px)',
             color: 'var(--ink)', lineHeight: 1.2,
+            marginBottom: '6px'          // ← минимальный отступ после имён
           }}>
             Райымбек{' '}
             <span style={{ fontStyle: 'normal', fontSize: '0.65em' }}>{'&'}</span>
@@ -63,33 +64,37 @@ export function Hero() {
 
         <Reveal delay={0.12}>
           <p style={{
-            marginTop: '1px', fontFamily: "'Bickham', Georgia, serif",
+            marginTop: '0',              // ← убрал отступ сверху
+            marginBottom: '8px',         // ← минимальный отступ после даты
+            fontFamily: "'Bickham', Georgia, serif",
             fontSize: 'clamp(50px,12vw,80px)', fontWeight: 400,
             letterSpacing: 'clamp(2px,1vw,5px)', color: 'var(--ink)',
           }}>28.06.2026</p>
         </Reveal>
 
         <Reveal delay={0.28}>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}>
-    
-    <img
-      src="./floral3.svg"
-      alt="decor"
-      style={{
-        width: '360px',     // ← стало в 2 раза шире и больше
-        height: 'auto',
-        display: 'block'
-      }}
-    />
-  </div>
-</Reveal>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '4px',            // ← совсем маленький отступ перед цветком
+            marginBottom: '6px'          // ← маленький отступ после цветка
+          }}>
+            
+            <img
+              src="./floral3.svg"
+              alt="decor"
+              style={{
+                width: '300px',
+                height: 'auto',
+                display: 'block'
+              }}
+            />
+          </div>
+        </Reveal>
 
         <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
+          <div style={{ marginTop: '0', maxWidth: '500px' }}>   {/* ← полностью убрал отступ перед текстом */}
             <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(36px,7vw,52px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
               {t.greeting}
             </p>
@@ -99,8 +104,8 @@ export function Hero() {
           </div>
         </Reveal>
 
+</div>
 
-      </div>
     </section>
   );
 }
