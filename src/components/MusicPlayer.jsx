@@ -133,10 +133,10 @@ export default function MusicPlayer() {
               </div>
               <button onClick={toggle} style={{
                 width:'48px',height:'48px',borderRadius:'50%',
-                background:'linear-gradient(135deg, var(--gold), var(--gold-light))',
+                background:'black',
                 border:'none',cursor:'pointer',
                 display:'flex',alignItems:'center',justifyContent:'center',
-                fontSize:'20px',color:'black',
+                fontSize:'20px',color:'white',
                 boxShadow: playing ? '0 0 0 6px rgba(201,168,76,0.2),0 4px 16px rgba(201,168,76,0.4)' : '0 4px 16px rgba(201,168,76,0.3)',
                 transition:'all 0.3s ease',
                 animation: playing ? 'pulse-gold 2s ease infinite' : 'none'
