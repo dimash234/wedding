@@ -44,7 +44,7 @@ export function DetailsSection() {
               >
                 <p
                   style={{
-                    fontSize: '8px',
+                    fontSize: '12px',
                     letterSpacing: '3px',
                     textTransform: 'lowercase',
                     color: 'var(--ink)',
@@ -85,7 +85,7 @@ export function DetailsSection() {
           >
             <p
               style={{
-                fontSize: '8px',
+                fontSize: '12px',
                 letterSpacing: '3px',
                 textTransform: 'lowercase',
                 color: 'var(--soft)',
