@@ -44,7 +44,7 @@ export function Hero() {
         {/* Date bottom */}
         <p className="rise-4" style={{
           position: 'absolute', bottom: '10%', left: 0, right: 0, textAlign: 'center',
-          fontSize: '10px', letterSpacing: '6px', textTransform: 'lowercase',
+          fontSize: '20px', letterSpacing: '6px', textTransform: 'lowercase',
           color: 'rgba(255,255,255,0.5)', fontWeight: 300, pointerEvents: 'none',
           fontFamily: "'Jost', sans-serif",
         }}>сенбі · 28.06.2026 · 18:00</p>
@@ -92,26 +92,5 @@ export function Hero() {
         </Reveal>
       </div>
     </section>
-  );
-}
-
-function KazakhScrollOrnament() {
-  return (
-    <svg viewBox="0 0 280 48" style={{ width: '100%', maxWidth: '280px', height: 'auto', display: 'block', margin: '0 auto', opacity: 0.65 }}>
-      <path d="M140,8 C143,14 143,20 140,24 C137,20 137,14 140,8Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M140,40 C143,34 143,28 140,24 C137,28 137,34 140,40Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M128,24 C134,21 140,21 144,24 C140,27 134,27 128,24Z" fill="var(--ink)" opacity="0.7"/>
-      <path d="M152,24 C146,21 140,21 136,24 C140,27 146,27 152,24Z" fill="var(--ink)" opacity="0.7"/>
-      <circle cx="140" cy="24" r="4.5" fill="none" stroke="var(--ink)" strokeWidth="1"/>
-      <circle cx="140" cy="24" r="2" fill="var(--ink)" opacity="0.8"/>
-      <line x1="0" y1="24" x2="108" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.4"/>
-      <line x1="172" y1="24" x2="280" y2="24" stroke="var(--ink)" strokeWidth="0.7" opacity="0.4"/>
-      <path d="M108,24 Q100,14 92,18 Q88,22 92,26 Q96,30 100,26 Q102,22 98,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.6"/>
-      <path d="M92,24 Q80,10 68,16 Q62,20 66,27 Q70,33 78,29 Q84,25 80,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
-      <path d="M68,24 Q54,8 40,15 Q34,20 38,28 Q44,35 54,30 Q62,25 56,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.4"/>
-      <path d="M172,24 Q180,14 188,18 Q192,22 188,26 Q184,30 180,26 Q178,22 182,20" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.6"/>
-      <path d="M188,24 Q200,10 212,16 Q218,20 214,27 Q210,33 202,29 Q196,25 200,19" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.5"/>
-      <path d="M212,24 Q226,8 240,15 Q246,20 242,28 Q236,35 226,30 Q218,25 224,17" fill="none" stroke="var(--ink)" strokeWidth="1" opacity="0.4"/>
-    </svg>
   );
 }

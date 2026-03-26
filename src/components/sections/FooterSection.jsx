@@ -58,17 +58,22 @@ export function FooterSection() {
         >
           Р ✦ Ж
         </p>
-        <p
-          style={{
-            fontSize: '18px',
-            letterSpacing: '5px',
-            color: 'var(--ink)',
-            fontWeight: 300,
-            fontFamily: "'Bickham', cursive",
-          }}
-        >
-          {t.footer}
-        </p>
+        <p style={{
+          fontFamily: "'Bickham', cursive",
+          fontSize: 'clamp(65px,14vw,110px)',
+          fontWeight: 300,
+          color: 'var(--ink)',
+          lineHeight: 1,
+          marginBottom: '16px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '20px', // 👈 расстояние вместо letterSpacing
+      }}>
+        <span>Р</span>
+        <span>✦</span>
+        <span>Ж</span>
+</p>
         <div
           style={{
             marginTop: '32px',
