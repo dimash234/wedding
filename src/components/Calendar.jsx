@@ -133,6 +133,7 @@ export default function Calendar({ weddingDate }) {
                     fontWeight: 300,
                     color: day ? 'var(--ink)' : 'transparent',
                     lineHeight: 1.2,
+                    fontFamily: "'Jost', sans-serif",
                   }}>
                     {day || ''}
                   </span>
