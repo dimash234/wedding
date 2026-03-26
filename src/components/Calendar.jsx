@@ -92,7 +92,7 @@ export default function Calendar({ weddingDate }) {
         <p style={{
           textAlign: 'center',
           fontFamily: "'Bickham', cursive",
-          fontSize: 'clamp(18px,4vw,26px)',
+          fontSize: 'clamp(28px,6vw,48px)',
           fontWeight: 400, letterSpacing: '3px',
           color: 'var(--ink)',
           marginBottom: '24px',

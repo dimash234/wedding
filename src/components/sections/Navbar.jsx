@@ -28,8 +28,8 @@ export function Navbar({ scrolled }) {
       {/* Logo */}
       <span
         style={{
-          fontFamily: "'Anastasia Script', Georgia, serif",
-          fontSize: '28px',
+          fontFamily: "'Bickham', cursive",
+          fontSize: '25px',
           letterSpacing: '5px',
           color: logoColor,
           fontWeight: 300,
