@@ -59,7 +59,7 @@ export function FooterSection() {
     gap: '20px',
   }}
 >
-  <span>Р ㅤ</span>
+  <span>Р ㅤㅤㅤ</span>
   <span style={{ display: 'inline-block', transform: 'translateY(5%)' }}>✦</span>
   <span>Ж</span>
 </p>
