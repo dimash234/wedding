@@ -68,14 +68,14 @@ export function Hero() {
 
         <Reveal delay={0.12}>
           <p style={{
-            marginTop: '16px', fontFamily: "'Bickham', Georgia, serif",
+            marginTop: '5px', fontFamily: "'Bickham', Georgia, serif",
             fontSize: 'clamp(50px,12vw,80px)', fontWeight: 400,
             letterSpacing: 'clamp(2px,1vw,5px)', color: 'var(--ink)',
           }}>28.06.2026</p>
         </Reveal>
 
         <Reveal delay={0.36}>
-          <div style={{ marginTop: 'clamp(20px,4vh,36px)', maxWidth: '500px' }}>
+          <div style={{ marginTop: 'clamp(40px,8vh,72px)', maxWidth: '500px' }}>
             <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(18px,3.5vw,26px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
               {t.greeting}
             </p>
