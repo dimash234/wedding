@@ -91,7 +91,7 @@ export default function Calendar({ weddingDate }) {
         {/* Month title */}
         <p style={{
           textAlign: 'center',
-          fontFamily: "'Anastasia Script', Georgia, serif",
+          fontFamily: "'Jost', sans-serif",
           fontSize: 'clamp(18px,4vw,26px)',
           fontWeight: 400, letterSpacing: '3px',
           color: 'var(--ink)',
