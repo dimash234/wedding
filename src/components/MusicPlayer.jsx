@@ -77,7 +77,7 @@ export default function MusicPlayer() {
   return (
     <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 300, fontFamily: "'Raleway', sans-serif" }}>
       <div style={{
-        background: 'rgba(253,248,242,0.97)', backdropFilter: 'blur(20px)',
+        background: 'black', backdropFilter: 'blur(20px)',
         border: '1px solid rgba(201,168,76,0.4)', borderRadius: '16px',
         boxShadow: '0 8px 40px rgba(201,168,76,0.2), 0 2px 8px rgba(0,0,0,0.08)',
         overflow: 'hidden',
@@ -136,7 +136,7 @@ export default function MusicPlayer() {
                 background:'linear-gradient(135deg, var(--gold), var(--gold-light))',
                 border:'none',cursor:'pointer',
                 display:'flex',alignItems:'center',justifyContent:'center',
-                fontSize:'20px',color:'white',
+                fontSize:'20px',color:'black',
                 boxShadow: playing ? '0 0 0 6px rgba(201,168,76,0.2),0 4px 16px rgba(201,168,76,0.4)' : '0 4px 16px rgba(201,168,76,0.3)',
                 transition:'all 0.3s ease',
                 animation: playing ? 'pulse-gold 2s ease infinite' : 'none'
