@@ -54,10 +54,10 @@ export default function App() {
       <div style={{ background: 'var(--white)' }}>
         <Navbar scrolled={scrolled} />
         <Hero />
-        <ScheduleSection />
         <CalendarSection />
-        <DetailsSection />
         <CountdownSection />
+        <ScheduleSection />
+        <DetailsSection />
         <MapSection />
         <RSVPForm />
         <FooterSection />
