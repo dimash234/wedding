@@ -91,12 +91,12 @@ export default function Calendar({ weddingDate }) {
         {/* Month title */}
         <p style={{
           textAlign: 'center',
-          fontFamily: "'Jost', sans-serif",
+          fontFamily: "'Anastasia Script', Georgia, serif",
           fontSize: 'clamp(18px,4vw,26px)',
           fontWeight: 400, letterSpacing: '3px',
           color: 'var(--ink)',
           marginBottom: '24px',
-          textTransform: 'lowercase',
+          textTransform: 'capitalize',
         }}>
           {t.calendar.months[month]} {year}
         </p>
@@ -108,6 +108,7 @@ export default function Calendar({ weddingDate }) {
               textAlign: 'center', padding: '4px 0',
               fontSize: '9px', letterSpacing: '1px',
               textTransform: 'lowercase', color: 'var(--ink)', opacity: 0.35,
+              fontFamily: "'Jost', sans-serif",
             }}>{d}</div>
           ))}
         </div>
@@ -123,7 +124,6 @@ export default function Calendar({ weddingDate }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontFamily: "'Jost', sans-serif",
               }}>
                 {isWed ? (
                   /* Heart with number inside */
