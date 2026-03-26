@@ -37,14 +37,6 @@ export function FooterSection() {
       }}
     >
       <Reveal delay={0}>
-        <div
-          style={{
-            width: '1px',
-            height: '64px',
-            background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.15))',
-            margin: '0 auto 32px',
-          }}
-        />
         <p
   style={{
     fontFamily: "'Bickham', cursive",
@@ -59,7 +51,7 @@ export function FooterSection() {
     gap: '20px',
   }}
 >
-  <span>Р ㅤㅤㅤ</span>
+  <span>Р</span>
   <span style={{ display: 'inline-block', transform: 'translateY(5%)' }}>✦</span>
   <span>Ж</span>
 </p>
