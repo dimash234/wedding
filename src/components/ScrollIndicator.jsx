@@ -48,8 +48,8 @@ export default function ScrollIndicator() {
       }}
     >
       <span style={{
-        fontFamily: "'Jost', sans-serif",
-        fontSize: '12px',
+        fontFamily: "'xio', sans-serif",
+        fontSize: '18px',
         letterSpacing: '2px',
         textTransform: 'uppercase',
         color: 'var(--ink)',

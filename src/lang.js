@@ -29,7 +29,7 @@ export const translations = {
     },
     footer: '28 · 06 · 2026',
     musicLabel: 'той музыкасы',
-    scrollDown: 'Төмен сырғытыңыз',
+    scrollDown: 'Төмен жылжыңыз',
   },
   ru: {
     nav: { schedule:'Программа', place:'место', rsvp:'участие' },
