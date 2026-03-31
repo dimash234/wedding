@@ -10,6 +10,7 @@ import { CalendarSection } from './components/sections/CalendarSection';
 import { DetailsSection } from './components/sections/DetailsSection';
 import { CountdownSection } from './components/sections/CountdownSection';
 import { FooterSection } from './components/sections/FooterSection';
+import ScrollIndicator from './components/ScrollIndicator';
 
 /* ─── Audio Instance ─────────────────────────────────────────────── */
 const audio = new Audio('./music/mahabbat.mp3');
