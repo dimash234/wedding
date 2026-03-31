@@ -56,13 +56,13 @@ export function ScheduleSection() {
 function SchCard({ item, align }) {
   return (
     <div style={{ maxWidth: '220px', width: '100%', textAlign: align }}>
-      <p style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(26px,5vw,38px)', fontWeight: 400, color: 'var(--ink)', letterSpacing: '2px', lineHeight: 1, marginBottom: '10px' }}>
+      <p style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(39px,8vw,57px)', fontWeight: 400, color: 'var(--ink)', letterSpacing: '2px', lineHeight: 1, marginBottom: '10px' }}>
         {item.time}
       </p>
-      <p style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.8px', color: 'var(--ink)', marginBottom: '5px', fontFamily: "'Jost', sans-serif" }}>
+      <p style={{ fontSize: '15px', fontWeight: 500, letterSpacing: '0.8px', color: 'var(--ink)', marginBottom: '5px', fontFamily: "'Jost', sans-serif" }}>
         {item.title}
       </p>
-      <p style={{ fontSize: '12px', color: 'var(--ink)', lineHeight: 1.75, fontWeight: 300, fontFamily: "'Jost', sans-serif", opacity: 0.7 }}>
+      <p style={{ fontSize: '15px', color: 'var(--ink)', lineHeight: 1.75, fontWeight: 300, fontFamily: "'Jost', sans-serif", opacity: 0.7 }}>
         {item.desc}
       </p>
     </div>
