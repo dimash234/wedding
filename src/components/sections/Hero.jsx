@@ -23,15 +23,15 @@ export function Hero() {
             fontFamily: "'Bickham', Georgia, serif",
             fontSize: 'clamp(120px,25vw,220px)',
             fontWeight: 400, letterSpacing: 'clamp(10px,3.5vw,26px)',
-            color: 'black', lineHeight: 1, textShadow: '0 3px 40px rgba(0,0,0,0.3)',
+            color: 'white', lineHeight: 1, textShadow: '0 3px 40px rgba(0,0,0,0.3)',
           }}>
             Р{' '}
-            <span style={{ color: 'black', fontSize: '0.42em', letterSpacing: 0, verticalAlign: 'middle' }}>{'&'}</span>
+            <span style={{ color: 'white', fontSize: '0.42em', letterSpacing: 0, verticalAlign: 'middle' }}>{'&'}</span>
             {' '}Ж
           </h1>
           <p className="rise-2" style={{
             marginTop: '14px', fontSize: '10px', letterSpacing: '7px',
-            textTransform: 'lowercase', color: 'rgb(255, 255, 255)',
+            textTransform: 'lowercase', color: 'rgba(0,0,0,0.55)',
             fontWeight: 300, fontFamily: "'Jost', sans-serif",
           }}>{t.invite}</p>
         </div>
@@ -42,7 +42,6 @@ export function Hero() {
         </div>
 
         {/* Date bottom */}
-        
         
       </div>
 

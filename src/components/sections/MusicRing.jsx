@@ -72,7 +72,7 @@ export function MusicRing({ playing, onClick }) {
               style={{
                 width: '3px',
                 height: '14px',
-                background: 'white',
+                background: 'black',
                 borderRadius: '2px',
                 display: 'block',
               }}
@@ -81,7 +81,7 @@ export function MusicRing({ playing, onClick }) {
               style={{
                 width: '3px',
                 height: '14px',
-                background: 'white',
+                background: 'black',
                 borderRadius: '2px',
                 display: 'block',
               }}
