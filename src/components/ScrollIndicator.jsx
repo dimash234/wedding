@@ -61,7 +61,8 @@ export default function ScrollIndicator() {
           color: 'var(--ink)',
           opacity: 0.7,
           textAlign: 'center',
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
+          fontWeight: 'bold'
         }}>
           {t?.scrollDown || 'Свайпните вниз'}
         </span>
