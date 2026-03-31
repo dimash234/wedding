@@ -31,7 +31,7 @@ export function Hero() {
           </h1>
           <p className="rise-2" style={{
             marginTop: '14px', fontSize: '10px', letterSpacing: '7px',
-            textTransform: 'lowercase', color: 'rgba(0,0,0,0.55)',
+            textTransform: 'lowercase', color: 'rgb(255, 255, 255)',
             fontWeight: 300, fontFamily: "'Jost', sans-serif",
           }}>{t.invite}</p>
         </div>
@@ -42,7 +42,6 @@ export function Hero() {
         </div>
 
         {/* Date bottom */}
-
         
         
       </div>

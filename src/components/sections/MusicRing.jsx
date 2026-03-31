@@ -54,9 +54,9 @@ export function MusicRing({ playing, onClick }) {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: '#111',
+          background: '#ffffff',
           backdropFilter: 'blur(12px)',
-          border: '1.5px solid #111',
+          border: '1.5px solid #ffffff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -89,7 +89,7 @@ export function MusicRing({ playing, onClick }) {
           </div>
         ) : (
           <svg viewBox="0 0 16 18" style={{ width: '14px', height: '16px', marginLeft: '3px' }}>
-            <path d="M2,1 L15,9 L2,17 Z" fill="#f7f4f4" />
+            <path d="M2,1 L15,9 L2,17 Z" fill="#000000" />
           </svg>
         )}
       </div>
