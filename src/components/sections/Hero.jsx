@@ -94,7 +94,7 @@ export function Hero() {
             <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(44px,9vw,65px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
               {t.greeting}
             </p>
-            <p style={{ fontSize: '18px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'mia', sans-serif" , marginTop: '12px' }}>
+            <p style={{ fontSize: '16px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'mia', sans-serif" , marginTop: '0' }}>
               {t.subGreeting}
             </p>
           </div>
