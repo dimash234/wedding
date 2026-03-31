@@ -31,7 +31,7 @@ export default function MapSection() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.15}>
+        {/* <Reveal delay={0.15}>
           <div style={{ overflow: 'hidden', border: '1px solid var(--border)' }}>
             <div style={{ height: '2px', background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.15), transparent)' }} />
             <iframe
@@ -41,7 +41,7 @@ export default function MapSection() {
               title="map" allowFullScreen
             />
           </div>
-        </Reveal>
+        </Reveal> */}
 
         <Reveal delay={0.25}>
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>

@@ -48,7 +48,7 @@ export default function ScrollIndicator() {
       }}
     >
       <span style={{
-        fontFamily: "'xio', sans-serif",
+        fontFamily: "'mia', sans-serif",
         fontSize: '18px',
         letterSpacing: '2px',
         textTransform: 'uppercase',
