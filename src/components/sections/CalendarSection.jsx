@@ -9,7 +9,7 @@ export function CalendarSection() {
   return (
     <section
       style={{
-        padding: 'clamp(56px,9vh,80px) 20px',
+        padding: 'clamp(40px, 8vh, 64px) 16px',
         background: 'var(--white)',
         position: 'relative',
       }}

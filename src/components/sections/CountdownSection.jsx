@@ -22,7 +22,7 @@ export function CountdownSection() {
     <section
       id="countdown"
       style={{
-        padding: 'clamp(56px,10vh,88px) 20px',
+        padding: 'clamp(40px, 8vh, 64px) 16px',
         background: 'var(--off)',
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',

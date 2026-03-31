@@ -7,7 +7,7 @@ export default function MapSection() {
   const FONT = "'Jost', sans-serif";
 
   return (
-    <section id="map" style={{ padding: 'clamp(56px,9vh,88px) 20px', background: 'var(--off)', borderTop: '1px solid var(--border)' }}>
+    <section id="map" style={{ padding: 'clamp(40px, 8vh, 64px) 16px', background: 'var(--off)', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: '860px', margin: '0 auto' }}>
 
         <Reveal delay={0}>
