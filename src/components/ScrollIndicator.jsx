@@ -54,7 +54,7 @@ export default function ScrollIndicator() {
         }}
       >
         <span style={{
-          fontFamily: "'mia', sans-serif",
+          fontFamily: "'Bickhamb', sans-serif",
           fontSize: '12px',
           letterSpacing: '2px',
           textTransform: 'uppercase',
