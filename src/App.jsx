@@ -61,6 +61,7 @@ export default function App() {
         <MapSection />
         <RSVPForm />
         <FooterSection />
+        <ScrollIndicator />
       </div>
     </LangContext.Provider>
   );

@@ -43,10 +43,7 @@ export function Hero() {
 
         {/* Date bottom */}
 
-        <div className="swipe-hint">
-          <span className="swipe-text">свайпните вниз</span>
-          <div className="swipe-arrow">↓</div>
-        </div>
+        
         
       </div>
 
