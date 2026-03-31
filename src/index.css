@@ -14,7 +14,13 @@
   font-style: normal;
   font-display: swap;
 }
-
+@font-face {
+  font-family: 'kz';
+  src: url('./fonts/KZPFChampionScriptPro-Regular.ttf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: 'Ante';
   src: url('./fonts/Ante.ttf') format('opentype');

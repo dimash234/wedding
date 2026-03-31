@@ -54,7 +54,21 @@ export default function ScrollIndicator() {
         }}
       >
         <span style={{
-          fontFamily: "'Bickhamb', sans-serif",
+          fontFamily: "'Ante', sans-serif",
+          fontSize: '12px',
+          letterSpacing: '2px',
+          textTransform: 'uppercase',
+          color: 'var(--ink)',
+          opacity: 0.7,
+          textAlign: 'center',
+          whiteSpace: 'nowrap',
+          fontWeight: 'bold'
+        }}>
+          {t?.scrollDown || 'Свайпните вниз'}
+        </span>
+
+        <span style={{
+          fontFamily: "'kz', sans-serif",
           fontSize: '12px',
           letterSpacing: '2px',
           textTransform: 'uppercase',
