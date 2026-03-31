@@ -4,53 +4,41 @@
   font-family: 'Bickham';
   src: url('./fonts/Bickham_Script_Pro_3_Regular.otf') format('opentype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: 'Bickhamb';
   src: url('./fonts/Bickham_Script_Pro_3_Bold.otf') format('opentype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
-@font-face {
-  font-family: 'kz';
-  src: url('./fonts/KZPFChampionScriptPro-Regular.ttf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+
 @font-face {
   font-family: 'Ante';
   src: url('./fonts/Ante.ttf') format('opentype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'xio';
   src: url('./fonts/Xiomara.ttf') format('opentype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'mia';
   src: url('./fonts/miama.otf') format('opentype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'kz';
   src: url('./fonts/KZ_Balmoral.ttf') format('opentype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 
@@ -58,8 +46,7 @@
   font-family: 'Bickham';
   src: url('./fonts/Bickham_Script_Pro_3_Semibold.otf') format('opentype');
   font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

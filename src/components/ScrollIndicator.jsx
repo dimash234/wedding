@@ -55,7 +55,7 @@ export default function ScrollIndicator() {
       >
         <span style={{
           fontFamily: "'Ante', sans-serif",
-          fontSize: '12px',
+          fontSize: '14px',
           letterSpacing: '2px',
           textTransform: 'uppercase',
           color: 'var(--ink)',
@@ -67,20 +67,7 @@ export default function ScrollIndicator() {
           {t?.scrollDown || 'Свайпните вниз'}
         </span>
 
-        <span style={{
-          fontFamily: "'kz', sans-serif",
-          fontSize: '12px',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          color: 'var(--ink)',
-          opacity: 0.7,
-          textAlign: 'center',
-          whiteSpace: 'nowrap',
-          fontWeight: 'bold'
-        }}>
-          {t?.scrollDown || 'Свайпните вниз'}
-        </span>
-        
+
         <svg 
           width="24" 
           height="24" 
