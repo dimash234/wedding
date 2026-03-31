@@ -8,7 +8,7 @@ export function ScheduleSection() {
   const photos = ['./nev.png', './arch.png', './cake.png'];
 
   return (
-    <section id="schedule" style={{ padding: 'clamp(40px, 8vh, 64px) 16px', background: 'var(--white)' }}>
+    <section id="schedule" style={{ padding: 'clamp(32px, 6vh, 48px) 12px', background: 'var(--white)' }}>
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
         <div style={{ textAlign: 'center', marginBottom: 'clamp(44px,8vh,72px)' }}>

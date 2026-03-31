@@ -7,7 +7,7 @@ export default function MapSection() {
   const FONT = "'Jost', sans-serif";
 
   return (
-    <section id="map" style={{ padding: 'clamp(40px, 8vh, 64px) 16px', background: 'var(--off)', borderTop: '1px solid var(--border)' }}>
+    <section id="map" style={{ padding: 'clamp(32px, 6vh, 48px) 12px', background: 'var(--off)', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: '860px', margin: '0 auto' }}>
 
         <Reveal delay={0}>
@@ -43,23 +43,28 @@ export default function MapSection() {
           </div>
         </Reveal> */}
 
-        <Reveal delay={0.25}>
-          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
-            <a
-              href="https://2gis.kz/almaty/firm/70000001064395301"
-              target="_blank" rel="noopener noreferrer"
-              style={{
-                display: 'inline-block', padding: '14px 40px',
-                background: 'var(--ink)', color: 'white', textDecoration: 'none',
-                fontSize: '11px', letterSpacing: '3px', textTransform: 'lowercase',
-                fontFamily: FONT, fontWeight: 300, transition: 'opacity 0.3s',
-              }}
-              onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
-              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-            >{t.map.btn2gis}</a>
-          </div>
-        </Reveal>
+       <Reveal delay={0.25}>
+  <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
+    <a
+      href="https://2gis.kz/almaty/firm/70000001064395301"
+      target="_blank" rel="noopener noreferrer"
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '10px',
+        padding: '14px 40px',
+        background: 'var(--ink)', color: 'white', textDecoration: 'none',
+        fontSize: '11px', letterSpacing: '3px', textTransform: 'lowercase',
+        fontFamily: FONT, fontWeight: 300, transition: 'opacity 0.3s',
+      }}
+      onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+      onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+    >
+      {/* Иконка 2GIS */}
+      <img src="./2gis.svg" alt="2GIS" width={18} height={18} />
 
+      {t.map.btn2gis}
+    </a>
+  </div>
+</Reveal>
       </div>
     </section>
   );

@@ -30,7 +30,7 @@ export function FooterSection() {
   return (
     <footer
       style={{
-        padding: 'clamp(56px,10vh,88px) 20px',
+        padding: 'clamp(32px, 6vh, 48px) 12px',
         background: 'var(--white)',
         textAlign: 'center',
         borderTop: '1px solid var(--border)',
