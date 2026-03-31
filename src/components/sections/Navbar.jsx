@@ -41,7 +41,7 @@ export function Navbar({ scrolled }) {
 
       {/* Links */}
       <div style={{ display: 'flex', gap: 'clamp(16px,3vw,32px)', alignItems: 'center' }}>
-        {[['#schedule', t.nav.schedule], ['#map', t.nav.place], ['#rsvp', t.nav.rsvp]].map(([h, l]) => (
+        {/* {[['#schedule', t.nav.schedule], ['#map', t.nav.place], ['#rsvp', t.nav.rsvp]].map(([h, l]) => (
           <a
             key={h}
             href={h}
@@ -59,7 +59,7 @@ export function Navbar({ scrolled }) {
           >
             {l}
           </a>
-        ))}
+        ))} */}
 
         {/* Lang */}
         <div style={{ display: 'flex', gap: '0', marginLeft: '4px' }}>

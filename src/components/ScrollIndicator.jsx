@@ -49,7 +49,7 @@ export default function ScrollIndicator() {
     >
       <span style={{
         fontFamily: "'mia', sans-serif",
-        fontSize: '18px',
+        fontSize: '12px',
         letterSpacing: '2px',
         textTransform: 'uppercase',
         color: 'var(--ink)',
