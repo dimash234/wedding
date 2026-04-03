@@ -27,7 +27,7 @@ export default function MapSection() {
               gap: '14px',
               fontSize: 'clamp(48px,9vw,72px)',
               letterSpacing: '2px',
-              color: 'var(--ink)',
+              color: 'black',
               opacity: 0.7,
               marginBottom: '12px',
               fontFamily: "'Bickham', Georgia, serif",
@@ -41,7 +41,7 @@ export default function MapSection() {
               fontFamily: "'Bickham', Georgia, serif",
               fontSize: 'clamp(42px,8vw,64px)',
               fontWeight: 300,
-              color: 'var(--ink)',
+              color: 'black',
               letterSpacing: '2px',
               marginBottom: '10px',
             }}>
@@ -52,7 +52,7 @@ export default function MapSection() {
             {t.host.sub && (
               <p style={{
                 fontFamily: "'Bickham', Georgia, serif",
-                fontSize: 'clamp(27px,6vw,33px)',
+                fontSize: 'clamp(35px,6vw,52px)',
                 color: 'var(--ink)',
                 opacity: 0.7,
                 marginTop: '8px',

@@ -26,6 +26,19 @@ export default function MusicPlayer() {
       if (audio.duration) setProgress(audio.currentTime / audio.duration * 100)
     })
 
+    useEffect(() => {
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  if (minimized) {
+    audio.pause();
+    setPlaying(false);
+  } else {
+    audio.play().catch(() => {});
+    setPlaying(true);
+  }
+}, [minimized]);
+
     const tryAutoPlay = () => {
       if (!hasAutoPlayed.current && audioRef.current) {
         audioRef.current.play().then(() => { setPlaying(true); hasAutoPlayed.current = true }).catch(() => {})
