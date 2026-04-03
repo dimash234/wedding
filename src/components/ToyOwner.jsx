@@ -129,9 +129,9 @@ export default function OwnerSection() {
                 }} />
                 <p style={{
                   fontFamily: "'mia', Georgia, serif",
-                  fontSize: '16px',
+                  fontSize: '19px',
                   color: 'var(--ink)',
-                  opacity: 0.7,
+                  opacity: 1.0,
                 }}>
                   {t.host.sub}
                 </p>
