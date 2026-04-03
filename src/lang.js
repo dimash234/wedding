@@ -52,7 +52,7 @@ export const translations = {
     },
     details: { label:'детали', date:'дата', time:'время', place:'адрес', dv:'28 июня 2026', tv:'17:00', pv:'"Ай-Коркем", Алматы' },
     calendar: { label:'календарь', months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], days:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'], legend:'день свадьбы' },
-    map:   { label:'адрес', title:'место проведения', sub:'г. Алматы', btn2gis:'2GIS', btnGoogle:'Google Maps' },
+    map:   { label:'адрес', title:'Место проведения', sub:'г. Алматы', btn2gis:'2GIS', btnGoogle:'Google Maps' },
     rsvp:  {
       label:'ответ', title:'Придёте?', sub:'подтвердите своё участие',
       nameLabel:'ваше имя', namePh:'Ваше имя...',
