@@ -50,7 +50,7 @@ export function DetailsSection() {
                     color: 'var(--ink)',
                     marginBottom: '9px',
                     opacity: 0.45,
-                    fontFamily: "'Jost', sans-serif",
+                    fontFamily: "'Ante', sans-serif",
                     fontWeight: 300,
                   }}
                 >
@@ -58,7 +58,7 @@ export function DetailsSection() {
                 </p>
                 <p
                   style={{
-                    fontFamily: "'Jost', sans-serif",
+                    fontFamily: "'Ante', sans-serif",
                     fontSize: 'clamp(16px,3.5vw,22px)',
                     color: 'var(--ink)',
                     letterSpacing: '1.5px',
@@ -98,7 +98,7 @@ export function DetailsSection() {
             </p>
             <p
               style={{
-                fontFamily: "'Jost', sans-serif",
+                fontFamily: "'Ante', sans-serif",
                 fontSize: 'clamp(16px,3.5vw,22px)',
                 color: 'var(--ink)',
                 letterSpacing: '1px',
