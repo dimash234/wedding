@@ -89,14 +89,14 @@ export function Hero() {
   </div>
 </Reveal>
 
-      <Reveal delay={0.36}>
+       <Reveal delay={0.36}>
   <div style={{ 
     marginTop: '0', 
     maxWidth: '500px',
     position: 'relative',
     padding: '20px 0',
   }}>
-    {/* Все 4 угловые рамки */}
+    {/* Decorative frame corners */}
     <div style={{
       position: 'absolute',
       top: '0',
@@ -105,27 +105,6 @@ export function Hero() {
       height: '30px',
       borderLeft: '1px solid var(--border)',
       borderTop: '1px solid var(--border)',
-      opacity: 0.5,
-      transition: 'all 0.4s ease',
-    }} />
-    <div style={{
-      position: 'absolute',
-      top: '0',
-      right: '-10px',
-      width: '30px',
-      height: '30px',
-      borderRight: '1px solid var(--border)',
-      borderTop: '1px solid var(--border)',
-      opacity: 0.5,
-    }} />
-    <div style={{
-      position: 'absolute',
-      bottom: '0',
-      left: '-10px',
-      width: '30px',
-      height: '30px',
-      borderLeft: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)',
       opacity: 0.5,
     }} />
     <div style={{
@@ -139,7 +118,7 @@ export function Hero() {
       opacity: 0.5,
     }} />
     
-    {/* Паттерн из точек */}
+    {/* Ornamental dots pattern */}
     <div style={{
       position: 'absolute',
       top: '10px',
@@ -151,41 +130,7 @@ export function Hero() {
       opacity: 0.3,
     }} />
 
-    {/* Плавающие частицы */}
-    {[...Array(3)].map((_, i) => (
-      <div
-        key={i}
-        style={{
-          position: 'absolute',
-          width: '3px',
-          height: '3px',
-          background: 'var(--ink)',
-          borderRadius: '50%',
-          opacity: 0.15,
-          right: `${25 + i * 12}px`,
-          top: `${60 + i * 25}px`,
-        }}
-      />
-    ))}
-
-    {/* Вертикальный текст (боковой) */}
-    <div style={{
-      position: 'absolute',
-      right: '-35px',
-      top: '50%',
-      transform: 'translateY(-50%) rotate(90deg)',
-      fontSize: '9px',
-      letterSpacing: '3px',
-      color: 'var(--border)',
-      textTransform: 'uppercase',
-      opacity: 0.5,
-      fontFamily: 'monospace',
-      whiteSpace: 'nowrap',
-    }}>
-      SCROLL • EXPLORE
-    </div>
-
-    {/* Приветствие с подчеркиванием */}
+    {/* Greeting with elegant underline */}
     <div style={{ position: 'relative', display: 'inline-block' }}>
       <p style={{ 
         fontFamily: "'Bickham', sans-serif", 
@@ -197,8 +142,6 @@ export function Hero() {
       }}>
         {t.greeting}
       </p>
-      
-      {/* Подчеркивание с градиентом */}
       <div style={{
         position: 'absolute',
         bottom: '0',
@@ -208,8 +151,6 @@ export function Hero() {
         background: 'linear-gradient(90deg, var(--ink), var(--border), transparent)',
         opacity: 0.4,
       }} />
-      
-      {/* Декоративная точка под текстом */}
       <div style={{
         position: 'absolute',
         bottom: '-4px',
@@ -221,36 +162,14 @@ export function Hero() {
         borderRadius: '50%',
         background: 'var(--off)',
       }} />
-
-      {/* SVG завиток справа */}
-      <svg 
-        width="50" 
-        height="20" 
-        viewBox="0 0 50 20" 
-        style={{
-          position: 'absolute',
-          right: '-60px',
-          top: '40%',
-          transform: 'translateY(-50%)',
-          opacity: 0.3,
-        }}
-      >
-        <path
-          d="M0,10 Q12.5,0 25,10 T50,10"
-          fill="none"
-          stroke="var(--border)"
-          strokeWidth="1"
-          strokeLinecap="round"
-        />
-      </svg>
     </div>
     
-    {/* Декоративный разделитель с ромбом */}
+    {/* Decorative flourish */}
     <div style={{
       display: 'flex',
       alignItems: 'center',
-      gap: '16px',
-      margin: '24px 0',
+      gap: '12px',
+      margin: '20px 0',
     }}>
       <div style={{
         flex: 1,
@@ -259,23 +178,12 @@ export function Hero() {
         opacity: 0.4,
       }} />
       <div style={{
-        width: '10px',
-        height: '10px',
+        width: '8px',
+        height: '8px',
         transform: 'rotate(45deg)',
         border: '1px solid var(--border)',
         opacity: 0.5,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <div style={{
-          width: '3px',
-          height: '3px',
-          background: 'var(--ink)',
-          borderRadius: '50%',
-          opacity: 0.5,
-        }} />
-      </div>
+      }} />
       <div style={{
         flex: 1,
         height: '1px',
@@ -284,12 +192,11 @@ export function Hero() {
       }} />
     </div>
     
-    {/* Подзаголовок с акцентом слева */}
+    {/* SubGreeting with subtle left accent */}
     <div style={{
       position: 'relative',
       paddingLeft: '24px',
     }}>
-      {/* Вертикальная линия */}
       <div style={{
         position: 'absolute',
         left: '0',
@@ -300,8 +207,6 @@ export function Hero() {
         opacity: 0.25,
         borderRadius: '2px',
       }} />
-      
-      {/* Точка на линии */}
       <div style={{
         position: 'absolute',
         left: '6px',
@@ -313,7 +218,6 @@ export function Hero() {
         background: 'var(--border)',
         opacity: 0.5,
       }} />
-      
       <p style={{ 
         fontSize: '18px', 
         letterSpacing: '0.8px', 
@@ -327,22 +231,9 @@ export function Hero() {
         {t.subGreeting}
       </p>
     </div>
-
-    {/* Нумерация внизу */}
-    <div style={{
-      position: 'absolute',
-      bottom: '-25px',
-      right: '0',
-      fontSize: '11px',
-      color: 'var(--border)',
-      letterSpacing: '2px',
-      fontFamily: 'monospace',
-      opacity: 0.6,
-    }}>
-      — 01 —
-    </div>
   </div>
 </Reveal>
+
 
       </div>
     </section>
