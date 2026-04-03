@@ -89,83 +89,144 @@ export function Hero() {
   </div>
 </Reveal>
 
-        <Reveal delay={0.36}>
+       <Reveal delay={0.36}>
   <div style={{ 
     marginTop: '0', 
     maxWidth: '500px',
     position: 'relative',
+    padding: '20px 0',
   }}>
-    {/* Decorative corner accent */}
+    {/* Decorative frame corners */}
     <div style={{
       position: 'absolute',
-      top: '-20px',
-      left: '-30px',
-      width: '60px',
-      height: '60px',
+      top: '0',
+      left: '-10px',
+      width: '30px',
+      height: '30px',
       borderLeft: '1px solid var(--border)',
       borderTop: '1px solid var(--border)',
-      opacity: 0.4,
-      pointerEvents: 'none',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      right: '-10px',
+      width: '30px',
+      height: '30px',
+      borderRight: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.5,
     }} />
     
-    {/* Greeting with decorative underline */}
+    {/* Ornamental dots pattern */}
+    <div style={{
+      position: 'absolute',
+      top: '10px',
+      right: '20px',
+      width: '40px',
+      height: '40px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '10px 10px',
+      opacity: 0.3,
+    }} />
+
+    {/* Greeting with elegant underline */}
     <div style={{ position: 'relative', display: 'inline-block' }}>
       <p style={{ 
         fontFamily: "'Bickham', sans-serif", 
         fontSize: 'clamp(44px,9vw,65px)', 
         fontWeight: 300, 
         color: 'var(--ink)', 
-        letterSpacing: '1px', 
-        marginBottom: '12px',
-        position: 'relative',
-        zIndex: 1,
+        letterSpacing: '2px', 
+        marginBottom: '16px',
       }}>
         {t.greeting}
       </p>
       <div style={{
         position: 'absolute',
-        bottom: '8px',
+        bottom: '0',
         left: '0',
         width: '100%',
-        height: '8px',
-        background: 'linear-gradient(90deg, var(--border), transparent)',
-        opacity: 0.15,
-        zIndex: 0,
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--ink), var(--border), transparent)',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '-4px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '6px',
+        height: '6px',
+        border: '1px solid var(--border)',
+        borderRadius: '50%',
+        background: 'var(--off)',
       }} />
     </div>
     
-    {/* Divider line */}
+    {/* Decorative flourish */}
     <div style={{
-      width: '80px',
-      height: '1px',
-      background: 'linear-gradient(90deg, var(--ink), transparent)',
-      margin: '8px 0 16px 0',
-      opacity: 0.3,
-    }} />
+      display: 'flex',
+      alignItems: 'center',
+      gap: '12px',
+      margin: '20px 0',
+    }}>
+      <div style={{
+        flex: 1,
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        width: '8px',
+        height: '8px',
+        transform: 'rotate(45deg)',
+        border: '1px solid var(--border)',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        flex: 1,
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.4,
+      }} />
+    </div>
     
-    {/* SubGreeting with left border accent */}
+    {/* SubGreeting with subtle left accent */}
     <div style={{
       position: 'relative',
-      paddingLeft: '16px',
+      paddingLeft: '24px',
     }}>
       <div style={{
         position: 'absolute',
         left: '0',
-        top: '8px',
-        bottom: '8px',
-        width: '2px',
-        background: 'linear-gradient(180deg, var(--border), transparent)',
-        opacity: 0.4,
-        borderRadius: '1px',
+        top: '0',
+        bottom: '0',
+        width: '3px',
+        background: 'linear-gradient(180deg, var(--ink) 0%, var(--border) 50%, transparent 100%)',
+        opacity: 0.25,
+        borderRadius: '2px',
+      }} />
+      <div style={{
+        position: 'absolute',
+        left: '6px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: '4px',
+        height: '4px',
+        borderRadius: '50%',
+        background: 'var(--border)',
+        opacity: 0.5,
       }} />
       <p style={{ 
-        fontSize: '16px', 
-        letterSpacing: '0.5px', 
+        fontSize: '15px', 
+        letterSpacing: '0.8px', 
         color: 'var(--ink)', 
-        lineHeight: 2, 
+        lineHeight: 1.9, 
         fontWeight: 300, 
         fontFamily: "'mia', sans-serif",
-        marginTop: '0',
+        margin: '0',
+        opacity: 0.9,
       }}>
         {t.subGreeting}
       </p>
