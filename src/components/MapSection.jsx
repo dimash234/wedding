@@ -4,7 +4,7 @@ import { Reveal } from './common/Reveal';
 
 export default function MapSection() {
   const { t } = useContext(LangContext);
-  const FONT = "'Jost', sans-serif";
+  const FONT = "'Ante', sans-serif";
 
   return (
     <section id="map" style={{ padding: 'clamp(32px, 6vh, 48px) 12px', background: 'var(--off)', borderTop: '1px solid var(--border)' }}>

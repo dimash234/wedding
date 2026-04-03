@@ -219,14 +219,14 @@ export function Hero() {
         opacity: 0.5,
       }} />
       <p style={{ 
-        fontSize: '15px', 
+        fontSize: '18px', 
         letterSpacing: '0.8px', 
         color: 'var(--ink)', 
         lineHeight: 1.9, 
-        fontWeight: 300, 
+        fontWeight: 600, 
         fontFamily: "'mia', sans-serif",
         margin: '0',
-        opacity: 0.9,
+        opacity: 1,
       }}>
         {t.subGreeting}
       </p>

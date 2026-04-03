@@ -70,10 +70,10 @@ export default function RSVPForm() {
         <Reveal delay={0}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <SectionLabel>{t.rsvp.label}</SectionLabel>
-            <h2 style={{ fontFamily: FONT, fontSize: 'clamp(26px,5vw,38px)', color: 'var(--ink)', marginBottom: '10px', fontWeight: 300, letterSpacing: '2px' }}>
+            <h2 style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(26px,5vw,38px)', color: 'var(--ink)', marginBottom: '10px', fontWeight: 300, letterSpacing: '2px' }}>
               {t.rsvp.title}
             </h2>
-            <p style={{ fontSize: '18px', letterSpacing: '1px', color: 'var(--ink)', fontWeight: 300, opacity: 0.8, fontFamily: FONT }}>
+            <p style={{ fontSize: '18px', letterSpacing: '1px', color: 'var(--ink)', fontWeight: 300, opacity: 0.8, fontFamily: "'Bickham', Georgia, serif", margin: '0' }}>
               {t.rsvp.sub}
             </p>
           </div>
