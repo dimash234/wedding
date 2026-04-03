@@ -89,114 +89,260 @@ export function Hero() {
   </div>
 </Reveal>
 
-       <Reveal delay={0.36}>
+      <Reveal delay={0.36}>
   <div style={{ 
     marginTop: '0', 
-    maxWidth: '520px',
+    maxWidth: '500px',
     position: 'relative',
-    padding: '40px 32px',
+    padding: '20px 0',
   }}>
-    {/* Subtle shadow layer */}
+    {/* Все 4 угловые рамки */}
     <div style={{
       position: 'absolute',
-      inset: '0',
-      background: 'var(--white)',
-      boxShadow: '0 4px 30px rgba(0,0,0,0.03)',
-      borderRadius: '2px',
-      zIndex: 0,
+      top: '0',
+      left: '-10px',
+      width: '30px',
+      height: '30px',
+      borderLeft: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.5,
+      transition: 'all 0.4s ease',
+    }} />
+    <div style={{
+      position: 'absolute',
+      top: '0',
+      right: '-10px',
+      width: '30px',
+      height: '30px',
+      borderRight: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      left: '-10px',
+      width: '30px',
+      height: '30px',
+      borderLeft: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      right: '-10px',
+      width: '30px',
+      height: '30px',
+      borderRight: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.5,
     }} />
     
-    {/* Top decorative line with ornament */}
+    {/* Паттерн из точек */}
     <div style={{
-      position: 'relative',
-      zIndex: 1,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: '28px',
+      position: 'absolute',
+      top: '10px',
+      right: '20px',
+      width: '40px',
+      height: '40px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '10px 10px',
+      opacity: 0.3,
+    }} />
+
+    {/* Плавающие частицы */}
+    {[...Array(3)].map((_, i) => (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          width: '3px',
+          height: '3px',
+          background: 'var(--ink)',
+          borderRadius: '50%',
+          opacity: 0.15,
+          right: `${25 + i * 12}px`,
+          top: `${60 + i * 25}px`,
+        }}
+      />
+    ))}
+
+    {/* Вертикальный текст (боковой) */}
+    <div style={{
+      position: 'absolute',
+      right: '-35px',
+      top: '50%',
+      transform: 'translateY(-50%) rotate(90deg)',
+      fontSize: '9px',
+      letterSpacing: '3px',
+      color: 'var(--border)',
+      textTransform: 'uppercase',
+      opacity: 0.5,
+      fontFamily: 'monospace',
+      whiteSpace: 'nowrap',
     }}>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, var(--border))', opacity: 0.6 }} />
-      <span style={{ 
-        margin: '0 16px', 
-        color: 'var(--border)', 
-        fontSize: '14px',
-        opacity: 0.8,
-      }}>◇</span>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, var(--border), transparent)', opacity: 0.6 }} />
+      SCROLL • EXPLORE
     </div>
 
-    {/* Greeting with refined underline */}
-    <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+    {/* Приветствие с подчеркиванием */}
+    <div style={{ position: 'relative', display: 'inline-block' }}>
       <p style={{ 
-        fontFamily: "'Bickham', Georgia, serif", 
-        fontSize: 'clamp(40px,8vw,56px)', 
+        fontFamily: "'Bickham', sans-serif", 
+        fontSize: 'clamp(44px,9vw,65px)', 
         fontWeight: 300, 
         color: 'var(--ink)', 
-        letterSpacing: '3px', 
-        marginBottom: '8px',
-        lineHeight: 1.1,
+        letterSpacing: '2px', 
+        marginBottom: '16px',
       }}>
         {t.greeting}
       </p>
+      
+      {/* Подчеркивание с градиентом */}
       <div style={{
-        width: '40px',
+        position: 'absolute',
+        bottom: '0',
+        left: '0',
+        width: '100%',
         height: '1px',
-        background: 'var(--ink)',
-        margin: '16px auto',
-        opacity: 0.3,
+        background: 'linear-gradient(90deg, var(--ink), var(--border), transparent)',
+        opacity: 0.4,
+      }} />
+      
+      {/* Декоративная точка под текстом */}
+      <div style={{
+        position: 'absolute',
+        bottom: '-4px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '6px',
+        height: '6px',
+        border: '1px solid var(--border)',
+        borderRadius: '50%',
+        background: 'var(--off)',
+      }} />
+
+      {/* SVG завиток справа */}
+      <svg 
+        width="50" 
+        height="20" 
+        viewBox="0 0 50 20" 
+        style={{
+          position: 'absolute',
+          right: '-60px',
+          top: '40%',
+          transform: 'translateY(-50%)',
+          opacity: 0.3,
+        }}
+      >
+        <path
+          d="M0,10 Q12.5,0 25,10 T50,10"
+          fill="none"
+          stroke="var(--border)"
+          strokeWidth="1"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+    
+    {/* Декоративный разделитель с ромбом */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '16px',
+      margin: '24px 0',
+    }}>
+      <div style={{
+        flex: 1,
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        width: '10px',
+        height: '10px',
+        transform: 'rotate(45deg)',
+        border: '1px solid var(--border)',
+        opacity: 0.5,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div style={{
+          width: '3px',
+          height: '3px',
+          background: 'var(--ink)',
+          borderRadius: '50%',
+          opacity: 0.5,
+        }} />
+      </div>
+      <div style={{
+        flex: 1,
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.4,
       }} />
     </div>
-
-    {/* SubGreeting — simple with first letter accent */}
-    <div style={{ position: 'relative', zIndex: 1, marginTop: '24px' }}>
+    
+    {/* Подзаголовок с акцентом слева */}
+    <div style={{
+      position: 'relative',
+      paddingLeft: '24px',
+    }}>
+      {/* Вертикальная линия */}
+      <div style={{
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        bottom: '0',
+        width: '3px',
+        background: 'linear-gradient(180deg, var(--ink) 0%, var(--border) 50%, transparent 100%)',
+        opacity: 0.25,
+        borderRadius: '2px',
+      }} />
+      
+      {/* Точка на линии */}
+      <div style={{
+        position: 'absolute',
+        left: '6px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: '4px',
+        height: '4px',
+        borderRadius: '50%',
+        background: 'var(--border)',
+        opacity: 0.5,
+      }} />
+      
       <p style={{ 
-        fontSize: '15px', 
-        letterSpacing: '0.6px', 
+        fontSize: '18px', 
+        letterSpacing: '0.8px', 
         color: 'var(--ink)', 
-        lineHeight: 1.8, 
-        fontWeight: 400, 
-        fontFamily: "'mia', Georgia, serif",
-        textAlign: 'center',
-        opacity: 0.85,
+        lineHeight: 1.9, 
+        fontWeight: 700, 
+        fontFamily: "'mia', sans-serif",
+        margin: '0',
+        opacity: 1,
       }}>
-        <span style={{
-          fontFamily: "'Bickham', Georgia, serif",
-          fontSize: '1.4em',
-          float: 'left',
-          lineHeight: 0.8,
-          marginRight: '4px',
-          marginTop: '2px',
-          opacity: 0.6,
-        }}>
-          {t.subGreeting?.charAt(0)}
-        </span>
-        {t.subGreeting?.slice(1)}
+        {t.subGreeting}
       </p>
     </div>
 
-    {/* Bottom decorative element */}
+    {/* Нумерация внизу */}
     <div style={{
-      position: 'relative',
-      zIndex: 1,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: '28px',
+      position: 'absolute',
+      bottom: '-25px',
+      right: '0',
+      fontSize: '11px',
+      color: 'var(--border)',
+      letterSpacing: '2px',
+      fontFamily: 'monospace',
+      opacity: 0.6,
     }}>
-      <div style={{ width: '60px', height: '1px', background: 'var(--border)', opacity: 0.4 }} />
-      <div style={{
-        width: '5px',
-        height: '5px',
-        border: '1px solid var(--border)',
-        transform: 'rotate(45deg)',
-        margin: '0 12px',
-        opacity: 0.5,
-      }} />
-      <div style={{ width: '60px', height: '1px', background: 'var(--border)', opacity: 0.4 }} />
+      — 01 —
     </div>
   </div>
 </Reveal>
-
 
       </div>
     </section>
