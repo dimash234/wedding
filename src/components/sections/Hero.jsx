@@ -89,14 +89,14 @@ export function Hero() {
   </div>
 </Reveal>
 
-       <Reveal delay={0.36}>
+      <Reveal delay={0.36}>
   <div style={{ 
     marginTop: '0', 
     maxWidth: '500px',
     position: 'relative',
     padding: '20px 0',
   }}>
-    {/* Decorative frame corners */}
+    {/* Four symmetric corner frames */}
     <div style={{
       position: 'absolute',
       top: '0',
@@ -105,6 +105,26 @@ export function Hero() {
       height: '30px',
       borderLeft: '1px solid var(--border)',
       borderTop: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      top: '0',
+      right: '-10px',
+      width: '30px',
+      height: '30px',
+      borderRight: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      left: '-10px',
+      width: '30px',
+      height: '30px',
+      borderLeft: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
       opacity: 0.5,
     }} />
     <div style={{
@@ -118,7 +138,7 @@ export function Hero() {
       opacity: 0.5,
     }} />
     
-    {/* Ornamental dots pattern */}
+    {/* Symmetric dots pattern - top right & bottom left */}
     <div style={{
       position: 'absolute',
       top: '10px',
@@ -129,42 +149,54 @@ export function Hero() {
       backgroundSize: '10px 10px',
       opacity: 0.3,
     }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '10px',
+      left: '20px',
+      width: '40px',
+      height: '40px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '10px 10px',
+      opacity: 0.3,
+    }} />
 
-    {/* Greeting with elegant underline */}
-    <div style={{ position: 'relative', display: 'inline-block' }}>
-      <p style={{ 
-        fontFamily: "'Bickham', sans-serif", 
-        fontSize: 'clamp(44px,9vw,65px)', 
-        fontWeight: 300, 
-        color: 'var(--ink)', 
-        letterSpacing: '2px', 
-        marginBottom: '16px',
-      }}>
-        {t.greeting}
-      </p>
-      <div style={{
-        position: 'absolute',
-        bottom: '0',
-        left: '0',
-        width: '100%',
-        height: '1px',
-        background: 'linear-gradient(90deg, var(--ink), var(--border), transparent)',
-        opacity: 0.4,
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: '-4px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '6px',
-        height: '6px',
-        border: '1px solid var(--border)',
-        borderRadius: '50%',
-        background: 'var(--off)',
-      }} />
+    {/* Centered Greeting with symmetric underline */}
+    <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+      <div style={{ position: 'relative', display: 'inline-block' }}>
+        <p style={{ 
+          fontFamily: "'Bickham', sans-serif", 
+          fontSize: 'clamp(44px,9vw,65px)', 
+          fontWeight: 300, 
+          color: 'var(--ink)', 
+          letterSpacing: '2px', 
+          margin: '0',
+        }}>
+          {t.greeting}
+        </p>
+        <div style={{
+          position: 'absolute',
+          bottom: '0',
+          left: '0',
+          width: '100%',
+          height: '1px',
+          background: 'linear-gradient(90deg, transparent, var(--ink), var(--border), var(--ink), transparent)',
+          opacity: 0.4,
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '-4px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '6px',
+          height: '6px',
+          border: '1px solid var(--border)',
+          borderRadius: '50%',
+          background: 'var(--off)',
+        }} />
+      </div>
     </div>
     
-    {/* Decorative flourish */}
+    {/* Decorative flourish - already symmetric */}
     <div style={{
       display: 'flex',
       alignItems: 'center',
@@ -192,18 +224,20 @@ export function Hero() {
       }} />
     </div>
     
-    {/* SubGreeting with subtle left accent */}
+    {/* SubGreeting with symmetric side accents */}
     <div style={{
       position: 'relative',
-      paddingLeft: '24px',
+      textAlign: 'center',
+      padding: '0 24px',
     }}>
+      {/* Left accent */}
       <div style={{
         position: 'absolute',
         left: '0',
         top: '0',
         bottom: '0',
         width: '3px',
-        background: 'linear-gradient(180deg, var(--ink) 0%, var(--border) 50%, transparent 100%)',
+        background: 'linear-gradient(180deg, transparent, var(--border) 50%, transparent)',
         opacity: 0.25,
         borderRadius: '2px',
       }} />
@@ -218,6 +252,30 @@ export function Hero() {
         background: 'var(--border)',
         opacity: 0.5,
       }} />
+      
+      {/* Right accent - mirror of left */}
+      <div style={{
+        position: 'absolute',
+        right: '0',
+        top: '0',
+        bottom: '0',
+        width: '3px',
+        background: 'linear-gradient(180deg, transparent, var(--border) 50%, transparent)',
+        opacity: 0.25,
+        borderRadius: '2px',
+      }} />
+      <div style={{
+        position: 'absolute',
+        right: '6px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: '4px',
+        height: '4px',
+        borderRadius: '50%',
+        background: 'var(--border)',
+        opacity: 0.5,
+      }} />
+      
       <p style={{ 
         fontSize: '18px', 
         letterSpacing: '0.8px', 
@@ -233,7 +291,6 @@ export function Hero() {
     </div>
   </div>
 </Reveal>
-
 
       </div>
     </section>
