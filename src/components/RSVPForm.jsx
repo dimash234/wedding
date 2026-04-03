@@ -33,7 +33,7 @@ export default function RSVPForm() {
     setLoading(false);
   };
 
-  const FONT = "'Jost', sans-serif";
+  const FONT = "'Ante', sans-serif";
 
   const inp = {
     width: '100%', padding: '14px 0',

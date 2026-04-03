@@ -90,15 +90,88 @@ export function Hero() {
 </Reveal>
 
         <Reveal delay={0.36}>
-          <div style={{ marginTop: '0', maxWidth: '500px' }}>
-            <p style={{ fontFamily: "'Bickham', sans-serif", fontSize: 'clamp(44px,9vw,65px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '1px', marginBottom: '12px' }}>
-              {t.greeting}
-            </p>
-            <p style={{ fontSize: '16px', letterSpacing: '0.5px', color: 'var(--ink)', lineHeight: 2, fontWeight: 300, fontFamily: "'mia', sans-serif" , marginTop: '16px' }}>
-              {t.subGreeting}
-            </p>
-          </div>
-        </Reveal>
+  <div style={{ 
+    marginTop: '0', 
+    maxWidth: '500px',
+    position: 'relative',
+  }}>
+    {/* Decorative corner accent */}
+    <div style={{
+      position: 'absolute',
+      top: '-20px',
+      left: '-30px',
+      width: '60px',
+      height: '60px',
+      borderLeft: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.4,
+      pointerEvents: 'none',
+    }} />
+    
+    {/* Greeting with decorative underline */}
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <p style={{ 
+        fontFamily: "'Bickham', sans-serif", 
+        fontSize: 'clamp(44px,9vw,65px)', 
+        fontWeight: 300, 
+        color: 'var(--ink)', 
+        letterSpacing: '1px', 
+        marginBottom: '12px',
+        position: 'relative',
+        zIndex: 1,
+      }}>
+        {t.greeting}
+      </p>
+      <div style={{
+        position: 'absolute',
+        bottom: '8px',
+        left: '0',
+        width: '100%',
+        height: '8px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.15,
+        zIndex: 0,
+      }} />
+    </div>
+    
+    {/* Divider line */}
+    <div style={{
+      width: '80px',
+      height: '1px',
+      background: 'linear-gradient(90deg, var(--ink), transparent)',
+      margin: '8px 0 16px 0',
+      opacity: 0.3,
+    }} />
+    
+    {/* SubGreeting with left border accent */}
+    <div style={{
+      position: 'relative',
+      paddingLeft: '16px',
+    }}>
+      <div style={{
+        position: 'absolute',
+        left: '0',
+        top: '8px',
+        bottom: '8px',
+        width: '2px',
+        background: 'linear-gradient(180deg, var(--border), transparent)',
+        opacity: 0.4,
+        borderRadius: '1px',
+      }} />
+      <p style={{ 
+        fontSize: '16px', 
+        letterSpacing: '0.5px', 
+        color: 'var(--ink)', 
+        lineHeight: 2, 
+        fontWeight: 300, 
+        fontFamily: "'mia', sans-serif",
+        marginTop: '0',
+      }}>
+        {t.subGreeting}
+      </p>
+    </div>
+  </div>
+</Reveal>
 
 
       </div>
