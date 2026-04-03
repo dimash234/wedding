@@ -15,18 +15,69 @@ export default function MusicPlayer() {
   const hasAutoPlayed = useRef(false)
 
   useEffect(() => {
-    const audio = new Audio(AUDIO_URL)
-    audio.loop = true
-    audio.volume = volume
-    audioRef.current = audio
+  const audio = new Audio(AUDIO_URL);
+  audio.loop = true;
+  audio.volume = volume;
+  audioRef.current = audio;
 
-    audio.addEventListener('loadedmetadata', () => setDuration(audio.duration))
-    audio.addEventListener('timeupdate', () => {
-      setCurrentTime(audio.currentTime)
-      if (audio.duration) setProgress(audio.currentTime / audio.duration * 100)
-    })
+  // 1. Обработка метаданных и времени
+  const handleLoadedMetadata = () => setDuration(audio.duration);
+  const handleTimeUpdate = () => {
+    setCurrentTime(audio.currentTime);
+    if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
+  };
 
-    useEffect(() => {
+  audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+  audio.addEventListener('timeupdate', handleTimeUpdate);
+
+  // 2. Функция для остановки музыки при выходе из браузера/вкладки
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      // Опционально: если вы хотите, чтобы музыка САМА продолжалась при возврате
+      // if (!minimized) { audio.play(); setPlaying(true); }
+    }
+  };
+
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  // 3. Автоплей при первом взаимодействии
+  const tryAutoPlay = () => {
+    if (!hasAutoPlayed.current && audioRef.current) {
+      audioRef.current.play()
+        .then(() => { setPlaying(true); hasAutoPlayed.current = true; })
+        .catch(() => {});
+      ['click', 'scroll', 'touchstart'].forEach(e => 
+        document.removeEventListener(e, tryAutoPlay)
+      );
+    }
+  };
+
+  audio.play()
+    .then(() => { setPlaying(true); hasAutoPlayed.current = true; })
+    .catch(() => {
+      ['click', 'scroll', 'touchstart'].forEach(e => 
+        document.addEventListener(e, tryAutoPlay)
+      );
+    });
+
+  // Очистка при размонтировании
+  return () => {
+    audio.pause();
+    audio.src = '';
+    audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.removeEventListener('timeupdate', handleTimeUpdate);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+    ['click', 'scroll', 'touchstart'].forEach(e => 
+      document.removeEventListener(e, tryAutoPlay)
+    );
+  };
+}, []); // Оставляем пустым для инициализации один раз
+
+// 4. Отдельный useEffect для реакции на изменение minimized (НЕ внутри первого!)
+useEffect(() => {
   const audio = audioRef.current;
   if (!audio) return;
 
@@ -34,33 +85,11 @@ export default function MusicPlayer() {
     audio.pause();
     setPlaying(false);
   } else {
+    // Воспроизводим, только если до этого не была нажата пауза вручную
     audio.play().catch(() => {});
     setPlaying(true);
   }
 }, [minimized]);
-
-    const tryAutoPlay = () => {
-      if (!hasAutoPlayed.current && audioRef.current) {
-        audioRef.current.play().then(() => { setPlaying(true); hasAutoPlayed.current = true }).catch(() => {})
-        document.removeEventListener('click', tryAutoPlay)
-        document.removeEventListener('scroll', tryAutoPlay)
-        document.removeEventListener('touchstart', tryAutoPlay)
-      }
-    }
-
-    audio.play().then(() => { setPlaying(true); hasAutoPlayed.current = true }).catch(() => {
-      document.addEventListener('click', tryAutoPlay)
-      document.addEventListener('scroll', tryAutoPlay)
-      document.addEventListener('touchstart', tryAutoPlay)
-    })
-
-    return () => {
-      audio.pause(); audio.src = ''
-      document.removeEventListener('click', tryAutoPlay)
-      document.removeEventListener('scroll', tryAutoPlay)
-      document.removeEventListener('touchstart', tryAutoPlay)
-    }
-  }, [])
 
   const toggle = () => {
     const audio = audioRef.current
