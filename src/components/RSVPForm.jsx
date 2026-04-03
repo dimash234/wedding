@@ -64,7 +64,7 @@ export default function RSVPForm() {
     );
 
   return (
-    <section id="rsvp" style={{ padding: '100px 20px', background: 'var(--white)' }}>
+    <section id="rsvp" style={{ padding: '10px 20px', background: 'var(--white)' }}>
       <div style={{ maxWidth: '480px', margin: '0 auto' }}>
 
         <Reveal delay={0}>
