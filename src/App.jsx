@@ -12,6 +12,7 @@ import { CountdownSection } from './components/sections/CountdownSection';
 import { FooterSection } from './components/sections/FooterSection';
 import ScrollIndicator from './components/ScrollIndicator';
 import ToyOwner from './components/ToyOwner';
+
 /* ─── Audio Instance ─────────────────────────────────────────────── */
 const audio = new Audio('./music/mahabbat.mp3');
 audio.loop = true;
@@ -30,12 +31,40 @@ export default function App() {
   const [lang, setLang] = useState('kz');
   const [playing, setPlaying] = useState(false);
 
+  // 1. Остановка музыки при сворачивании или уходе с вкладки
+  useEffect(() => {
+    const handleStop = () => {
+      audio.pause();
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        handleStop();
+      }
+    };
+
+    // Слушаем изменение видимости вкладки
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    // Слушаем потерю фокуса окна (сворачивание браузера)
+    window.addEventListener('blur', handleStop);
+    // Для мобильных устройств (уход со страницы)
+    window.addEventListener('pagehide', handleStop);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('blur', handleStop);
+      window.removeEventListener('pagehide', handleStop);
+    };
+  }, []);
+
+  // 2. Обработка скролла для навбара
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // 3. Синхронизация состояния интерфейса с объектом Audio
   useEffect(() => {
     const onPlay = () => setPlaying(true);
     const onPause = () => setPlaying(false);
@@ -69,7 +98,7 @@ export default function App() {
   );
 }
 
-/* ─── Shared UI ──────────────────────────────────────────────────── */
+/* ─── Вспомогательные компоненты UI (SectionLabel и прочие) оставляем без изменений ─── */
 function SectionLabel({ children }) {
   return (
     <p style={{
@@ -94,9 +123,6 @@ function ThinLine() {
   )
 }
 
-/* ─── Kazakh Scroll Ornament ────────────────────────────────────── */
-
-
 function WaveLine() {
   return (
     <svg width="56" height="8" viewBox="0 0 56 8" fill="none">
@@ -114,10 +140,6 @@ function GoldDiamond() {
     </svg>
   )
 }
-
-/* ─── Rich SVG Ornaments ──────────────────────────────────────────── */
-
-
 
 export function ScrollDivider({ opacity = 0.55 }) {
   return (
@@ -138,4 +160,3 @@ export function ScrollDivider({ opacity = 0.55 }) {
     </svg>
   )
 }
-

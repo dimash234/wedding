@@ -1,119 +1,21 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { LangContext } from '../context/LangContext'
 
-const AUDIO_URL = './music/mahabbat.mp3'
-
 export default function MusicPlayer() {
-  const { t } = useContext(LangContext)
-  const [playing, setPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [duration, setDuration] = useState(0)
+  // Берём всё необходимое из контекста (то, что мы настроили в App.js)
+  const { t, playing, toggle } = useContext(LangContext)
+  
+  // Эти состояния оставляем локальными для интерфейса плеера
   const [volume, setVolume] = useState(0.5)
   const [minimized, setMinimized] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const audioRef = useRef(null)
-  const hasAutoPlayed = useRef(false)
 
-  useEffect(() => {
-  const audio = new Audio(AUDIO_URL);
-  audio.loop = true;
-  audio.volume = volume;
-  audioRef.current = audio;
-
-  // 1. Обработка метаданных и времени
-  const handleLoadedMetadata = () => setDuration(audio.duration);
-  const handleTimeUpdate = () => {
-    setCurrentTime(audio.currentTime);
-    if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
-  };
-
-  audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-  audio.addEventListener('timeupdate', handleTimeUpdate);
-
-  // 2. Функция для остановки музыки при выходе из браузера/вкладки
-  const handleVisibilityChange = () => {
-    if (document.hidden) {
-      audio.pause();
-      setPlaying(false);
-    } else {
-      // Опционально: если вы хотите, чтобы музыка САМА продолжалась при возврате
-      // if (!minimized) { audio.play(); setPlaying(true); }
-    }
-  };
-
-  document.addEventListener('visibilitychange', handleVisibilityChange);
-
-  // 3. Автоплей при первом взаимодействии
-  const tryAutoPlay = () => {
-    if (!hasAutoPlayed.current && audioRef.current) {
-      audioRef.current.play()
-        .then(() => { setPlaying(true); hasAutoPlayed.current = true; })
-        .catch(() => {});
-      ['click', 'scroll', 'touchstart'].forEach(e => 
-        document.removeEventListener(e, tryAutoPlay)
-      );
-    }
-  };
-
-  audio.play()
-    .then(() => { setPlaying(true); hasAutoPlayed.current = true; })
-    .catch(() => {
-      ['click', 'scroll', 'touchstart'].forEach(e => 
-        document.addEventListener(e, tryAutoPlay)
-      );
-    });
-
-  // Очистка при размонтировании
-  return () => {
-    audio.pause();
-    audio.src = '';
-    audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.removeEventListener('timeupdate', handleTimeUpdate);
-    document.removeEventListener('visibilitychange', handleVisibilityChange);
-    ['click', 'scroll', 'touchstart'].forEach(e => 
-      document.removeEventListener(e, tryAutoPlay)
-    );
-  };
-}, []); // Оставляем пустым для инициализации один раз
-
-// 4. Отдельный useEffect для реакции на изменение minimized (НЕ внутри первого!)
-useEffect(() => {
-  const audio = audioRef.current;
-  if (!audio) return;
-
-  if (minimized) {
-    audio.pause();
-    setPlaying(false);
-  } else {
-    // Воспроизводим, только если до этого не была нажата пауза вручную
-    audio.play().catch(() => {});
-    setPlaying(true);
-  }
-}, [minimized]);
-
-  const toggle = () => {
-    const audio = audioRef.current
-    if (!audio) return
-    if (playing) { audio.pause(); setPlaying(false) }
-    else { audio.play().then(() => setPlaying(true)).catch(() => {}) }
-  }
-
-  const seek = (e) => {
-    const audio = audioRef.current
-    if (!audio || !duration) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    audio.currentTime = ((e.clientX - rect.left) / rect.width) * duration
-  }
-
+  // Находим объект аудио, чтобы управлять громкостью (опционально)
   const changeVolume = (e) => {
     const v = parseFloat(e.target.value)
     setVolume(v)
-    if (audioRef.current) audioRef.current.volume = v
-  }
-
-  const fmt = (s) => {
-    if (!s || isNaN(s)) return '0:00'
-    return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`
+    // Напрямую находим аудио, если нужно регулировать громкость
+    const audioEl = document.querySelector('audio') 
+    if (audioEl) audioEl.volume = v
   }
 
   return (
@@ -130,12 +32,14 @@ useEffect(() => {
 
         {minimized ? (
           <div style={{ display:'flex',alignItems:'center',justifyContent:'center',padding:'16px' }}>
-            <button onClick={() => setMinimized(false)} style={{ width:'28px',height:'28px',background:'none',border:'none',cursor:'pointer',fontSize:'20px', animation: playing ? 'spin-slow 4s linear infinite' : 'none' }}>🎵</button>
+            <button onClick={() => setMinimized(false)} style={{ 
+              width:'28px',height:'28px',background:'none',border:'none',cursor:'pointer',fontSize:'20px', 
+              animation: playing ? 'spin-slow 4s linear infinite' : 'none' 
+            }}>🎵</button>
           </div>
         ) : (
           <div style={{ padding: '16px' }}>
             <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'14px' }}>
-              {/* Vinyl disc */}
               <div style={{
                 width:'48px',height:'48px',borderRadius:'50%',flexShrink:0,
                 background:'conic-gradient(from 0deg, var(--gold), var(--rose-light), var(--gold-pale), var(--gold))',
@@ -146,27 +50,14 @@ useEffect(() => {
                 <div style={{ width:'14px',height:'14px',borderRadius:'50%',background:'var(--cream)',border:'2px solid rgba(201,168,76,0.5)' }} />
               </div>
               <div style={{ flex:1,minWidth:0 }}>
-                <p style={{ fontSize:'13px',fontWeight:600,color:'var(--text-dark)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',marginBottom:'2px' }}>
+                <p style={{ fontSize:'13px',fontWeight:600,color:'white',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',marginBottom:'2px' }}>
                   {t.music.title}
                 </p>
                 <p style={{ fontSize:'11px',color:'var(--gold)',letterSpacing:'1px' }}>{t.music.sub}</p>
               </div>
-              <button onClick={() => setMinimized(true)} style={{ background:'none',border:'none',cursor:'pointer',fontSize:'16px',color:'var(--text-light)',padding:'4px' }}>—</button>
+              <button onClick={() => setMinimized(true)} style={{ background:'none',border:'none',cursor:'pointer',fontSize:'16px',color:'white',padding:'4px' }}>—</button>
             </div>
 
-            {/* Progress */}
-            <div onClick={seek} style={{ height:'4px',borderRadius:'2px',background:'var(--gold-pale)',cursor:'pointer',marginBottom:'6px',position:'relative' }}>
-              <div style={{ height:'100%',borderRadius:'2px',width:`${progress}%`,background:'linear-gradient(to right, var(--gold), var(--rose-light))',transition:'width 0.5s linear',position:'relative' }}>
-                <div style={{ position:'absolute',right:'-5px',top:'-4px',width:'12px',height:'12px',borderRadius:'50%',background:'var(--gold)',boxShadow:'0 1px 4px rgba(201,168,76,0.5)' }} />
-              </div>
-            </div>
-
-            <div style={{ display:'flex',justifyContent:'space-between',fontSize:'10px',color:'var(--text-light)',marginBottom:'14px' }}>
-              <span>{fmt(currentTime)}</span>
-              <span>{fmt(duration)}</span>
-            </div>
-
-            {/* Controls */}
             <div style={{ display:'flex',alignItems:'center',justifyContent:'center',gap:'16px' }}>
               <div style={{ display:'flex',alignItems:'center',gap:'6px' }}>
                 <span style={{ fontSize:'12px' }}>{volume===0?'🔇':volume<0.5?'🔉':'🔊'}</span>
@@ -175,20 +66,19 @@ useEffect(() => {
               </div>
               <button onClick={toggle} style={{
                 width:'48px',height:'48px',borderRadius:'50%',
-                background:'black',
+                background:'white',
                 border:'none',cursor:'pointer',
                 display:'flex',alignItems:'center',justifyContent:'center',
-                fontSize:'20px',color:'white',
+                fontSize:'20px',color:'black',
                 boxShadow: playing ? '0 0 0 6px rgba(201,168,76,0.2),0 4px 16px rgba(201,168,76,0.4)' : '0 4px 16px rgba(201,168,76,0.3)',
-                transition:'all 0.3s ease',
-                animation: playing ? 'pulse-gold 2s ease infinite' : 'none'
+                transition:'all 0.3s ease'
               }}>
                 {playing ? '⏸' : '▶'}
               </button>
               <div style={{ fontSize:'16px',color:'var(--gold)',opacity:0.7 }}>🔁</div>
             </div>
 
-            <p style={{ marginTop:'12px',fontSize:'9px',color:'var(--text-light)',textAlign:'center',opacity:0.7 }}>
+            <p style={{ marginTop:'12px',fontSize:'9px',color:'white',textAlign:'center',opacity:0.7 }}>
               {t.music.note}
             </p>
           </div>
