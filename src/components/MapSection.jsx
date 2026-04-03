@@ -14,8 +14,8 @@ export default function MapSection() {
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <p style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px',
-              fontSize: '13px', letterSpacing: '3px', textTransform: 'lowercase',
-              color: 'var(--ink)', opacity: 0.45, marginBottom: '18px',
+              fontSize: '16px', letterSpacing: '3px', textTransform: 'lowercase',
+              color: 'var(--ink)', opacity: 1, marginBottom: '18px',
               fontFamily: FONT, fontWeight: 400,
             }}>
               <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'linear-gradient(to right,transparent,rgba(0,0,0,0.2),transparent)' }} />
