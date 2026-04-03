@@ -28,7 +28,6 @@ export default function MapSection() {
               fontSize: 'clamp(48px,9vw,72px)',
               letterSpacing: '2px',
               color: 'black',
-              opacity: 0.7,
               marginBottom: '12px',
               fontFamily: "'Bickham', Georgia, serif",
               fontWeight: 300,
