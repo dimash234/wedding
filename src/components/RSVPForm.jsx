@@ -67,17 +67,237 @@ export default function RSVPForm() {
     <section id="rsvp" style={{ padding: '10px 20px', background: 'var(--white)' }}>
       <div style={{ maxWidth: '480px', margin: '0 auto' }}>
 
-        <Reveal delay={0}>
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <SectionLabel>{t.rsvp.label}</SectionLabel>
-            <h2 style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(48px,9vw,72px)', color: 'var(--ink)', marginBottom: '10px', fontWeight: 300, letterSpacing: '2px' }}>
-              {t.rsvp.title}
-            </h2>
-            <p style={{ fontSize: 'clamp(36px,7vw,54px)', letterSpacing: '1px', color: 'var(--ink)', fontWeight: 300, opacity: 1, fontFamily: "'Bickham', Georgia, serif", margin: '0' }}>
-              {t.rsvp.sub}
-            </p>
-          </div>
-        </Reveal>
+       <Reveal delay={0}>
+  <div style={{ 
+    position: 'relative',
+    textAlign: 'center', 
+    marginBottom: '50px',
+    padding: '40px 60px',
+  }}>
+    {/* Four symmetric corner frames */}
+    <div style={{
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '30px',
+      height: '30px',
+      borderLeft: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      top: '0',
+      right: '0',
+      width: '30px',
+      height: '30px',
+      borderRight: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      left: '0',
+      width: '30px',
+      height: '30px',
+      borderLeft: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      right: '0',
+      width: '30px',
+      height: '30px',
+      borderRight: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.5,
+    }} />
+
+    {/* Symmetric ornamental dots - diagonal corners */}
+    <div style={{
+      position: 'absolute',
+      top: '15px',
+      right: '15px',
+      width: '35px',
+      height: '35px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '8px 8px',
+      opacity: 0.3,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '15px',
+      left: '15px',
+      width: '35px',
+      height: '35px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '8px 8px',
+      opacity: 0.3,
+    }} />
+
+    {/* Vertical side accents */}
+    <div style={{
+      position: 'absolute',
+      left: '15px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      height: '40%',
+      width: '1px',
+      background: 'linear-gradient(180deg, transparent, var(--border) 50%, transparent)',
+      opacity: 0.4,
+    }} />
+    <div style={{
+      position: 'absolute',
+      right: '15px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      height: '40%',
+      width: '1px',
+      background: 'linear-gradient(180deg, transparent, var(--border) 50%, transparent)',
+      opacity: 0.4,
+    }} />
+
+    {/* Top decorative flourish */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      marginBottom: '24px',
+    }}>
+      <div style={{
+        width: '50px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        width: '6px',
+        height: '6px',
+        transform: 'rotate(45deg)',
+        border: '1px solid var(--border)',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        width: '50px',
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.5,
+      }} />
+    </div>
+
+    <SectionLabel>{t.rsvp.label}</SectionLabel>
+    
+    <h2 style={{ 
+      fontFamily: "'Bickham', Georgia, serif", 
+      fontSize: 'clamp(48px,9vw,72px)', 
+      color: 'var(--ink)', 
+      marginBottom: '16px', 
+      fontWeight: 300, 
+      letterSpacing: '2px',
+      position: 'relative',
+      display: 'inline-block',
+    }}>
+      {t.rsvp.title}
+      {/* Decorative underline */}
+      <div style={{
+        position: 'absolute',
+        bottom: '-8px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '80px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--ink), transparent)',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '-10px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '5px',
+        height: '5px',
+        background: 'var(--ink)',
+        opacity: 0.4,
+        borderRadius: '50%',
+      }} />
+    </h2>
+
+    {/* Middle decorative flourish */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '12px',
+      margin: '20px 0',
+    }}>
+      <div style={{
+        width: '20px',
+        height: '1px',
+        background: 'var(--border)',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        width: '4px',
+        height: '4px',
+        background: 'var(--border)',
+        opacity: 0.5,
+        borderRadius: '50%',
+      }} />
+      <div style={{
+        width: '20px',
+        height: '1px',
+        background: 'var(--border)',
+        opacity: 0.4,
+      }} />
+    </div>
+
+    <p style={{ 
+      fontSize: 'clamp(36px,7vw,54px)', 
+      letterSpacing: '1px', 
+      color: 'var(--ink)', 
+      fontWeight: 300, 
+      opacity: 1, 
+      fontFamily: "'Bickham', Georgia, serif", 
+      margin: '0',
+      position: 'relative',
+    }}>
+      {t.rsvp.sub}
+    </p>
+
+    {/* Bottom decorative flourish */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      marginTop: '24px',
+    }}>
+      <div style={{
+        width: '40px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        width: '6px',
+        height: '6px',
+        border: '1px solid var(--border)',
+        opacity: 0.5,
+        transform: 'rotate(45deg)',
+      }} />
+      <div style={{
+        width: '40px',
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.4,
+      }} />
+    </div>
+  </div>
+</Reveal>
 
         <Reveal delay={0.1}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>

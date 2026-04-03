@@ -56,97 +56,277 @@ export default function OwnerSection() {
       <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         <Reveal delay={0}>
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+  <div style={{ 
+    position: 'relative', 
+    textAlign: 'center', 
+    marginBottom: '40px',
+    padding: '30px 40px',
+  }}>
+    {/* Four symmetric corner frames */}
+    <div style={{
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '25px',
+      height: '25px',
+      borderLeft: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.4,
+    }} />
+    <div style={{
+      position: 'absolute',
+      top: '0',
+      right: '0',
+      width: '25px',
+      height: '25px',
+      borderRight: '1px solid var(--border)',
+      borderTop: '1px solid var(--border)',
+      opacity: 0.4,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      left: '0',
+      width: '25px',
+      height: '25px',
+      borderLeft: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.4,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '0',
+      right: '0',
+      width: '25px',
+      height: '25px',
+      borderRight: '1px solid var(--border)',
+      borderBottom: '1px solid var(--border)',
+      opacity: 0.4,
+    }} />
 
-            {/* label with decorative lines */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '20px',
-              marginBottom: '12px',
-            }}>
-              <span style={{
-                width: '40px',
-                height: '1px',
-                background: 'linear-gradient(90deg, transparent, var(--border))',
-              }} />
-              <p style={{
-                fontSize: 'clamp(48px,9vw,72px)',
-                letterSpacing: '2px',
-                color: 'black',
-                fontFamily: "'Bickham', Georgia, serif",
-                fontWeight: 300,
-              }}>
-                {t.host.label}
-              </p>
-              <span style={{
-                width: '40px',
-                height: '1px',
-                background: 'linear-gradient(90deg, var(--border), transparent)',
-              }} />
-            </div>
+    {/* Symmetric ornamental dots - corners */}
+    <div style={{
+      position: 'absolute',
+      top: '15px',
+      right: '15px',
+      width: '30px',
+      height: '30px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '8px 8px',
+      opacity: 0.3,
+    }} />
+    <div style={{
+      position: 'absolute',
+      bottom: '15px',
+      left: '15px',
+      width: '30px',
+      height: '30px',
+      backgroundImage: 'radial-gradient(circle, var(--border) 1.5px, transparent 1.5px)',
+      backgroundSize: '8px 8px',
+      opacity: 0.3,
+    }} />
 
-            {/* name with underline accent */}
-            <div style={{ position: 'relative', display: 'inline-block' }}>
-              <h2 style={{
-                fontFamily: "'Bickham', Georgia, serif",
-                fontSize: 'clamp(42px,8vw,64px)',
-                fontWeight: 300,
-                color: 'black',
-                letterSpacing: '2px',
-                marginBottom: '10px',
-              }}>
-                {t.host.title}
-              </h2>
-              <div style={{
-                position: 'absolute',
-                bottom: '0',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '60px',
-                height: '2px',
-                background: 'linear-gradient(90deg, transparent, var(--ink), transparent)',
-                opacity: 0.3,
-              }} />
-            </div>
+    {/* Vertical side accents */}
+    <div style={{
+      position: 'absolute',
+      left: '10px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      height: '60%',
+      width: '1px',
+      background: 'linear-gradient(180deg, transparent, var(--border) 50%, transparent)',
+      opacity: 0.3,
+    }} />
+    <div style={{
+      position: 'absolute',
+      right: '10px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      height: '60%',
+      width: '1px',
+      background: 'linear-gradient(180deg, transparent, var(--border) 50%, transparent)',
+      opacity: 0.3,
+    }} />
 
-            {/* sub with decorative dots */}
-            {t.host.sub && (
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '12px',
-                marginTop: '16px',
-              }}>
-                <span style={{
-                  width: '4px',
-                  height: '4px',
-                  borderRadius: '50%',
-                  background: 'var(--ink)',
-                  opacity: 0.4,
-                }} />
-                <p style={{
-                  fontFamily: "'mia', Georgia, serif",
-                  fontSize: '19px',
-                  color: 'var(--ink)',
-                  opacity: 1.0,
-                }}>
-                  {t.host.sub}
-                </p>
-                <span style={{
-                  width: '4px',
-                  height: '4px',
-                  borderRadius: '50%',
-                  background: 'var(--ink)',
-                  opacity: 0.4,
-                }} />
-              </div>
-            )}
+    {/* Top decorative flourish */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      marginBottom: '20px',
+    }}>
+      <div style={{
+        width: '60px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        width: '6px',
+        height: '6px',
+        transform: 'rotate(45deg)',
+        border: '1px solid var(--border)',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        width: '60px',
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.5,
+      }} />
+    </div>
 
-          </div>
-        </Reveal>
+    {/* label with decorative lines */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '20px',
+      marginBottom: '12px',
+    }}>
+      <span style={{
+        width: '40px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+      }} />
+      <p style={{
+        fontSize: 'clamp(48px,9vw,72px)',
+        letterSpacing: '2px',
+        color: 'black',
+        fontFamily: "'Bickham', Georgia, serif",
+        fontWeight: 300,
+        margin: 0,
+      }}>
+        {t.host.label}
+      </p>
+      <span style={{
+        width: '40px',
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+      }} />
+    </div>
+
+    {/* name with symmetric double underline accent */}
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <h2 style={{
+        fontFamily: "'Bickham', Georgia, serif",
+        fontSize: 'clamp(42px,8vw,64px)',
+        fontWeight: 300,
+        color: 'black',
+        letterSpacing: '2px',
+        margin: '0 0 16px 0',
+      }}>
+        {t.host.title}
+      </h2>
+      {/* Top accent line */}
+      <div style={{
+        position: 'absolute',
+        top: '-8px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '40px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--ink), transparent)',
+        opacity: 0.3,
+      }} />
+      {/* Bottom accent line */}
+      <div style={{
+        position: 'absolute',
+        bottom: '0',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '60px',
+        height: '2px',
+        background: 'linear-gradient(90deg, transparent, var(--ink), transparent)',
+        opacity: 0.3,
+      }} />
+      {/* Center diamond */}
+      <div style={{
+        position: 'absolute',
+        bottom: '-3px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '4px',
+        height: '4px',
+        background: 'var(--ink)',
+        opacity: 0.4,
+        transform: 'translateX(-50%) rotate(45deg)',
+      }} />
+    </div>
+
+    {/* Bottom decorative flourish */}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      marginTop: '20px',
+      marginBottom: '16px',
+    }}>
+      <div style={{
+        width: '30px',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--border))',
+        opacity: 0.4,
+      }} />
+      <div style={{
+        width: '4px',
+        height: '4px',
+        borderRadius: '50%',
+        background: 'var(--border)',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        width: '4px',
+        height: '4px',
+        borderRadius: '50%',
+        background: 'var(--border)',
+        opacity: 0.5,
+      }} />
+      <div style={{
+        width: '30px',
+        height: '1px',
+        background: 'linear-gradient(90deg, var(--border), transparent)',
+        opacity: 0.4,
+      }} />
+    </div>
+
+    {/* sub with decorative dots */}
+    {t.host.sub && (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '12px',
+      }}>
+        <span style={{
+          width: '4px',
+          height: '4px',
+          borderRadius: '50%',
+          background: 'var(--ink)',
+          opacity: 0.4,
+        }} />
+        <p style={{
+          fontFamily: "'mia', Georgia, serif",
+          fontSize: '19px',
+          color: 'var(--ink)',
+          opacity: 1.0,
+          margin: 0,
+        }}>
+          {t.host.sub}
+        </p>
+        <span style={{
+          width: '4px',
+          height: '4px',
+          borderRadius: '50%',
+          background: 'var(--ink)',
+          opacity: 0.4,
+        }} />
+      </div>
+    )}
+  </div>
+</Reveal>
 
       </div>
     </section>
