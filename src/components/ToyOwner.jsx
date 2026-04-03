@@ -50,8 +50,8 @@ export default function MapSection() {
             {/* sub */}
             {t.host.sub && (
               <p style={{
-                fontFamily: "'Bickham', Georgia, serif",
-                fontSize: 'clamp(35px,6vw,52px)',
+                fontFamily: "'mia', Georgia, serif",
+                fontSize: '14px',
                 color: 'var(--ink)',
                 opacity: 0.7,
                 marginTop: '8px',
