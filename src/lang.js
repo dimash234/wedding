@@ -30,6 +30,11 @@ export const translations = {
     footer: '28 · 06 · 2026',
     musicLabel: 'той музыкасы',
     scrollDown: 'Төмен жылжыңыз',
+    host: {
+    label: 'Той иесі',
+    title: 'Ақтолқын',
+    sub: 'Қуанышымызға ортақ болыңыздар!'
+    } ,
   },
   ru: {
     nav: { schedule:'Программа', place:'место', rsvp:'участие' },
@@ -62,5 +67,10 @@ export const translations = {
     footer: '28 · 06 · 2026',
     musicLabel: 'свадебная музыка',
     scrollDown: 'Свайпните вниз',
+    host: {
+    label: 'Хозяин торжества',
+    title: 'Актолкын',
+    sub: 'Разделите с нами нашу радость!'
+    } ,
   },
 }

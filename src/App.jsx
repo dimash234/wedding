@@ -11,7 +11,7 @@ import { DetailsSection } from './components/sections/DetailsSection';
 import { CountdownSection } from './components/sections/CountdownSection';
 import { FooterSection } from './components/sections/FooterSection';
 import ScrollIndicator from './components/ScrollIndicator';
-
+import ToyOwner from './components/ToyOwner';
 /* ─── Audio Instance ─────────────────────────────────────────────── */
 const audio = new Audio('./music/mahabbat.mp3');
 audio.loop = true;
@@ -60,6 +60,7 @@ export default function App() {
         <ScheduleSection />
         <DetailsSection />
         <MapSection />
+        <ToyOwner />
         <RSVPForm />
         <FooterSection />
         <ScrollIndicator />
