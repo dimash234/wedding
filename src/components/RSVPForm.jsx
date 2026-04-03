@@ -39,12 +39,12 @@ export default function RSVPForm() {
     width: '100%', padding: '14px 0',
     border: 'none', borderBottom: '1px solid rgba(0,0,0,0.15)',
     background: 'transparent', fontFamily: FONT,
-    fontSize: '16px', color: 'var(--ink)', outline: 'none',
+    fontSize: '19px', color: 'var(--ink)', outline: 'none',
     transition: 'border-color 0.3s', fontWeight: 300, letterSpacing: '0.3px',
   };
 
   const lbl = {
-    display: 'block', fontSize: '13px', letterSpacing: '3px',
+    display: 'block', fontSize: '16px', letterSpacing: '3px',
     textTransform: 'lowercase', color: 'var(--ink)',
     marginBottom: '10px', fontWeight: 400, fontFamily: FONT, opacity: 0.5,
   };
@@ -73,7 +73,7 @@ export default function RSVPForm() {
             <h2 style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(48px,9vw,72px)', color: 'var(--ink)', marginBottom: '10px', fontWeight: 300, letterSpacing: '2px' }}>
               {t.rsvp.title}
             </h2>
-            <p style={{ fontSize: 'clamp(42px,8vw,64px)', letterSpacing: '1px', color: 'var(--ink)', fontWeight: 300, opacity: 0.8, fontFamily: "'Bickham', Georgia, serif", margin: '0' }}>
+            <p style={{ fontSize: 'clamp(32px,6vw,44px)', letterSpacing: '1px', color: 'var(--ink)', fontWeight: 300, opacity: 0.8, fontFamily: "'Bickham', Georgia, serif", margin: '0' }}>
               {t.rsvp.sub}
             </p>
           </div>
@@ -104,8 +104,8 @@ export default function RSVPForm() {
                     border: `1px solid ${form.attendance === o.v ? 'var(--ink)' : 'rgba(0,0,0,0.15)'}`,
                     color: form.attendance === o.v ? 'white' : 'var(--ink)',
                   }}>
-                    <p style={{ fontSize: '15px', marginBottom: '3px', fontFamily: FONT, fontWeight: 300 }}>{o.tx}</p>
-                    <p style={{ fontSize: '11px', opacity: 0.6, fontFamily: FONT, fontWeight: 300 }}>{o.s}</p>
+                    <p style={{ fontSize: '18px', marginBottom: '3px', fontFamily: FONT, fontWeight: 300 }}>{o.tx}</p>
+                    <p style={{ fontSize: '14px', opacity: 0.6, fontFamily: FONT, fontWeight: 300 }}>{o.s}</p>
                   </button>
                 ))}
               </div>
@@ -117,18 +117,18 @@ export default function RSVPForm() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginTop: '8px' }}>
                   <button onClick={() => upd('guests', Math.max(1, form.guests - 1))}
                     style={{ width: '42px', height: '42px', border: '1px solid rgba(0,0,0,0.15)', background: 'transparent', cursor: 'pointer', fontSize: '22px', color: 'var(--ink)', fontFamily: FONT }}>−</button>
-                  <span style={{ fontFamily: FONT, fontSize: '28px', fontWeight: 300, minWidth: '36px', textAlign: 'center', color: 'var(--ink)' }}>
+                  <span style={{ fontFamily: FONT, fontSize: '31px', fontWeight: 300, minWidth: '36px', textAlign: 'center', color: 'var(--ink)' }}>
                     {form.guests}
                   </span>
                   <button onClick={() => upd('guests', Math.min(10, form.guests + 1))}
                     style={{ width: '42px', height: '42px', border: '1px solid rgba(0,0,0,0.15)', background: 'transparent', cursor: 'pointer', fontSize: '22px', color: 'var(--ink)', fontFamily: FONT }}>+</button>
-                  <span style={{ fontSize: '13px', opacity: 0.5, fontFamily: FONT, fontWeight: 300 }}>{t.rsvp.gUnit}</span>
+                  <span style={{ fontSize: '16px', opacity: 0.5, fontFamily: FONT, fontWeight: 300 }}>{t.rsvp.gUnit}</span>
                 </div>
               </div>
             )}
 
 
-            {error && <p style={{ fontSize: '13px', color: '#c0392b', textAlign: 'center', fontFamily: FONT }}>{error}</p>}
+            {error && <p style={{ fontSize: '16px', color: '#c0392b', textAlign: 'center', fontFamily: FONT }}>{error}</p>}
 
             <button onClick={submit} disabled={!form.name || !form.attendance || loading} style={{
               width: '100%', padding: '18px',
@@ -136,7 +136,7 @@ export default function RSVPForm() {
               border: 'none',
               cursor: !form.name || !form.attendance ? 'not-allowed' : 'pointer',
               color: !form.name || !form.attendance ? 'rgba(0,0,0,0.3)' : 'white',
-              fontSize: '12px', letterSpacing: '4px', textTransform: 'lowercase',
+              fontSize: '15px', letterSpacing: '4px', textTransform: 'lowercase',
               fontFamily: FONT, fontWeight: 300, transition: 'all 0.3s',
             }}>
               {loading ? t.rsvp.sending : t.rsvp.submit}
