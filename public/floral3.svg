@@ -3,12 +3,12 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      width="1000px" height="800px" 
-     viewBox="0 0 396.099 196.099"
+     viewBox="-170 0 736.099 196.099"
      xml:space="preserve">
   
   <!-- Левая горизонтальная линия (касается цветка) -->
   <line 
-    x1="10" 
+    x1="-160" 
     y1="98" 
     x2="100" 
     y2="98" 
@@ -20,7 +20,7 @@
   <line 
     x1="296.099" 
     y1="98" 
-    x2="386.099" 
+    x2="556.099" 
     y2="98" 
     stroke="#000000" 
     stroke-width="3" 
