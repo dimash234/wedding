@@ -71,44 +71,6 @@ export function DetailsSection() {
             ))}
           </div>
         </Reveal>
-
-        {/* Bottom row: address full width */}
-        <Reveal delay={0.2}>
-          <div
-            style={{
-              background: 'var(--white)',
-              border: '1px solid var(--border)',
-              borderTop: 'none',
-              padding: 'clamp(18px,4vw,28px) 16px',
-              textAlign: 'center',
-            }}
-          >
-            <p
-              style={{
-                fontSize: '12px',
-                letterSpacing: '3px',
-                textTransform: 'lowercase',
-                color: 'var(--soft)',
-                marginBottom: '9px',
-                fontFamily: "'Jost', sans-serif",
-                fontWeight: 300,
-              }}
-            >
-              {t.details.place}
-            </p>
-            <p
-              style={{
-                fontFamily: "'Ante', sans-serif",
-                fontSize: 'clamp(16px,3.5vw,22px)',
-                color: 'var(--ink)',
-                letterSpacing: '1px',
-                fontWeight: 300,
-              }}
-            >
-              {t.details.pv}
-            </p>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

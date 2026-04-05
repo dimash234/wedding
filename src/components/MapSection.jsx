@@ -25,7 +25,10 @@ export default function MapSection() {
             <h2 style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(42px,8vw,64px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '2px', marginBottom: '8px' }}>
               {t.map.title}
             </h2>
-            <p style={{ fontFamily: FONT, fontSize: '14px', letterSpacing: '2px', color: 'var(--ink)', fontWeight: 300, opacity: 0.55 }}>
+            <p style={{ fontFamily: FONT, fontSize: '17px', letterSpacing: '2px', color: 'var(--ink)', fontWeight: 300, opacity: 0.55 }}>
+              {t.details.pv}
+            </p>
+            <p style={{ fontFamily: FONT, fontSize: '17px', letterSpacing: '2px', color: 'var(--ink)', fontWeight: 300, opacity: 0.55 }}>
               {t.map.sub}
             </p>
           </div>
