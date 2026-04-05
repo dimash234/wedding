@@ -5,7 +5,7 @@ import { SectionLabel } from '../common/SectionLabel';
 
 export function ScheduleSection() {
   const { t } = useContext(LangContext);
-  const photos = ['./nev.png', './arch.png', './cake.png'];
+  const photos = ['./nev.png', './arch.png', './cake.png', './dance.png'];
 
   return (
     <section id="schedule" style={{ padding: 'clamp(32px, 6vh, 48px) 12px', background: 'var(--white)' }}>
