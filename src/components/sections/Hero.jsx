@@ -77,15 +77,15 @@ export function Hero() {
   }}>
     
     <img
-      src="./floral3.svg"
-      alt="decor"
-      style={{
-        width: '300px',     // ← стало в 2 раза шире и больше
-        height: '150px',    // ← стало в 2 раза выше
-        display: 'block',
-        objectFit: 'fill'
-      }}
-    />
+  src="./floral3.svg"
+  alt="decor"
+  style={{
+    width: '150px',
+    height: '75px',
+    display: 'block',
+    objectFit: 'fill'
+  }}
+/>
   </div>
 </Reveal>
 
