@@ -70,7 +70,7 @@ export const translations = {
     musicLabel: 'свадебная музыка',
     scrollDown: 'Свайпните вниз',
     host: {
-    label: 'Хозяин торжества',
+    label: 'С уважением!',
     title: 'Актолкын',
     sub: 'Разделите с нами нашу радость!'
     } ,
