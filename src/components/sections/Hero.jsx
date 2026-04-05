@@ -80,8 +80,8 @@ export function Hero() {
   src="./floral3.svg"
   alt="decor"
   style={{
-    width: '150px',
-    height: '75px',
+    width: '225px',
+    height: '112.5px',
     display: 'block',
     objectFit: 'fill'
   }}
