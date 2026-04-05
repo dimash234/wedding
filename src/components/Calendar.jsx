@@ -82,6 +82,9 @@ export default function Calendar({ weddingDate }) {
   while (cells.length % 7 !== 0) cells.push(null)
 
   return (
+    
+    
+
     <Reveal delay={0.1}>
       <div style={{
         background: 'transparent',
