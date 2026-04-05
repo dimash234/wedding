@@ -155,7 +155,7 @@ export default function Calendar({ weddingDate }) {
             fontSize: '10px', letterSpacing: '2.5px',
             color: 'var(--ink)', textTransform: 'lowercase',
             fontWeight: 300, opacity: 0.6,
-            fontFamily: "'Jost', sans-serif",
+            fontFamily: "'Ante', sans-serif",
           }}>
             {t.calendar.legend}
           </span>

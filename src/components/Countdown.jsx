@@ -16,7 +16,7 @@ function FlipBlock({ value }) {
   return (
     <span key={animKey} style={{
       display: 'inline-block',
-      fontFamily: "'Ante', sans-serif",
+      fontFamily: "'Jost', sans-serif",
       fontSize: 'clamp(36px,8.5vw,72px)',
       fontWeight: 300,
       color: 'var(--ink)',
@@ -31,7 +31,7 @@ function FlipBlock({ value }) {
 
 export default function Countdown({ targetDate }) {
   const { t } = useContext(LangContext);
-  const FONT = "'Jost', sans-serif";
+  const FONT = "'Ante', sans-serif";
 
   const calc = () => {
     const diff = new Date(targetDate) - new Date();

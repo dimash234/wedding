@@ -194,7 +194,7 @@ export default function OwnerSection() {
         fontSize: 'clamp(48px,9vw,72px)',
         letterSpacing: '2px',
         color: 'black',
-        fontFamily: "'Bickham', Georgia, serif",
+        fontFamily: "'Ante', Georgia, serif",
         fontWeight: 300,
         margin: 0,
       }}>
