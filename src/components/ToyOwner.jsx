@@ -191,7 +191,7 @@ export default function OwnerSection() {
         background: 'linear-gradient(90deg, transparent, var(--border))',
       }} />
       <p style={{
-        fontSize: 'clamp(48px,9vw,72px)',
+        fontSize: '16px',
         letterSpacing: '2px',
         color: 'black',
         fontFamily: "'Ante', Georgia, serif",

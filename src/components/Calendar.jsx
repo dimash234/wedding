@@ -152,7 +152,7 @@ export default function Calendar({ weddingDate }) {
         }}>
           <HeartSmall size={14} />
           <span style={{
-            fontSize: '10px', letterSpacing: '2.5px',
+            fontSize: '16px', letterSpacing: '2.5px',
             color: 'var(--ink)', textTransform: 'lowercase',
             fontWeight: 300, opacity: 0.6,
             fontFamily: "'Ante', sans-serif",

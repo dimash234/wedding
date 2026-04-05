@@ -89,7 +89,7 @@ export default function Countdown({ targetDate }) {
                 </div>
               </div>
               <p style={{
-                marginTop: '9px', fontSize: 'clamp(9px,1.6vw,11px)',
+                marginTop: '9px', fontSize: '15px',
                 letterSpacing: '2.5px', textTransform: 'lowercase',
                 color: 'var(--ink)', whiteSpace: 'nowrap',
                 fontWeight: 400, fontFamily: FONT, opacity: 0.5,
@@ -98,7 +98,7 @@ export default function Countdown({ targetDate }) {
 
             {i < 3 && (
               <span style={{
-                fontFamily: FONT, fontSize: 'clamp(28px,6vw,52px)',
+                fontFamily: FONT, fontSize: '15px',
                 fontWeight: 300, color: 'var(--ink)', lineHeight: 1,
                 marginTop: 'clamp(10px,2vw,18px)', flexShrink: 0,
                 opacity: blink ? 0.6 : 0.1, transition: 'opacity 0.35s ease',
@@ -110,7 +110,7 @@ export default function Countdown({ targetDate }) {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px', opacity: 0.35 }}>
         <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(0,0,0,0.2)' }} />
-        <p style={{ fontSize: '10px', letterSpacing: '4px', textTransform: 'lowercase', color: 'var(--ink)', whiteSpace: 'nowrap', fontWeight: 400, fontFamily: FONT }}>
+        <p style={{ fontSize: '12px', letterSpacing: '4px', textTransform: 'lowercase', color: 'var(--ink)', whiteSpace: 'nowrap', fontWeight: 400, fontFamily: FONT }}>
           28.06.2026
         </p>
         <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(0,0,0,0.2)' }} />

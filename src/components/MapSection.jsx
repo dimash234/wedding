@@ -22,7 +22,7 @@ export default function MapSection() {
               {t.map.label}
               <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'linear-gradient(to right,transparent,rgba(0,0,0,0.2),transparent)' }} />
             </p>
-            <h2 style={{ fontFamily: "'Ante', Georgia, serif", fontSize: 'clamp(42px,8vw,64px)', fontWeight: 300, color: 'var(--ink)', letterSpacing: '2px', marginBottom: '8px' }}>
+            <h2 style={{ fontFamily: "'Ante', Georgia, serif", fontSize: '18px', fontWeight: 300, color: 'var(--ink)', letterSpacing: '2px', marginBottom: '8px' }}>
               {t.map.title}
             </h2>
             <p style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(42px,8vw,64px)', letterSpacing: '2px', color: 'var(--ink)', fontWeight: 300, opacity: 1 }}>
