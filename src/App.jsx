@@ -85,8 +85,8 @@ export default function App() {
         <Navbar scrolled={scrolled} />
         <Hero />
         <CalendarSection />
-        <ScheduleSection />
         <DetailsSection />
+        <ScheduleSection />
         <MapSection />
         <ToyOwner />
         <CountdownSection />
