@@ -69,7 +69,6 @@ export default function RSVPForm() {
 
         <Reveal delay={0}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <SectionLabel>{t.rsvp.label}</SectionLabel>
             <h2 style={{ fontFamily: "'Bickham', Georgia, serif", fontSize: 'clamp(48px,9vw,72px)', color: 'var(--ink)', marginBottom: '10px', fontWeight: 300, letterSpacing: '2px' }}>
               {t.rsvp.sub}
             </h2>

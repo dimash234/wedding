@@ -15,9 +15,6 @@ export function DetailsSection() {
       }}
     >
       <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center' }}>
-        <Reveal delay={0}>
-          <SectionLabel>{t.details.label}</SectionLabel>
-        </Reveal>
 
         {/* Top row: date + time */}
         <Reveal delay={0.1}>
