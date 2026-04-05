@@ -23,7 +23,7 @@ export function CalendarSection() {
         <Reveal delay={0.06} y={10}>
           <p style={{
             fontFamily: "'Ante', sans-serif",
-            fontSize: 'clamp(13px, 3vw, 15px)',
+            fontSize: '17px',
             letterSpacing: '3px',
             textTransform: 'lowercase',
             color: 'var(--ink)',
