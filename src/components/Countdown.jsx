@@ -16,7 +16,7 @@ function FlipBlock({ value }) {
   return (
     <span key={animKey} style={{
       display: 'inline-block',
-      fontFamily: "'Jost', sans-serif",
+      fontFamily: "'Ante', sans-serif",
       fontSize: 'clamp(36px,8.5vw,72px)',
       fontWeight: 300,
       color: 'var(--ink)',

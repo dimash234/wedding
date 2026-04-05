@@ -46,7 +46,7 @@ export default function RSVPForm() {
   const lbl = {
     display: 'block', fontSize: '16px', letterSpacing: '3px',
     textTransform: 'lowercase', color: 'var(--ink)',
-    marginBottom: '10px', fontWeight: 400, fontFamily: FONT, opacity: 0.5,
+    marginBottom: '10px', fontWeight: 400, fontFamily: FONT, opacity: 1,
   };
 
   if (submitted)
@@ -102,7 +102,7 @@ export default function RSVPForm() {
                     color: form.attendance === o.v ? 'white' : 'var(--ink)',
                   }}>
                     <p style={{ fontSize: '18px', marginBottom: '3px', fontFamily: FONT, fontWeight: 300 }}>{o.tx}</p>
-                    <p style={{ fontSize: '14px', opacity: 0.6, fontFamily: FONT, fontWeight: 300 }}>{o.s}</p>
+                    <p style={{ fontSize: '14px', opacity: 1, fontFamily: FONT, fontWeight: 300 }}>{o.s}</p>
                   </button>
                 ))}
               </div>
@@ -119,7 +119,7 @@ export default function RSVPForm() {
                   </span>
                   <button onClick={() => upd('guests', Math.min(10, form.guests + 1))}
                     style={{ width: '42px', height: '42px', border: '1px solid rgba(0,0,0,0.15)', background: 'transparent', cursor: 'pointer', fontSize: '22px', color: 'var(--ink)', fontFamily: FONT }}>+</button>
-                  <span style={{ fontSize: '16px', opacity: 0.5, fontFamily: FONT, fontWeight: 300 }}>{t.rsvp.gUnit}</span>
+                  <span style={{ fontSize: '16px', opacity: 1, fontFamily: FONT, fontWeight: 300 }}>{t.rsvp.gUnit}</span>
                 </div>
               </div>
             )}
