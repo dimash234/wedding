@@ -100,7 +100,7 @@ function Dashboard({ onLogout }) {
   const fetchGuests = async () => {
     setLoading(true)
     try {
-      const q   = query(collection(db, 'rsvp'), orderBy('createdAt', 'desc'))
+      const q = query(collection(db, 'rsvp'))
       const snap = await getDocs(q)
       setGuests(snap.docs.map(d => ({ id: d.id, ...d.data() })))
     } catch (e) {
