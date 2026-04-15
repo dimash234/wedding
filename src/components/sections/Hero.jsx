@@ -292,6 +292,23 @@ export function Hero() {
   </div>
 </Reveal>
 
+<Reveal delay={0.12}>
+
+
+      <img src="/wtf.png" alt="" style={{
+        width: '200px',
+        marginTop: '80px',
+        display: 'block',
+        transform: 'rotate(0deg)',
+        opacity: 1,
+        borderRadius: '50%'
+      }} />
+
+   </Reveal>
+
+
+
+
       </div>
     </section>
   );
